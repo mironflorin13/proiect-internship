@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+$font: 'Roboto', sans-serif;
+
+.Avatar {
+    display: flex;  
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 176px;
+    height: 10vh;
+    align-items: center;
+}
+
+h3, h4, p {
+    font-family: $font;
+}
+
+h3 {
+    font-size: 16px;
+}
+
+h4 {
+    font-size: 14px;
+    color: #868686;
+}
+
+p {
+    font-size: 14px;
+    color: #FC5D27;
+    font-weight: bold;
+}
