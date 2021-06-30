@@ -1,10 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.scss';
+import React from "react";
+import ReactDOM from "react-dom";
+import InProgressCompleteChallenge from "./components/InProgressCompleteChallenge";
+import "./index.scss";
 
 ReactDOM.render(
-	<React.StrictMode>
-		<div>Hello world</div>
-	</React.StrictMode>,
-	document.getElementById('root')
+  <React.StrictMode>
+    <InProgressCompleteChallenge />
+  </React.StrictMode>,
+  document.getElementById("root")
 );
