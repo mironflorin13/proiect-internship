@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 
 import UserCard from "./UserCard";
-import getUserInfo from "../utils/getUserInfo.js";
+import getUserInfo from "../mockFunctions/getUserInfo.js";
 import "./LeftHandPanel.scss";
 
 function LeftHandPanel(props) {
