@@ -2,19 +2,12 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 
 import UserCard from "./UserCard";
+
 import getUserInfo from "../mockFunctions/getUserInfo.js";
 import "./LeftHandPanel.scss";
 
 function LeftHandPanel(props) {
   const [userData, setUserData] = useState({});
-
-  // const getUserInfo = (id) => {
-  //   const userToShow = props.userAvatar().find(
-  //     (userChosen) => userChosen.id === id
-  //   );
-
-  //   return Promise.resolve(userToShow);
-  // };
 
   useEffect(() => {
     getUserInfo(0)
@@ -26,7 +19,6 @@ function LeftHandPanel(props) {
       });
   }, []);
 
-  // console.log(userData);
   return (
     <>
       <div className="LeftHandPanel">

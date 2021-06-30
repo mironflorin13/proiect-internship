@@ -1,7 +1,8 @@
-import getUsers from "./getUsers";
+import users from "./users";
+// import getUsers from "./getUsers";
 
 const getUserInfo = (id) => {
-  const userToShow = getUsers().find((userChosen) => userChosen.id === id);
+  const userToShow = users.find((userChosen) => userChosen.id === id);
 
   return Promise.resolve(userToShow);
 };

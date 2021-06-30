@@ -3,12 +3,12 @@ import ReactDOM from "react-dom";
 import LeftHandPanel from "./components/LeftHandPanel";
 
 import "./app.scss";
-import getUsers from "./mockFunctions/getUsers.js";
+import users from "./mockFunctions/users.js";
 
 function App() {
   return (
     <div>
-      <LeftHandPanel userAvatar={getUsers} />
+      <LeftHandPanel userAvatar={users} />
     </div>
   );
 }
