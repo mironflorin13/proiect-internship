@@ -1,5 +1,3 @@
-import React from "react";
-
 const getChallanges = (id) => {
   const challanges = [
     {
@@ -10,7 +8,7 @@ const getChallanges = (id) => {
       credits: 50,
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus. Sed at orci sit amet lectus euismod ultrices eget quis tortor.",
-      status: null,
+      status: "available",
     },
     {
       id: 2,
@@ -20,7 +18,7 @@ const getChallanges = (id) => {
       credits: 50,
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus. Sed at orci sit amet lectus euismod ultrices eget quis tortor.orem ipsum dolor sit amet, consectetur adipiscing elit",
-      status: null,
+      status: "available",
     },
     {
       id: 3,
@@ -29,7 +27,7 @@ const getChallanges = (id) => {
       xp: 30,
       credits: 50,
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      status: null,
+      status: "available",
     },
     {
       id: 4,
