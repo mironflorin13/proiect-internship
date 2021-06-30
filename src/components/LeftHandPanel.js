@@ -2,38 +2,35 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 
 import UserCard from "./UserCard";
-
+import getUserInfo from "../utils/getUserInfo.js";
 import "./LeftHandPanel.scss";
 
 function LeftHandPanel(props) {
-  const [data, setData] = useState([]);
+  const [userData, setUserData] = useState({});
 
-  const getUserInfo = (id) => {
-    const userToShow = props.userAvatar.filter(
-      (userChosen) => userChosen.id === id
-    );
+  // const getUserInfo = (id) => {
+  //   const userToShow = props.userAvatar().find(
+  //     (userChosen) => userChosen.id === id
+  //   );
 
-    return Promise.resolve(userToShow);
-  };
+  //   return Promise.resolve(userToShow);
+  // };
 
   useEffect(() => {
     getUserInfo(0)
-      .then((userData) => {
-        setData(userData);
+      .then((data) => {
+        setUserData(data);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
 
-  console.log(data);
+  // console.log(userData);
   return (
     <>
       <div className="LeftHandPanel">
-        {data &&
-          data.map((item) => (
-            <UserCard userName={item.name} userJob={item.jobTitle} userPhoto={item.image} key={item.id}/>
-          ))}
+        <UserCard {...userData} />
 
         <p className="LeftHandPanel_admin"> Switch to Admin </p>
       </div>
