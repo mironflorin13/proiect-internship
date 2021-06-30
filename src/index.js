@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import InProgressCompleteChallenge from "./components/inProgressCompleteChallange/InProgressCompleteChallenge";
 import "./index.scss";
+import App from "./App";
 
 ReactDOM.render(
   <React.StrictMode>
-    <InProgressCompleteChallenge />
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );
