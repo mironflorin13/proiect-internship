@@ -14,6 +14,7 @@ const users = [
     jobTitle: "Software Developer",
     image:
       "https://i.pinimg.com/564x/65/25/a0/6525a08f1df98a2e3a545fe2ace4be47.jpg",
+    challenges: [],
   },
 ];
 
