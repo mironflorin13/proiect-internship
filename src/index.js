@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import InProgressCompleteChallenge from "./components/InProgressCompleteChallenge";
+import InProgressCompleteChallenge from "./components/inProgressCompleteChallange/InProgressCompleteChallenge";
 import "./index.scss";
 
 ReactDOM.render(

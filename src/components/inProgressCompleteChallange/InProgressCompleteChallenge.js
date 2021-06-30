@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import getChallenges from "../mockFunctions/getChallenges";
+import getChallenges from "../../mockFunctions/getChallenges";
 
 const InProgressCompleteChallenge = () => {
   const [data, setData] = useState([]);
@@ -12,7 +12,6 @@ const InProgressCompleteChallenge = () => {
   useEffect(() => {
     getChallenges()
       .then((challenges) => {
-        setData(challenges);
         setDataInProgress(
           challenges.filter((item) => item.status === "available")
         );
@@ -26,10 +25,8 @@ const InProgressCompleteChallenge = () => {
         setIsPending(false);
       });
   }, []);
-  console.log(dataCompleted);
-  console.log(dataInProgress);
 
-  return <div className="container">"Aici vor fi afisate cardurile"</div>;
+  return <div className="container">"Aici vor fi afisate cardurilessd"</div>;
 };
 
 export default InProgressCompleteChallenge;
