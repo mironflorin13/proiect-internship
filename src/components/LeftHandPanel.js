@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 
-import Avatar from "./Avatar";
+import UserCard from "./UserCard";
 
 import "./LeftHandPanel.scss";
 
@@ -32,7 +32,7 @@ function LeftHandPanel(props) {
       <div className="LeftHandPanel">
         {data &&
           data.map((item) => (
-            <Avatar userName={item.name} userJob={item.jobTitle} userPhoto={item.image} key={item.id}/>
+            <UserCard userName={item.name} userJob={item.jobTitle} userPhoto={item.image} key={item.id}/>
           ))}
 
         <p className="LeftHandPanel_admin"> Switch to Admin </p>

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 
-import userImage from "../img/user1.png";
-import "./Avatar.scss";
+import "./UserCard.scss";
 
-function Avatar(props) {
+function UserCard(props) {
 
   return (
     <div className="Avatar">
@@ -23,4 +22,4 @@ function Avatar(props) {
   );
 }
 
-export default Avatar;
+export default UserCard;
