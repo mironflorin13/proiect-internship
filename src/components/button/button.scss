@@ -1,12 +1,13 @@
 @import "../../index.scss";
 
 .secondary {
+  border: 1px solid $blue-color;
   background: white;
-  margin-right: 20px;
   color: $blue-color;
 }
 
 .primary {
+  border: none;
   background: $blue-color;
   color: white;
 }
@@ -14,9 +15,7 @@
 .flex-width-max {
   flex-grow: 1;
 }
-
-.button {
-  border: 1px solid $blue-color;
+.btn {
   border-radius: 4px;
   padding: 10px 25px;
   font-family: $font-family;
