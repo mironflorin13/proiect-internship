@@ -7,10 +7,14 @@
 }
 
 .primary {
-  flex-grow: 1;
   background: $blue-color;
   color: white;
 }
+
+.flex-width-max {
+  flex-grow: 1;
+}
+
 .button {
   border: 1px solid $blue-color;
   border-radius: 4px;
