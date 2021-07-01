@@ -1,0 +1,13 @@
+@import "../../index.scss";
+
+.secondary {
+  padding: 10px 10%;
+  background: white;
+  color: $blue-color;
+}
+
+.primary {
+  padding: 10px 15%;
+  background: $blue-color;
+  color: white;
+}
