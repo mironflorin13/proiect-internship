@@ -1,0 +1,106 @@
+@import "../../index.scss";
+
+.border-top-red {
+  border-top: 3px $red-color solid;
+}
+
+.border-top-green {
+  border-top: 3px $green-color solid;
+}
+
+.card {
+  position: relative;
+  width: 300px;
+  min-width: 300px;
+  height: 330px;
+  padding: 30px;
+  background: #ffffff;
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.06);
+  border-radius: 6px;
+
+  .title {
+    font-family: $font-family;
+    font-size: 16px;
+  }
+  .xp-and-credits {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 20px;
+
+    .xp {
+      font-family: $font-family;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 16px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      letter-spacing: 0.01em;
+      margin-right: 30px;
+
+      color: $blue-color;
+    }
+    .credits {
+      font-family: $font-family;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 16px;
+
+      color: $red-color;
+    }
+  }
+  .description {
+    font-family: $font-family;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 24px;
+    /* or 171% */
+    margin-bottom: 30px;
+    color: #6a758d;
+    max-height: 140px;
+    overflow: auto;
+    &:-webkit-scrollbar {
+      width: 7px;
+    }
+  }
+  .description::-webkit-scrollbar {
+    width: 7px;
+  }
+  .description::-webkit-scrollbar-track {
+    background: $scroll-backgroud-color;
+  }
+
+  .description::-webkit-scrollbar-thumb {
+    background-color: $scroll-bar-color;
+    border-radius: 40px;
+  }
+  .buttons-container {
+    display: flex;
+    gap: 20px;
+  }
+  .bottom {
+    position: absolute;
+    width: 240px;
+    bottom: 30px;
+
+    .green {
+      color: $green-color;
+    }
+    .red {
+      color: $red-color;
+    }
+    .status {
+      font-family: $font-family;
+      text-transform: uppercase;
+      font-style: normal;
+      padding: 10px;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 16px;
+      text-align: center;
+    }
+  }
+}
