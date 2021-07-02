@@ -38,16 +38,15 @@
       text-align: center;
       letter-spacing: 0.01em;
       margin-right: 30px;
-
       color: $blue-color;
     }
+
     .credits {
       font-family: $font-family;
       font-style: normal;
       font-weight: bold;
       font-size: 14px;
       line-height: 16px;
-
       color: $red-color;
     }
   }
@@ -62,25 +61,26 @@
     color: #6a758d;
     max-height: 140px;
     overflow: auto;
-    &:-webkit-scrollbar {
+
+    &::-webkit-scrollbar {
       width: 7px;
     }
-  }
-  .description::-webkit-scrollbar {
-    width: 7px;
-  }
-  .description::-webkit-scrollbar-track {
-    background: $scroll-backgroud-color;
+
+    &::-webkit-scrollbar-track {
+      background: $scroll-backgroud-color;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $scroll-bar-color;
+      border-radius: 40px;
+    }
   }
 
-  .description::-webkit-scrollbar-thumb {
-    background-color: $scroll-bar-color;
-    border-radius: 40px;
-  }
   .buttons-container {
     display: flex;
     gap: 20px;
   }
+
   .bottom {
     position: absolute;
     width: 240px;
@@ -89,9 +89,11 @@
     .green {
       color: $green-color;
     }
+
     .red {
       color: $red-color;
     }
+
     .status {
       font-family: $font-family;
       text-transform: uppercase;
