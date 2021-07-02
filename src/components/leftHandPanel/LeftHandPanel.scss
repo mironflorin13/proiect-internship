@@ -1,0 +1,30 @@
+@import "../../utils/partials";
+
+.LeftHandPanel {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-color: $white;
+  padding-top: 40px;
+}
+
+.LeftHandPanel_admin {
+  align-self: flex-start;
+  font-family: $fontRoboto;
+  color: $fontColorGrey;
+  font-size: 16px;
+  padding-top: 30px;
+  padding-left: 40px;
+}
+
+.cardsOverviewContainer {
+  height: 100vh;
+  position: absolute;
+  left: 301px;
+  top: 0;
+  width: fit-content;
+}
