@@ -1,11 +1,29 @@
 @import "../../index.scss";
 
-.border-top-red {
-  border-top: 3px $red-color solid;
+@mixin completeChallengeBottomStyle($color) {
+  .bottom > h3 {
+    font-family: $font-family;
+    text-transform: uppercase;
+    font-style: normal;
+    padding: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    color: $color;
+  }
 }
 
-.border-top-green {
+.denied {
+  border-top: 3px $red-color solid;
+
+  @include completeChallengeBottomStyle($red-color);
+}
+
+.validated {
   border-top: 3px $green-color solid;
+
+  @include completeChallengeBottomStyle($green-color);
 }
 
 .card {
@@ -22,6 +40,7 @@
     font-family: $font-family;
     font-size: 16px;
   }
+
   .xp-and-credits {
     display: flex;
     margin-top: 10px;
@@ -56,7 +75,6 @@
     font-weight: normal;
     font-size: 14px;
     line-height: 24px;
-    /* or 171% */
     margin-bottom: 30px;
     color: #6a758d;
     max-height: 140px;
@@ -85,24 +103,5 @@
     position: absolute;
     width: 240px;
     bottom: 30px;
-
-    .green {
-      color: $green-color;
-    }
-
-    .red {
-      color: $red-color;
-    }
-
-    .status {
-      font-family: $font-family;
-      text-transform: uppercase;
-      font-style: normal;
-      padding: 10px;
-      font-weight: 600;
-      font-size: 14px;
-      line-height: 16px;
-      text-align: center;
-    }
   }
 }
