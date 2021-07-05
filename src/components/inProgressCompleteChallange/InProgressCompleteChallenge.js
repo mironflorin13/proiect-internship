@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import getChallenges from "../../mockFunctions/getChallenges";
+import DisplayChallenges from "../displayChallenges/DisplayChallenges";
 
 const InProgressCompleteChallenge = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(false);
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState(false);
 
@@ -12,6 +13,7 @@ const InProgressCompleteChallenge = () => {
   useEffect(() => {
     getChallenges()
       .then((challenges) => {
+        setData(challenges);
         setDataInProgress(
           challenges.filter((item) => item.status === "available")
         );
@@ -26,7 +28,27 @@ const InProgressCompleteChallenge = () => {
       });
   }, []);
 
-  return <div className="container">"Aici vor fi afisate cardurilessd"</div>;
+  return (
+    <>
+      {error && <div>{error}</div>}
+      {isPending && <div>Loading...</div>}
+      {data && (
+        <>
+          <DisplayChallenges
+            data={dataInProgress}
+            title={"In progress Challenges"}
+            button1Message={"Quit"}
+            button2Message={"Completed"}
+          />
+          <DisplayChallenges
+            data={dataCompleted}
+            title={"Completed Challenges"}
+            style={"padding-bottom"}
+          />
+        </>
+      )}
+    </>
+  );
 };
 
 export default InProgressCompleteChallenge;
