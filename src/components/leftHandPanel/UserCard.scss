@@ -1,11 +1,12 @@
-@import "../utils/partials";
+@import "../../utils/partials";
 
 .UserCard {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  width: 176px;
+  width: 210px;
   align-items: center;
+  padding-left: 40px;
 }
 
 .userName,
