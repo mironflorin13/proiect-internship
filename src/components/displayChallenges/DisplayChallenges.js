@@ -1,13 +1,7 @@
 import "./displayChallenges.scss";
 import Card from "../card/Card";
 
-const DisplayChallenges = ({
-  data,
-  title,
-  style,
-  button1Message,
-  button2Message,
-}) => {
+const DisplayChallenges = ({ data, title, style, children }) => {
   return (
     <div className={`challenges-container ${style}`}>
       <h1 className="challenges-tilte">{title}</h1>
@@ -21,8 +15,7 @@ const DisplayChallenges = ({
               credits={item.credits}
               description={item.description}
               key={item.id}
-              button1Message={button1Message}
-              button2Message={button2Message}
+              children={children}
             />
           ))
         ) : (

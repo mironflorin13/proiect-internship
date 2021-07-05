@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import getChallenges from "../../mockFunctions/getChallenges";
 import DisplayChallenges from "../displayChallenges/DisplayChallenges";
+import Button from "../button/Button";
 
 const InProgressCompleteChallenge = () => {
   const [data, setData] = useState(false);
@@ -37,9 +38,11 @@ const InProgressCompleteChallenge = () => {
           <DisplayChallenges
             data={dataInProgress}
             title={"In progress Challenges"}
-            button1Message={"Quit"}
-            button2Message={"Completed"}
-          />
+          >
+            <Button type={`btn secondary`} value={"Quit"} />
+            <Button type="btn primary flex-width-max" value={"Completed"} />
+          </DisplayChallenges>
+
           <DisplayChallenges
             data={dataCompleted}
             title={"Completed Challenges"}
