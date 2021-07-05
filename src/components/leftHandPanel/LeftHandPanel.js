@@ -8,7 +8,7 @@ import "./LeftHandPanel.scss";
 import Overview from "../../pages/Overview";
 import Challenges from "../../pages/Challenges";
 import Shop from "../../pages/Shop";
-import Navigation from "./Navigation";
+import Menu from "./Menu";
 
 function LeftHandPanel(props) {
   const [userData, setUserData] = useState({});
@@ -29,7 +29,7 @@ function LeftHandPanel(props) {
         <UserCard {...userData} />
 
         <Router>
-          <Navigation />
+          <Menu />
           <Switch>
             <Route path="/" exact component={() => <Overview />} />
             <Route path="/challenges" exact component={() => <Challenges />} />
