@@ -9,6 +9,7 @@ import Overview from "../../pages/Overview";
 import Challenges from "../../pages/Challenges";
 import Shop from "../../pages/Shop";
 import Menu from "./Menu";
+import ExperienceBar from "./ExperienceBar";
 
 function LeftHandPanel(props) {
   const [userData, setUserData] = useState({});
@@ -27,7 +28,7 @@ function LeftHandPanel(props) {
     <>
       <div className="LeftHandPanel">
         <UserCard {...userData} />
-
+        <ExperienceBar />
         <Router>
           <Menu />
           <Switch>
