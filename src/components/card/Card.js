@@ -2,17 +2,8 @@ import React from "react";
 import "./card.scss";
 import Button from "../button/Button";
 
-const Card = ({
-  status,
-  title,
-  xp,
-  credits,
-  description,
-  button1Message,
-  button2Message,
-}) => {
+const Card = ({ status, title, xp, credits, description, children }) => {
   const completed = status === "validated" || status === "denied" ? status : "";
-  const hide = button1Message === "" ? "hide-btn" : "";
 
   return (
     <div className={`card ${completed}`}>
@@ -27,10 +18,7 @@ const Card = ({
 
       <div className="bottom">
         {completed === "" ? (
-          <div className="buttons-container">
-            <Button type={`btn secondary ${hide}`} value={button1Message} />
-            <Button type="btn primary flex-width-max" value={button2Message} />
-          </div>
+          <div className="buttons-container">{children}</div>
         ) : (
           <h3>{status}</h3>
         )}
