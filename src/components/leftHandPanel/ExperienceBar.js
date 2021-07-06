@@ -1,6 +1,5 @@
 import React from "react";
 
-import { challenges } from "../../data/challenges";
 import "./ExperienceBar.scss";
 
 function ExperienceBar(props) {

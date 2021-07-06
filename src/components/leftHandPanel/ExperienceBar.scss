@@ -14,18 +14,18 @@
 
 .level {
   font-family: $fontRoboto;
-  color: #184fc4;
+  color: $blue;
   font-size: 14px;
   font-weight: bold;
 }
 
 .experience-bar {
   width: 220px;
-  background-color: #c0cfea;
+  background-color: $lightBlue;
   height: 7px;
 }
 
 .inside-bar {
-  background-color: #184FC4;
+  background-color: $blue;
   height: 7px;
 }
