@@ -2,7 +2,7 @@ import "./challenges.scss";
 import Card from "../card/Card";
 import React from "react";
 
-const DisplayChallenges = ({ title, additionalClass, children }) => {
+const Challenges = ({ title, additionalClass, children }) => {
   return (
     <div className={`challenges-container ${additionalClass}`}>
       <h1 className="challenges-tilte">{title}</h1>
@@ -11,4 +11,4 @@ const DisplayChallenges = ({ title, additionalClass, children }) => {
   );
 };
 
-export default DisplayChallenges;
+export default Challenges;
