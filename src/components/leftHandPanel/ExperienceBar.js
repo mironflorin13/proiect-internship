@@ -1,9 +1,26 @@
 import React from "react";
 
 import { challenges } from "../../data/challenges";
+import "./ExperienceBar.scss";
 
-function ExperienceBar() {
-  return <p>{challenges.reduce((sum, user) => sum + user.xp, 0)}</p>;
+function ExperienceBar(props) {
+  return (
+    <div className="experience-container">
+      <div className="experience-details">
+        <span className="level">LEVEL {props.level}</span>
+        <span className="level">
+          {" "}
+          {props.currentXP} / {props.targetXP} XP{" "}
+        </span>
+      </div>
+      <div className="experience-bar">
+        <div
+          className="inside-bar"
+          style={{ width: `${props.barWidth}%` }}
+        ></div>
+      </div>
+    </div>
+  );
 }
 
 export default ExperienceBar;

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import UserCard from "./UserCard";
 import getUserInfo from "../../mockFunctions/getUserInfo.js";
+import { challenges } from "../../data/challenges";
 import "./LeftHandPanel.scss";
 
 import Overview from "../../pages/Overview";
@@ -10,6 +11,26 @@ import Challenges from "../../pages/Challenges";
 import Shop from "../../pages/Shop";
 import Menu from "./Menu";
 import ExperienceBar from "./ExperienceBar";
+
+function getLevel() {
+  let level = Math.floor(getCurrentXP() / 15) + 1;
+  return level;
+}
+
+function getCurrentXP() {
+  let currentXP = challenges
+    .filter((item) => item.status === "validated")
+    .reduce((sum, item) => sum + item.xp, 0);
+  return currentXP;
+}
+
+function getTargetXP() {
+  return getLevel() * 15;
+}
+
+function getBarWidth() {
+  return getCurrentXP() * 100 / 15;
+}
 
 function LeftHandPanel(props) {
   const [userData, setUserData] = useState({});
@@ -28,7 +49,12 @@ function LeftHandPanel(props) {
     <>
       <div className="LeftHandPanel">
         <UserCard {...userData} />
-        <ExperienceBar />
+        <ExperienceBar
+          level={getLevel()}
+          currentXP={getCurrentXP()}
+          targetXP={getTargetXP()}
+          barWidth={getBarWidth()}
+        />
         <Router>
           <Menu />
           <Switch>

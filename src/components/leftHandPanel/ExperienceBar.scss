@@ -1,0 +1,31 @@
+@import "../../utils/partials";
+
+.experience-container {
+  padding-left: 40px;
+  padding-top: 30px;
+  width: 260px;
+}
+
+.experience-details {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 20px;
+}
+
+.level {
+  font-family: $fontRoboto;
+  color: #184fc4;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.experience-bar {
+  width: 220px;
+  background-color: #c0cfea;
+  height: 7px;
+}
+
+.inside-bar {
+  background-color: #184FC4;
+  height: 7px;
+}
