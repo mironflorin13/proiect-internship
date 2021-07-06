@@ -2,13 +2,7 @@ import "./challenges.scss";
 import Card from "../card/Card";
 import React from "react";
 
-const DisplayChallenges = ({
-  data,
-  title,
-  additionalClass,
-  children,
-  quitButton,
-}) => {
+const DisplayChallenges = ({ data, title, additionalClass, children }) => {
   return (
     <div className={`challenges-container ${additionalClass}`}>
       <h1 className="challenges-tilte">{title}</h1>
