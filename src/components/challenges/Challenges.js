@@ -1,9 +1,16 @@
-import "./displayChallenges.scss";
+import "./challenges.scss";
 import Card from "../card/Card";
+import React from "react";
 
-const DisplayChallenges = ({ data, title, style, children }) => {
+const DisplayChallenges = ({
+  data,
+  title,
+  additionalClass,
+  children,
+  quitButton,
+}) => {
   return (
-    <div className={`challenges-container ${style}`}>
+    <div className={`challenges-container ${additionalClass}`}>
       <h1 className="challenges-tilte">{title}</h1>
       <div className="challenges-display-cards">
         {data.length ? (
@@ -15,7 +22,9 @@ const DisplayChallenges = ({ data, title, style, children }) => {
               credits={item.credits}
               description={item.description}
               key={item.id}
-              children={children}
+              children={React.Children.map(children, (child) => {
+                return React.cloneElement(child, { id: item.id }, null);
+              })}
             />
           ))
         ) : (

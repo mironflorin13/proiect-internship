@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import getChallenges from "../../mockFunctions/getChallenges";
-import DisplayChallenges from "../displayChallenges/DisplayChallenges";
+import Challenges from "../challenges/Challenges";
 import Button from "../button/Button";
 
 const InProgressCompleteChallenge = () => {
-  const [data, setData] = useState(false);
+  const [data, setData] = useState([]);
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState(false);
 
@@ -35,18 +35,15 @@ const InProgressCompleteChallenge = () => {
       {isPending && <div>Loading...</div>}
       {data && (
         <>
-          <DisplayChallenges
-            data={dataInProgress}
-            title={"In progress Challenges"}
-          >
-            <Button type={`btn secondary`} value={"Quit"} />
-            <Button type="btn primary flex-width-max" value={"Completed"} />
-          </DisplayChallenges>
+          <Challenges data={dataInProgress} title="In progress Challenges">
+            <Button type="btn secondary" value="Quit" />
+            <Button type="btn primary flex-width-max" value="Completed" />
+          </Challenges>
 
-          <DisplayChallenges
+          <Challenges
             data={dataCompleted}
-            title={"Completed Challenges"}
-            style={"padding-bottom"}
+            title="Completed Challenges"
+            additionalClass="padding-bottom"
           />
         </>
       )}
