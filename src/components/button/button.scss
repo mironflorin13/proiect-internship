@@ -15,9 +15,14 @@
 .flex-width-max {
   flex-grow: 1;
 }
+
+.hide-btn {
+  display: none;
+}
+
 .btn {
   border-radius: 4px;
-  padding: 10px 25px;
+  padding: 10px 20px;
   font-family: $font-family;
   font-style: normal;
   font-weight: 500;
