@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import getChallenges from "../../mockFunctions/getChallenges";
 import Challenges from "../challenges/Challenges";
 import Button from "../button/Button";
+import Card from "../card/Card";
 
 const InProgressCompleteChallenge = () => {
   const [data, setData] = useState([]);
@@ -35,16 +36,49 @@ const InProgressCompleteChallenge = () => {
       {isPending && <div>Loading...</div>}
       {data && (
         <>
-          <Challenges data={dataInProgress} title="In progress Challenges">
-            <Button type="btn secondary" value="Quit" />
-            <Button type="btn primary flex-width-max" value="Completed" />
+          <Challenges title="In progress Challenges">
+            {dataInProgress.length ? (
+              dataInProgress.map((item) => (
+                <Card
+                  status={item.status}
+                  title={item.title}
+                  xp={item.xp}
+                  credits={item.credits}
+                  description={item.description}
+                  key={item.id}
+                >
+                  <Button type="btn secondary" value="Quit" id={item.id} />
+                  <Button
+                    type="btn primary flex-width-max"
+                    value="Completed"
+                    id={item.id}
+                  />
+                </Card>
+              ))
+            ) : (
+              <h2 className="challenges-subtilte">No Challenges to display</h2>
+            )}
           </Challenges>
 
           <Challenges
-            data={dataCompleted}
             title="Completed Challenges"
             additionalClass="padding-bottom"
-          />
+          >
+            {dataCompleted.length ? (
+              dataCompleted.map((item) => (
+                <Card
+                  status={item.status}
+                  title={item.title}
+                  xp={item.xp}
+                  credits={item.credits}
+                  description={item.description}
+                  key={item.id}
+                />
+              ))
+            ) : (
+              <h2 className="challenges-subtilte">No Challenges to display</h2>
+            )}
+          </Challenges>
         </>
       )}
     </>
