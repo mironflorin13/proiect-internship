@@ -5,10 +5,20 @@ import UserCard from "./UserCard";
 import getUserInfo from "../../mockFunctions/getUserInfo.js";
 import "./LeftHandPanel.scss";
 
+import { challenges } from "../../data/challenges";
 import Overview from "../../pages/Overview";
 import Challenges from "../../pages/Challenges";
 import Shop from "../../pages/Shop";
 import Menu from "./Menu";
+import Credits from "./Credits";
+
+function getNumberOfCredits() {
+  let credits = challenges
+    .filter((item) => item.status === "validated")
+    .reduce((sum, item) => sum + item.credits, 0);
+
+  return credits;
+}
 
 function LeftHandPanel(props) {
   const [userData, setUserData] = useState({});
@@ -27,7 +37,7 @@ function LeftHandPanel(props) {
     <>
       <div className="LeftHandPanel">
         <UserCard {...userData} />
-
+        <Credits credits={getNumberOfCredits()} />
         <Router>
           <Menu />
           <Switch>
