@@ -1,0 +1,26 @@
+@import "../../index.scss";
+
+.challenges-tilte {
+  font-family: $font-family;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 23px;
+  color: $black-color;
+}
+
+.challenges-subtilte {
+  font-family: $font-family;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 23px;
+  color: $black-color;
+}
+
+.challenges-display-cards {
+  margin-top: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
