@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 
 import "../components/leftHandPanel/LeftHandPanel.scss";
-import "./Increment.scss";
+import "./Demo.scss";
+import ExperienceBar from "../components/leftHandPanel/ExperienceBar";
 
-function Increment(props) {
-  const [count, setCount] = useState(props.currentXP);
+function Demo() {
+  const [count, setCount] = useState(10);
 
   function incrementCountHandler() {
     setCount((prevCount) => prevCount + 1);
-    props.updateCurrentXPHandler();
   }
 
   return (
     <div className="cardsOverviewContainer">
       <div className="container">
-        <span className="button-text">{count}</span>
+        <ExperienceBar currentXP={count} />
+        <span className="button-text counter">{count}</span>
         <button onClick={incrementCountHandler} className="button-text">
           +
         </button>
@@ -23,4 +24,4 @@ function Increment(props) {
   );
 }
 
-export default Increment;
+export default Demo;
