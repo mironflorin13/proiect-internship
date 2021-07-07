@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import getChallenges from "../../mockFunctions/getChallenges";
+import "./inProgressCompleteChallenge.scss";
 import Challenges from "../challenges/Challenges";
 import Button from "../button/Button";
 import Card from "../card/Card";
@@ -35,7 +36,7 @@ const InProgressCompleteChallenge = () => {
       {error && <div>{error}</div>}
       {isPending && <div>Loading...</div>}
       {data && (
-        <>
+        <div className="challenges-container">
           <Challenges title="In progress Challenges">
             {dataInProgress.length ? (
               dataInProgress.map((item) => (
@@ -60,10 +61,7 @@ const InProgressCompleteChallenge = () => {
             )}
           </Challenges>
 
-          <Challenges
-            title="Completed Challenges"
-            additionalClass="padding-bottom"
-          >
+          <Challenges title="Completed Challenges">
             {dataCompleted.length ? (
               dataCompleted.map((item) => (
                 <Card
@@ -79,7 +77,7 @@ const InProgressCompleteChallenge = () => {
               <h2 className="challenges-subtilte">No Challenges to display</h2>
             )}
           </Challenges>
-        </>
+        </div>
       )}
     </>
   );
