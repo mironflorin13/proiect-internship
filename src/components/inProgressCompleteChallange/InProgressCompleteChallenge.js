@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import getChallenges from "../../mockFunctions/getChallenges";
+import { editChallengeStatus } from "../../data/challenges";
+
 import "./inProgressCompleteChallenge.scss";
+
 import Challenges from "../challenges/Challenges";
 import Button from "../button/Button";
 import Card from "../card/Card";
@@ -12,6 +15,17 @@ const InProgressCompleteChallenge = () => {
 
   const [dataInProgress, setDataInProgress] = useState([]);
   const [dataCompleted, setDataCompleted] = useState([]);
+  const [restart, setRestart] = useState(1);
+
+  const quitChallenge = (id) => {
+    editChallengeStatus(id, "denied");
+    setRestart(restart + 1);
+  };
+
+  const completeChallenge = (id) => {
+    editChallengeStatus(id, "validated");
+    setRestart(restart + 1);
+  };
 
   useEffect(() => {
     getChallenges()
@@ -29,7 +43,7 @@ const InProgressCompleteChallenge = () => {
         setError(error.message);
         setIsPending(false);
       });
-  }, []);
+  }, [restart]);
 
   return (
     <>
@@ -48,9 +62,15 @@ const InProgressCompleteChallenge = () => {
                   description={item.description}
                   key={item.id}
                 >
-                  <Button type="btn secondary" value="Quit" id={item.id} />
+                  <Button
+                    type="btn secondary"
+                    value="Quit"
+                    id={item.id}
+                    modifyStatusFunction={quitChallenge}
+                  />
                   <Button
                     type="btn primary flex-width-max"
+                    modifyStatusFunction={completeChallenge}
                     value="Completed"
                     id={item.id}
                   />

@@ -44,3 +44,6 @@ export const challenges = [
     status: "denied",
   },
 ];
+export function editChallengeStatus(id, status) {
+  challenges.find((item) => item.id === id).status = status;
+}
