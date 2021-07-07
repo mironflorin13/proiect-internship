@@ -3,12 +3,7 @@ import React from "react";
 import "./Credits.scss";
 
 function Credits(props) {
-
-  return (
-    <div>
-      <p>{props.credits} CREDITS</p>
-    </div>
-  );
+  return <div className="credits">{props.credits} CREDITS</div>;
 }
 
 export default Credits;
