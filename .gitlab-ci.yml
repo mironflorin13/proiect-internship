@@ -1,12 +1,10 @@
-language: node_js
-
-node_js:
-  - "node"
-  
 stages:
-  - lint
-
-tests:
-  stage: lint
-  script:
-    - npm run lint
+ - eslint
+ 
+check-eslint:
+ image: node:14
+ stage: eslint
+ script: 
+  - rm -rf node_modules/
+  - npm install
+  - npm run lint
