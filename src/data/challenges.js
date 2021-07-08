@@ -1,4 +1,4 @@
-export const challenges = [
+let challenges = [
   {
     id: 1,
     title: "Do a byte-sized learning talk",
@@ -6,7 +6,7 @@ export const challenges = [
     credits: 50,
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus. Sed at orci sit amet lectus euismod ultrices eget quis tortor.",
-    status: "available",
+    status: "in-progress",
   },
   {
     id: 2,
@@ -15,7 +15,7 @@ export const challenges = [
     credits: 50,
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus. Sed at orci sit amet lectus euismod ultrices eget quis tortor.orem ipsum dolor sit amet, consectetur adipiscing elit",
-    status: "available",
+    status: "in-progress",
   },
   {
     id: 3,
@@ -23,7 +23,7 @@ export const challenges = [
     xp: 30,
     credits: 50,
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    status: "available",
+    status: "in-progress",
   },
   {
     id: 4,
@@ -44,6 +44,11 @@ export const challenges = [
     status: "denied",
   },
 ];
-export function editChallengeStatus(id, status) {
-  challenges.find((item) => item.id === id).status = status;
-}
+
+export const setChallenges = (c) => {
+  challenges = c;
+};
+
+export const getChallenges = () => {
+  return challenges;
+};
