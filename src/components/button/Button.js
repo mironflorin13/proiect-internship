@@ -1,9 +1,9 @@
 import React from "react";
 import "./button.scss";
 
-const Button = ({ type, value, id, modifyStatusFunction }) => {
+const Button = ({ type, value, handleOnClick }) => {
   return (
-    <button onClick={() => modifyStatusFunction(id)} className={type}>
+    <button onClick={handleOnClick} className={type}>
       {value}
     </button>
   );

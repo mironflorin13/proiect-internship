@@ -4,7 +4,7 @@ import { editChallengeStatus } from "../../data/challenges";
 
 import "./inProgressCompleteChallenge.scss";
 
-import Challenges from "../challenges/Challenges";
+import ChallengesSection from "../challengesSection/ChallengesSection";
 import Button from "../button/Button";
 import Card from "../card/Card";
 
@@ -51,7 +51,7 @@ const InProgressCompleteChallenge = () => {
       {isPending && <div>Loading...</div>}
       {data && (
         <div className="challenges-container">
-          <Challenges title="In progress Challenges">
+          <ChallengesSection title="In progress Challenges">
             {dataInProgress.length ? (
               dataInProgress.map((item) => (
                 <Card
@@ -65,23 +65,21 @@ const InProgressCompleteChallenge = () => {
                   <Button
                     type="btn secondary"
                     value="Quit"
-                    id={item.id}
-                    modifyStatusFunction={quitChallenge}
+                    handleOnClick={() => quitChallenge(item.id)}
                   />
                   <Button
                     type="btn primary flex-width-max"
-                    modifyStatusFunction={completeChallenge}
-                    value="Completed"
-                    id={item.id}
+                    handleOnClick={() => completeChallenge(item.id)}
+                    value="Complete"
                   />
                 </Card>
               ))
             ) : (
               <h2 className="challenges-subtilte">No Challenges to display</h2>
             )}
-          </Challenges>
+          </ChallengesSection>
 
-          <Challenges title="Completed Challenges">
+          <ChallengesSection title="Completed Challenges">
             {dataCompleted.length ? (
               dataCompleted.map((item) => (
                 <Card
@@ -96,7 +94,7 @@ const InProgressCompleteChallenge = () => {
             ) : (
               <h2 className="challenges-subtilte">No Challenges to display</h2>
             )}
-          </Challenges>
+          </ChallengesSection>
         </div>
       )}
     </>
