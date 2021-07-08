@@ -2,7 +2,7 @@ import React from "react";
 
 import "./ExperienceBar.scss";
 
-function getInfo(currentXP) {
+function getCurrentXPTargetAndLevelInfo(currentXP) {
   let targetXP = 15;
   let level = 1;
   while (currentXP >= targetXP) {
@@ -25,15 +25,20 @@ function getBarWidth(currentXP, targetXP) {
 }
 
 function ExperienceBar(props) {
-  let initialObject = getInfo(props.currentXP);
+  let initialCurrentXPTargetAndLevelObject = getCurrentXPTargetAndLevelInfo(
+    props.currentXP
+  );
 
   return (
     <div className="experience-container">
       <div className="experience-details">
-        <span className="level">LEVEL {initialObject.level}</span>
+        <span className="level">
+          LEVEL {initialCurrentXPTargetAndLevelObject.level}
+        </span>
         <span className="level">
           {" "}
-          {initialObject.currentXP} / {initialObject.targetXP} XP{" "}
+          {initialCurrentXPTargetAndLevelObject.currentXP} /{" "}
+          {initialCurrentXPTargetAndLevelObject.targetXP} XP{" "}
         </span>
       </div>
       <div className="experience-bar">
@@ -41,8 +46,8 @@ function ExperienceBar(props) {
           className="inside-bar"
           style={{
             width: `${getBarWidth(
-              initialObject.currentXP,
-              initialObject.targetXP
+              initialCurrentXPTargetAndLevelObject.currentXP,
+              initialCurrentXPTargetAndLevelObject.targetXP
             )}%`,
           }}
         ></div>
