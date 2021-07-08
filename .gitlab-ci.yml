@@ -1,0 +1,12 @@
+language: node_js
+
+node_js:
+  - "node"
+  
+stages:
+  - lint
+
+tests:
+  stage: lint
+  script:
+    - npm run lint
