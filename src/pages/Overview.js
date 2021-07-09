@@ -6,7 +6,7 @@ import "../components/leftHandPanel/LeftHandPanel.scss";
 function Overview(props) {
   return (
     <div className="cardsOverviewContainer">
-      <InProgressCompleteChallenge />
+      <InProgressCompleteChallenge userChallengesIds={[1, 2, 3, 4, 5]} />
     </div>
   );
 }
