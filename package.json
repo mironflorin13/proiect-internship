@@ -9,9 +9,18 @@
 		"react-router-dom": "^5.2.0",
 		"react-scripts": "4.0.3"
 	},
+	"devDependencies": {
+		"eslint": "^7.29.0",
+		"eslint-plugin-import": "^2.23.4",
+		"eslint-plugin-react": "^7.24.0",
+		"eslint-plugin-react-hooks": "^4.2.0",
+		"eslint-plugin-sonarjs": "^0.8.0-125",
+		"eslint-plugin-unicorn": "^34.0.1"
+	},
 	"scripts": {
 		"start": "react-scripts start",
-		"build": "react-scripts build"
+		"build": "react-scripts build",
+		"lint": "eslint src"
 	},
 	"eslintConfig": {
 		"extends": [

@@ -1,0 +1,10 @@
+stages:
+ - eslint
+ 
+check-eslint:
+ image: node:14
+ stage: eslint
+ script: 
+  - rm -rf node_modules/
+  - npm install
+  - npm run lint
