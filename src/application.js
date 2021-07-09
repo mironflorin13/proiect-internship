@@ -3,11 +3,11 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import getUserInfo from "./mockFunctions/get-user-info.js";
 import LeftHandPanel from "./components/left-hand-panel/left-hand-panel";
-import Overview from "./pages/overview";
-import Challenges from "./pages/challenges";
-import Demo from "./pages/demo";
-import Shop from "./pages/shop";
-import "./app.scss";
+import Overview from "./all-pages/overview";
+import Challenges from "./all-pages/challenges";
+import Demo from "./all-pages/demo";
+import Shop from "./all-pages/shop";
+import "./application.scss";
 import users from "./mockFunctions/users.js";
 
 function App() {
