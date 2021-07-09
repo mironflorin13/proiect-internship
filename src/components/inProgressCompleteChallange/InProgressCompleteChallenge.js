@@ -44,7 +44,7 @@ const InProgressCompleteChallenge = ({ userChallengesIds }) => {
     challengesRequest();
   };
 
-  useEffect(challengesRequest, []);
+  useEffect(challengesRequest, [userChallengesIds]);
 
   return (
     <>
