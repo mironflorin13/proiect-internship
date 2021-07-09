@@ -1,12 +1,11 @@
 import React from "react";
-import ReactDOM from "react-dom";
 
 import "./UserCard.scss";
 
 function UserCard({ name, jobTitle, image }) {
   return (
     <div className="UserCard">
-      <img src={image} className="avatar" alt="user photo" />
+      <img src={image} className="avatar" alt="user" />
 
       <div>
         <h3 className="userName">{name}</h3>

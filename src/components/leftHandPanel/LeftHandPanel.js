@@ -1,15 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React from "react";
 
 import UserCard from "./UserCard";
-import getUserInfo from "../../mockFunctions/getUserInfo.js";
 import "./LeftHandPanel.scss";
 import { getChallenges } from "../../data/challenges";
 
-import Overview from "../../pages/Overview";
-import Challenges from "../../pages/Challenges";
-import Shop from "../../pages/Shop";
-import Demo from "../../pages/Demo";
 import Menu from "./Menu";
 import ExperienceBar from "./ExperienceBar";
 import Credits from "./Credits";
@@ -33,33 +27,14 @@ function getNumberOfCredits() {
 }
 
 function LeftHandPanel(props) {
-  const [userData, setUserData] = useState({});
-
-  useEffect(() => {
-    getUserInfo(0)
-      .then((data) => {
-        setUserData(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-
   return (
     <>
       <div className="LeftHandPanel">
-        <UserCard {...userData} />
+        <UserCard {...props.userData} />
+
         <Credits credits={getNumberOfCredits()} />
         <ExperienceBar currentXP={getInitialCurrentXP()} />
-        <Router>
-          <Menu />
-          <Switch>
-            <Route path="/" exact component={() => <Overview />} />
-            <Route path="/challenges" exact component={() => <Challenges />} />
-            <Route path="/shop" exact component={() => <Shop />} />
-            <Route path="/demo" exact component={() => <Demo />} />
-          </Switch>
-        </Router>
+        <Menu />
 
         <p className="LeftHandPanel_admin"> Switch to Admin </p>
       </div>
