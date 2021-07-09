@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import getUserInfo from "./mockFunctions/getUserInfo.js";
-import LeftHandPanel from "./components/leftHandPanel/LeftHandPanel";
-import Overview from "./pages/Overview";
-import Challenges from "./pages/Challenges";
-import Demo from "./pages/Demo";
-
-import Shop from "./pages/Shop";
+import getUserInfo from "./mockFunctions/get-user-info.js";
+import LeftHandPanel from "./components/left-hand-panel/left-hand-panel";
+import Overview from "./pages/overview";
+import Challenges from "./pages/challenges";
+import Demo from "./pages/demo";
+import Shop from "./pages/shop";
 import "./app.scss";
 import users from "./mockFunctions/users.js";
 
@@ -16,10 +15,10 @@ function App() {
 
   useEffect(() => {
     getUserInfo(0)
-      .then((data) => {
+      .then(data => {
         setUserData(data);
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
   }, []);

@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./UserCard.scss";
+import "./user-card.scss";
 
 function UserCard({ name, jobTitle, image }) {
   return (

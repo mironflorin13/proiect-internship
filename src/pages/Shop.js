@@ -1,11 +1,11 @@
 import React from "react";
 
-import "../components/leftHandPanel/LeftHandPanel.scss";
+import "../components/left-hand-panel/left-hand-panel.scss";
 
 function Shop(props) {
   return (
     <div className="cardsOverviewContainer">
-      <div className="container">"Aici vor fi produsele din shop"</div>
+      <div className="container">Aici vor fi produsele din shop</div>
     </div>
   );
 }

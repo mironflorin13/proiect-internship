@@ -1,23 +1,22 @@
 import React from "react";
 
-import "./ExperienceBar.scss";
+import "./experience-bar.scss";
 
 function getCurrentXPTargetAndLevelInfo(currentXP) {
+  let currentXPCopy = currentXP;
   let targetXP = 15;
   let level = 1;
-  while (currentXP >= targetXP) {
-    currentXP -= targetXP;
+  while (currentXPCopy >= targetXP) {
+    currentXPCopy -= targetXP;
     targetXP += 15;
     level++;
   }
 
-  let experienceInfo = {
-    currentXP: currentXP,
-    targetXP: targetXP,
-    level: level,
+  return {
+    currentXP,
+    targetXP,
+    level,
   };
-
-  return experienceInfo;
 }
 
 function getBarWidth(currentXP, targetXP) {
@@ -25,7 +24,7 @@ function getBarWidth(currentXP, targetXP) {
 }
 
 function ExperienceBar(props) {
-  let initialCurrentXPTargetAndLevelObject = getCurrentXPTargetAndLevelInfo(
+  const initialCurrentXPTargetAndLevelObject = getCurrentXPTargetAndLevelInfo(
     props.currentXP
   );
 
