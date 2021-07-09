@@ -4,8 +4,8 @@ import getUserChallenges from "../../mockFunctions/get-user-challenges";
 import editChallengeStatus from "../../mockFunctions/edit-challenge-status";
 import "./in-progress-complete-challenge.scss";
 import ChallengesSection from "../challenges-section/challenges-section";
-import Button from "../button/button";
-import Card from "../card/card";
+import Button from "../button-f/button";
+import Card from "../card-f/card";
 
 const InProgressCompleteChallenge = ({ userChallengesIds }) => {
   const [isPending, setIsPending] = useState(true);
