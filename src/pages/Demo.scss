@@ -1,0 +1,19 @@
+@import "../utils/partials";
+
+.button-text {
+  font-family: $fontRoboto;
+  font-size: 30px;
+  margin-top: 30px;
+}
+
+.counter {
+  margin-left: 40px;
+}
+
+button {
+  width: 70px;
+  height: 40px;
+  border: 2px solid $blue;
+  background-color: $lightBlue;
+  margin-left: 10px;  
+}

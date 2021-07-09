@@ -1,8 +1,8 @@
-import "./challenges.scss";
-import Card from "../card/Card";
+import "./challengesSection.scss";
+
 import React from "react";
 
-const Challenges = ({ title, children }) => {
+const ChallengesSection = ({ title, children }) => {
   return (
     <div>
       <h1 className="challenges-tilte">{title}</h1>
@@ -11,4 +11,4 @@ const Challenges = ({ title, children }) => {
   );
 };
 
-export default Challenges;
+export default ChallengesSection;

@@ -1,6 +1,5 @@
 import React from "react";
 import "./card.scss";
-import Button from "../button/Button";
 
 const Card = ({ status, title, xp, credits, description, children }) => {
   const completed = status === "validated" || status === "denied" ? status : "";

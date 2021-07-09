@@ -3,11 +3,13 @@ import React from "react";
 import InProgressCompleteChallenge from "../components/inProgressCompleteChallange/InProgressCompleteChallenge";
 import "../components/leftHandPanel/LeftHandPanel.scss";
 
-function Overview(props) {
+function Overview({ userData }) {
   return (
-    <div className="cardsOverviewContainer">
-      <InProgressCompleteChallenge />
-    </div>
+    userData !== undefined && (
+      <div className="cardsOverviewContainer">
+        <InProgressCompleteChallenge userChallengesIds={userData} />
+      </div>
+    )
   );
 }
 

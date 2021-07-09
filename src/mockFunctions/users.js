@@ -5,7 +5,7 @@ const users = [
     jobTitle: "Software Developer",
     image:
       "https://www.pngfind.com/pngs/m/488-4887957_facebook-teerasej-profile-ball-circle-circular-profile-picture.png",
-    challenges: [],
+    challenges: [1, 2, 3, 4, 5],
   },
 
   {
