@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import getAvailableChallenges from "../../mockFunctions/get-available-challenges";
+import getAvailableChallenges from "../../mock-functions/get-available-challenges";
 import ChallengesSection from "../challenges-section/challenges-section";
 import Button from "../button/button";
 import Card from "../card/card";
