@@ -2,11 +2,11 @@ import React from "react";
 
 import { getChallenges } from "../../data/challenges";
 
-import UserCard from "./user-card";
+import UserCard from "./user-card/user-card";
 import "./left-hand-panel.scss";
-import Menu from "./menu";
-import ExperienceBar from "./experience-bar";
-import Credits from "./credits";
+import Menu from "./menu/menu";
+import ExperienceBar from "./experience-bar/experience-bar";
+import Credits from "./credits/credits";
 
 function getInitialCurrentXP() {
   const challenges = getChallenges();
@@ -25,14 +25,14 @@ function getNumberOfCredits() {
 function LeftHandPanel(props) {
   return (
     <div className="LeftHandPanel">
-      <UserCard {...props.userData} />
+        <UserCard {...props.userData} />
 
-      <Credits credits={getNumberOfCredits()} />
-      <ExperienceBar currentXP={getInitialCurrentXP()} />
-      <Menu />
+        <Credits credits={getNumberOfCredits()} />
+        <ExperienceBar currentXP={getInitialCurrentXP()} />
+        <Menu />
 
-      <p className="LeftHandPanel_admin"> Switch to Admin </p>
-    </div>
+        <p className="LeftHandPanel_admin"> Switch to Admin </p>
+      </div>
   );
 }
 
