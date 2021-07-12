@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
-import getUserChallenges from "../../mockFunctions/getUserChallenges";
-import editChallengeStatus from "../../mockFunctions/editChallengeStatus";
 
-import "./inProgressCompleteChallenge.scss";
-
-import ChallengesSection from "../challengesSection/ChallengesSection";
-import Button from "../button/Button";
-import Card from "../card/Card";
+import getUserChallenges from "../../mockFunctions/get-user-challenges";
+import editChallengeStatus from "../../mockFunctions/edit-challenge-status";
+import "./in-progress-complete-challenge.scss";
+import ChallengesSection from "../challenges-section/challenges-section";
+import Button from "../button/button";
+import Card from "../card/card";
 
 const InProgressCompleteChallenge = ({ userChallengesIds }) => {
   const [isPending, setIsPending] = useState(true);
@@ -17,34 +16,34 @@ const InProgressCompleteChallenge = ({ userChallengesIds }) => {
 
   const challengesRequest = () => {
     getUserChallenges(userChallengesIds)
-      .then((challenges) => {
+      .then(challenges => {
         setDataInProgress(
-          challenges.filter((item) => item.status === "in-progress")
+          challenges.filter(item => item.status === "in-progress")
         );
         setDataCompleted(
           challenges.filter(
-            (item) => item.status === "denied" || item.status === "validated"
+            item => item.status === "denied" || item.status === "validated"
           )
         );
         setIsPending(false);
       })
-      .catch((error) => {
+      .catch(error => {
         setError(error.message);
         setIsPending(false);
       });
   };
 
-  const quitChallenge = (id) => {
+  const quitChallenge = id => {
     editChallengeStatus(id, "denied");
     challengesRequest();
   };
 
-  const completeChallenge = (id) => {
+  const completeChallenge = id => {
     editChallengeStatus(id, "validated");
     challengesRequest();
   };
 
-  useEffect(challengesRequest, []);
+  useEffect(challengesRequest, [userChallengesIds]);
 
   return (
     <>
@@ -54,7 +53,7 @@ const InProgressCompleteChallenge = ({ userChallengesIds }) => {
       <div className="challenges-container">
         <ChallengesSection title="In progress Challenges">
           {dataInProgress.length ? (
-            dataInProgress.map((item) => (
+            dataInProgress.map(item => (
               <Card
                 status={item.status}
                 title={item.title}
@@ -82,7 +81,7 @@ const InProgressCompleteChallenge = ({ userChallengesIds }) => {
 
         <ChallengesSection title="Completed Challenges">
           {dataCompleted.length ? (
-            dataCompleted.map((item) => (
+            dataCompleted.map(item => (
               <Card
                 status={item.status}
                 title={item.title}

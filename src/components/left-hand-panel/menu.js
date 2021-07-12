@@ -1,8 +1,8 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 
-import "./Menu.scss";
-import Page from "./Page";
+import "./menu.scss";
+import Page from "./page";
 
 const pages = [
   {
@@ -26,7 +26,7 @@ function Menu(props) {
   const location = useLocation();
   return (
     <div className="pagesContainer">
-      {pages.map((item) => (
+      {pages.map(item => (
         <Page
           page={item.page}
           path={item.path}

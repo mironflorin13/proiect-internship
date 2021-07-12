@@ -5,6 +5,7 @@
   flex-direction: column;
   width: 300px;
   position: fixed;
+  min-height: 500px;
   top: 0;
   left: 0;
   bottom: 0;
@@ -17,8 +18,9 @@
   font-family: $fontRoboto;
   color: $fontColorGrey;
   font-size: 16px;
-  padding-top: 250px;
-  padding-left: 40px;
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
 }
 
 .cardsOverviewContainer {
