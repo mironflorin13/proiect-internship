@@ -3,11 +3,12 @@ import { useState, useEffect } from "react";
 import getUserChallenges from "../../mock-functions/get-user-challenges";
 import editChallengeStatus from "../../mock-functions/edit-challenge-status";
 import "./in-progress-complete-challenge.scss";
+import { getUsers } from "../../mock-functions/users";
 import ChallengesSection from "../challenges-section/challenges-section";
 import Button from "../button/button";
 import Card from "../card/card";
 
-const InProgressCompleteChallenge = ({ userChallengesIds }) => {
+const InProgressCompleteChallenge = ({ userId }) => {
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState(false);
 
@@ -15,6 +16,9 @@ const InProgressCompleteChallenge = ({ userChallengesIds }) => {
   const [dataCompleted, setDataCompleted] = useState([]);
 
   const challengesRequest = () => {
+    const user = getUsers();
+    const userChallengesIds = user.find(item => item.id === userId).challenges;
+
     getUserChallenges(userChallengesIds)
       .then(challenges => {
         setDataInProgress(
@@ -43,7 +47,7 @@ const InProgressCompleteChallenge = ({ userChallengesIds }) => {
     challengesRequest();
   };
 
-  useEffect(challengesRequest, [userChallengesIds]);
+  useEffect(challengesRequest, [userId]);
 
   return (
     <>

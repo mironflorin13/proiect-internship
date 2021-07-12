@@ -1,4 +1,4 @@
-const users = [
+let users = [
   {
     id: 0,
     name: "Daniel Toma",
@@ -17,5 +17,8 @@ const users = [
     challenges: [],
   },
 ];
-
+export const setUsers = u => {
+  users = u;
+};
+export const getUsers = () => users;
 export default users;
