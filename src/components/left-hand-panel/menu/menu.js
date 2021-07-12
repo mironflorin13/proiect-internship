@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 
 import "./menu.scss";
-import Page from "./page";
+import Page from "../page";
 
 const pages = [
   {

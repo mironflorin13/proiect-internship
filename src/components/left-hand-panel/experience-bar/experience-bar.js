@@ -13,7 +13,7 @@ function getCurrentXPTargetAndLevelInfo(currentXP) {
   }
 
   return {
-    currentXP,
+    currentXP: currentXPCopy,
     targetXP,
     level,
   };
