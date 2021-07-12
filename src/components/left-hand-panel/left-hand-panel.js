@@ -2,11 +2,11 @@ import React from "react";
 
 import { getChallenges } from "../../data/challenges";
 
-import UserCard from "./user-card";
-import "./LeftHandPanel.scss";
-import Menu from "./menu";
-import ExperienceBar from "./experience-bar";
-import Credits from "./credits";
+import UserCard from "./user-card/user-card";
+import "./left-hand-panel.scss";
+import Menu from "./menu/menu";
+import ExperienceBar from "./experience-bar/experience-bar";
+import Credits from "./credits/credits";
 
 function getInitialCurrentXP() {
   const challenges = getChallenges();

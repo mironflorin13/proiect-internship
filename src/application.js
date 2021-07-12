@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import getUserInfo from "./mockFunctions/get-user-info.js";
+import getUserInfo from "./mock-functions/get-user-info.js";
 import LeftHandPanel from "./components/left-hand-panel/left-hand-panel";
 import Overview from "./pages/overview";
 import Challenges from "./pages/challenges";
 import Demo from "./pages/demo";
 import Shop from "./pages/shop";
 import "./application.scss";
-import users from "./mockFunctions/users.js";
+import users from "./mock-functions/users.js";
 
 function App() {
   const [userData, setUserData] = useState({});

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
-import getUserChallenges from "../../mockFunctions/get-user-challenges";
-import editChallengeStatus from "../../mockFunctions/edit-challenge-status";
+import getUserChallenges from "../../mock-functions/get-user-challenges";
+import editChallengeStatus from "../../mock-functions/edit-challenge-status";
 import "./in-progress-complete-challenge.scss";
 import ChallengesSection from "../challenges-section/challenges-section";
 import Button from "../button/button";

@@ -1,4 +1,4 @@
-import "./challengesSection.scss";
+import "./challenges-section.scss";
 
 import React from "react";
 
