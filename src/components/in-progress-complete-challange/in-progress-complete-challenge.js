@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 
 import getUserChallenges from "../../mockFunctions/get-user-challenges";
 import editChallengeStatus from "../../mockFunctions/edit-challenge-status";
-import "./inProgressCompleteChallenge.scss";
-import ChallengesSection from "../challengesSection/challenges-section";
+import "./in-progress-complete-challenge.scss";
+import ChallengesSection from "../challenges-section/challenges-section";
 import Button from "../button/button";
 import Card from "../card/card";
 
@@ -43,7 +43,7 @@ const InProgressCompleteChallenge = ({ userChallengesIds }) => {
     challengesRequest();
   };
 
-  useEffect(challengesRequest, []);
+  useEffect(challengesRequest, [userChallengesIds]);
 
   return (
     <>

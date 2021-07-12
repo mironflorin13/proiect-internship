@@ -45,10 +45,8 @@ let challenges = [
   },
 ];
 
-export const setChallenges = (c) => {
+export const setChallenges = c => {
   challenges = c;
 };
 
-export const getChallenges = () => {
-  return challenges;
-};
+export const getChallenges = () => challenges;
