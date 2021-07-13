@@ -1,6 +1,5 @@
 import { getChallenges } from "../data/challenges";
-
-import { getUsers } from "./users";
+import { getUsers } from "../data/users";
 
 const getUserChallenges = userId => {
   const challenges = getChallenges();

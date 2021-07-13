@@ -8,7 +8,7 @@ import Challenges from "./pages/challenges";
 import Demo from "./pages/demo";
 import Shop from "./pages/shop";
 import "./application.scss";
-import users from "./mock-functions/users.js";
+import users from "./data/users.js";
 
 function App() {
   const [userData, setUserData] = useState({});

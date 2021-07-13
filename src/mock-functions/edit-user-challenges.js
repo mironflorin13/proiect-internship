@@ -1,4 +1,5 @@
-import { setUsers, getUsers } from "./users";
+import { setUsers, getUsers } from "../data/users";
+
 import editChallengeStatus from "./edit-challenge-status";
 
 const editUserChallenges = (id, challengeId) => {
