@@ -1,12 +1,16 @@
 import { getChallenges } from "../data/challenges";
 
-const getUserChallenges = userChallengesIds => {
-  const challenges = getChallenges();
-  const userChallenges = challenges.filter(item =>
-    userChallengesIds.find(itemId => itemId === item.id)
-  );
+import { getUsers } from "./users";
 
-  return Promise.resolve(userChallenges);
+const getUserChallenges = userId => {
+  const challenges = getChallenges();
+  const users = getUsers();
+  const userChallengesIds = users.find(item => item.id === userId).challenges;
+  return Promise.resolve(
+    challenges.filter(item =>
+      userChallengesIds.find(itemId => itemId === item.id)
+    )
+  );
 };
 
 export default getUserChallenges;

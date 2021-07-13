@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 
 import getAvailableChallenges from "../../mock-functions/get-available-challenges";
-import editChallengeStatus from "../../mock-functions/edit-challenge-status";
 import editUserChallenges from "../../mock-functions/edit-user-challenges";
 import ChallengesSection from "../challenges-section/challenges-section";
 import Button from "../button/button";
@@ -23,9 +22,9 @@ const AvailableChallenges = ({ userId }) => {
         setIsPending(false);
       });
   };
-  const enrollChallenge = itemId => {
+
+  const enrollChallenge = itemId => () => {
     editUserChallenges(userId, itemId);
-    editChallengeStatus(itemId, "in-progress");
     challengesRequest();
   };
 
@@ -41,18 +40,11 @@ const AvailableChallenges = ({ userId }) => {
         <ChallengesSection title="Available Challenges">
           {dataAvailable.length ? (
             dataAvailable.map(item => (
-              <Card
-                status={item.status}
-                title={item.title}
-                xp={item.xp}
-                credits={item.credits}
-                description={item.description}
-                key={item.id}
-              >
+              <Card {...item} key={item.id}>
                 <Button
                   type="btn primary flex-width-max"
                   value="Enroll"
-                  handleOnClick={() => enrollChallenge(item.id)}
+                  handleOnClick={enrollChallenge(item.id)}
                 />
               </Card>
             ))

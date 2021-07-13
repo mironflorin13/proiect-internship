@@ -1,4 +1,5 @@
 import { setUsers, getUsers } from "./users";
+import editChallengeStatus from "./edit-challenge-status";
 
 const editUserChallenges = (id, challengeId) => {
   const users = getUsers();
@@ -9,6 +10,7 @@ const editUserChallenges = (id, challengeId) => {
     return item;
   });
 
+  editChallengeStatus(challengeId, "in-progress");
   setUsers(usersCopy);
 };
 
