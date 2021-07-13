@@ -7,7 +7,7 @@ import Card from "../card/card";
 
 const AvailableChallenges = () => {
   const [isPending, setIsPending] = useState(true);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState();
   const [dataAvailable, setDataAvailable] = useState([]);
 
   const challengesRequest = () => {
@@ -24,11 +24,12 @@ const AvailableChallenges = () => {
 
   useEffect(challengesRequest, []);
 
-  return (
-    <>
-      {error && <div>{error}</div>}
-      {isPending && <div>Loading...</div>}
-
+  if (isPending) {
+    return <div>Loading...</div>;
+  } else if (error) {
+    return <div>{error}</div>;
+  } else {
+    return (
       <div className="challenges-container">
         <ChallengesSection title="Available Challenges">
           {dataAvailable.length ? (
@@ -49,8 +50,8 @@ const AvailableChallenges = () => {
           )}
         </ChallengesSection>
       </div>
-    </>
-  );
+    );
+  }
 };
 
 export default AvailableChallenges;
