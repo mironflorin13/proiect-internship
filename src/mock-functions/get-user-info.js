@@ -1,4 +1,4 @@
-import users from "./users";
+import users from "../data/users";
 // import getUsers from "./getUsers";
 
 const getUserInfo = id => {

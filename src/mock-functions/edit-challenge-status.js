@@ -10,6 +10,7 @@ const editChallengeStatus = (id, status) => {
   });
 
   setChallenges(challengesCopy);
+  return challengesCopy;
 };
 
 export default editChallengeStatus;
