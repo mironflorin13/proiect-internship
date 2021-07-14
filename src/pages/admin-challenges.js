@@ -9,12 +9,12 @@ import Card from "../components/card/card";
 const AdminChallenges = () => {
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState();
-  const [dataAvailable, setDataAvailable] = useState([]);
+  const [availableChallenges, setAvailableChallenges] = useState([]);
 
   const challengesRequest = () => {
     getAllChallenges()
       .then(challenges => {
-        setDataAvailable(challenges);
+        setAvailableChallenges(challenges);
         setIsPending(false);
       })
       .catch(error => {
@@ -34,9 +34,9 @@ const AdminChallenges = () => {
       <div className="cardsOverviewContainer">
         <div className="challenges-container">
           <ChallengesSection title="Challenges">
-            {dataAvailable.length ? (
-              dataAvailable.map(item => (
-                <>
+            <>
+              {availableChallenges.length ? (
+                availableChallenges.map(item => (
                   <Card
                     title={item.title}
                     xp={item.xp}
@@ -47,12 +47,14 @@ const AdminChallenges = () => {
                     <Button type="btn secondary " value="Delete" />
                     <Button type="btn primary flex-width-max" value="Edit" />
                   </Card>
-                  <Button type="btn primary fix" value="Add New" />
-                </>
-              ))
-            ) : (
-              <h2 className="challenges-subtilte">No Challenges to display</h2>
-            )}
+                ))
+              ) : (
+                <h2 className="challenges-subtilte">
+                  No Challenges to display
+                </h2>
+              )}
+              <Button type="btn primary fix" value="Add New" />
+            </>
           </ChallengesSection>
         </div>
       </div>
