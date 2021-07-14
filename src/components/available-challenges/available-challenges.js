@@ -9,12 +9,12 @@ import Card from "../card/card";
 const AvailableChallenges = ({ userId }) => {
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState();
-  const [dataAvailable, setDataAvailable] = useState([]);
+  const [availableChallenges, setAvailableChallenges] = useState([]);
 
-  const challengesRequest = () => {
-    getAvailableChallenges()
+  const challengesRequest = functionThatReturnAPromise => {
+    functionThatReturnAPromise()
       .then(challenges => {
-        setDataAvailable(challenges);
+        setAvailableChallenges(challenges);
         setIsPending(false);
       })
       .catch(error => {
@@ -24,11 +24,12 @@ const AvailableChallenges = ({ userId }) => {
   };
 
   const enrollChallenge = itemId => () => {
-    editUserChallenges(userId, itemId);
-    challengesRequest();
+    challengesRequest(() => editUserChallenges(userId, itemId));
   };
 
-  useEffect(challengesRequest, []);
+  useEffect(() => {
+    challengesRequest(getAvailableChallenges);
+  }, []);
 
   if (isPending) {
     return <div>Loading...</div>;
@@ -38,8 +39,8 @@ const AvailableChallenges = ({ userId }) => {
     return (
       <div className="challenges-container">
         <ChallengesSection title="Available Challenges">
-          {dataAvailable.length ? (
-            dataAvailable.map(item => (
+          {availableChallenges.length ? (
+            availableChallenges.map(item => (
               <Card {...item} key={item.id}>
                 <Button
                   type="btn primary flex-width-max"

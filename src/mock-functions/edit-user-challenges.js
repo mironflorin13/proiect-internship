@@ -11,8 +11,11 @@ const editUserChallenges = (id, challengeId) => {
     return item;
   });
 
-  editChallengeStatus(challengeId, "in-progress");
+  const challenges = editChallengeStatus(challengeId, "in-progress");
   setUsers(usersCopy);
+  return Promise.resolve(
+    challenges.filter(item => item.status === "available")
+  );
 };
 
 export default editUserChallenges;
