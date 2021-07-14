@@ -11,8 +11,8 @@ const AvailableChallenges = ({ userId }) => {
   const [error, setError] = useState();
   const [availableChallenges, setAvailableChallenges] = useState([]);
 
-  const challengesRequest = functionThatReturnAPromise => {
-    functionThatReturnAPromise()
+  const challengesRequest = getChallenges => {
+    getChallenges()
       .then(challenges => {
         setAvailableChallenges(challenges);
         setIsPending(false);
