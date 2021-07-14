@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import "./menu.scss";
 import Page from "../page";
 
-const pages = [
+const userPages = [
   {
     id: 1,
     page: "Overview",
@@ -22,18 +22,46 @@ const pages = [
   },
 ];
 
-function Menu(props) {
+const adminPages = [
+  {
+    id: 1,
+    page: "Challenges",
+    path: "/",
+  },
+  {
+    id: 2,
+    page: "Validation",
+    path: "/validation",
+  },
+  {
+    id: 3,
+    page: "Shop",
+    path: "/shop",
+  },
+];
+
+function Menu({ pagesToShow }) {
   const location = useLocation();
   return (
     <div className="pagesContainer">
-      {pages.map(item => (
-        <Page
-          page={item.page}
-          path={item.path}
-          location={location.pathname}
-          key={item.id}
-        />
-      ))}
+      {pagesToShow === "User" &&
+        userPages.map(item => (
+          <Page
+            page={item.page}
+            path={item.path}
+            location={location.pathname}
+            key={item.id}
+          />
+        ))}
+      {pagesToShow === "Admin" &&
+        adminPages.map(item2 => (
+          <Page
+            page={item2.page}
+            path={item2.path}
+            location={location.pathname}
+            key={item2.id}
+          />
+        ))}
     </div>
   );
 }

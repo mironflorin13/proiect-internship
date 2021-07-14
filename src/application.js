@@ -12,6 +12,7 @@ import users from "./mock-functions/users.js";
 
 function App() {
   const [userData, setUserData] = useState({});
+  const [switchUserAdmin, setSwitchUserAdmin] = useState("User");
 
   useEffect(() => {
     getUserInfo(0)
@@ -23,21 +24,54 @@ function App() {
       });
   }, []);
 
+  function switchRoleHandler() {
+    switchUserAdmin === "User"
+      ? setSwitchUserAdmin("Admin")
+      : setSwitchUserAdmin("User");
+  }
+
   return (
     <div>
-      <Router>
-        <LeftHandPanel userAvatar={users} userData={userData} />
-        <Switch>
-          <Route
-            path="/"
-            exact
-            component={() => <Overview userData={userData.challenges} />}
+      {switchUserAdmin === "User" && (
+        <Router>
+          <LeftHandPanel
+            userAvatar={users}
+            userData={userData}
+            role={switchUserAdmin}
+            switchRole={switchRoleHandler}
           />
-          <Route path="/challenges" exact component={() => <Challenges />} />
-          <Route path="/shop" exact component={() => <Shop />} />
-          <Route path="/demo" exact component={() => <Demo />} />
-        </Switch>
-      </Router>
+          <Switch>
+            <Route
+              path="/"
+              exact
+              component={() => <Overview userData={userData.challenges} />}
+            />
+            <Route path="/challenges" exact component={() => <Challenges />} />
+            <Route path="/shop" exact component={() => <Shop />} />
+            <Route path="/demo" exact component={() => <Demo />} />
+          </Switch>
+        </Router>
+      )}
+      {switchUserAdmin === "Admin" && (
+        <Router>
+          <LeftHandPanel
+            userAvatar={users}
+            userData={userData}
+            role={switchUserAdmin}
+            switchRole={switchRoleHandler}
+          />
+          <Switch>
+            <Route
+              path="/"
+              exact
+              component={() => <Overview userData={userData.challenges} />}
+            />
+            <Route path="/challenges" exact component={() => <Challenges />} />
+            <Route path="/shop" exact component={() => <Shop />} />
+            <Route path="/demo" exact component={() => <Demo />} />
+          </Switch>
+        </Router>
+      )}
     </div>
   );
 }

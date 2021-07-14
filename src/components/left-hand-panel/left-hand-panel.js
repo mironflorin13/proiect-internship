@@ -23,16 +23,34 @@ function getNumberOfCredits() {
 }
 
 function LeftHandPanel(props) {
+  // const [switchUserAdmin, setSwitchUserAdmin] = useState("Admin");
+
+  function switchUserAdminHandler() {
+    console.log(props.role);
+    props.switchRole();
+  }
+
   return (
     <div className="LeftHandPanel">
-        <UserCard {...props.userData} />
+      <UserCard {...props.userData} />
 
-        <Credits credits={getNumberOfCredits()} />
-        <ExperienceBar currentXP={getInitialCurrentXP()} />
-        <Menu />
+      {props.role === "User" && (
+        <>
+          <Credits credits={getNumberOfCredits()} />
+          <ExperienceBar currentXP={getInitialCurrentXP()} />
+        </>
+      )}
 
-        <p className="LeftHandPanel_admin"> Switch to Admin </p>
-      </div>
+      <Menu pagesToShow={props.role} />
+
+      <a
+        // href="/admin-challenges"
+        className="LeftHandPanel_admin"
+        onClick={switchUserAdminHandler}
+      >
+        Switch to {props.role === "Admin" ? "User" : "Admin"}
+      </a>
+    </div>
   );
 }
 

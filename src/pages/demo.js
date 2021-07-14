@@ -16,7 +16,7 @@ function Demo() {
       <div className="container">
         <ExperienceBar currentXP={count} />
         <span className="button-text counter">{count}</span>
-        <button onClick={incrementCountHandler} className="button-text">
+        <button onClick={incrementCountHandler} className="button-text btn-demo">
           +
         </button>
       </div>
