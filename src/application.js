@@ -9,14 +9,15 @@ import Demo from "./pages/demo";
 import Shop from "./pages/shop";
 import Validation from "./pages/validation";
 import "./application.scss";
-import users from "./mock-functions/users.js";
+import users from "./data/users.js";
 
 function App() {
   const [userData, setUserData] = useState({});
   const [switchUserAdmin, setSwitchUserAdmin] = useState("User");
+  const userId = 0;
 
   useEffect(() => {
-    getUserInfo(0)
+    getUserInfo(userId)
       .then(data => {
         setUserData(data);
       })
@@ -45,9 +46,15 @@ function App() {
             <Route
               path="/"
               exact
-              component={() => <Overview userData={userData.challenges} />}
+              component={() => (
+                <Overview userData={userData.challenges} userId={userId} />
+              )}
             />
-            <Route path="/challenges" exact component={() => <Challenges />} />
+            <Route
+              path="/challenges"
+              exact
+              component={() => <Challenges userId={userId} />}
+            />
             <Route
               path="/shop"
               exact
@@ -66,7 +73,11 @@ function App() {
             switchRole={switchRoleHandler}
           />
           <Switch>
-            <Route path="/challenges-admin" exact component={() => <Challenges />} />
+            <Route
+              path="/challenges-admin"
+              exact
+              component={() => <Challenges userId={userId} />}
+            />
             <Route path="/validation" exact component={() => <Validation />} />
             <Route
               path="/shop-admin"

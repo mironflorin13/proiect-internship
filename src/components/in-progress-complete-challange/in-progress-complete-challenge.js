@@ -1,21 +1,21 @@
 import { useState, useEffect } from "react";
 
-import getUserChallenges from "../../mock-functions/get-user-challenges";
-import editChallengeStatus from "../../mock-functions/edit-challenge-status";
-import "./in-progress-complete-challenge.scss";
 import ChallengesSection from "../challenges-section/challenges-section";
 import Button from "../button/button";
 import Card from "../card/card";
+import getUserChallenges from "../../mock-functions/get-user-challenges";
+import editChallengeStatus from "../../mock-functions/edit-challenge-status";
+import "./in-progress-complete-challenge.scss";
 
-const InProgressCompleteChallenge = ({ userChallengesIds }) => {
+const InProgressCompleteChallenge = ({ userId }) => {
   const [isPending, setIsPending] = useState(true);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState();
 
   const [dataInProgress, setDataInProgress] = useState([]);
   const [dataCompleted, setDataCompleted] = useState([]);
 
   const challengesRequest = () => {
-    getUserChallenges(userChallengesIds)
+    getUserChallenges(userId)
       .then(challenges => {
         setDataInProgress(
           challenges.filter(item => item.status === "in-progress")
@@ -33,43 +33,37 @@ const InProgressCompleteChallenge = ({ userChallengesIds }) => {
       });
   };
 
-  const quitChallenge = id => {
+  const quitChallenge = id => () => {
     editChallengeStatus(id, "denied");
     challengesRequest();
   };
 
-  const completeChallenge = id => {
+  const completeChallenge = id => () => {
     editChallengeStatus(id, "validated");
     challengesRequest();
   };
 
-  useEffect(challengesRequest, [userChallengesIds]);
+  useEffect(challengesRequest, [userId]);
 
-  return (
-    <>
-      {error && <div>{error}</div>}
-      {isPending && <div>Loading...</div>}
-
+  if (isPending) {
+    return <div>Loading...</div>;
+  } else if (error) {
+    return <div>{error}</div>;
+  } else {
+    return (
       <div className="challenges-container">
         <ChallengesSection title="In progress Challenges">
           {dataInProgress.length ? (
             dataInProgress.map(item => (
-              <Card
-                status={item.status}
-                title={item.title}
-                xp={item.xp}
-                credits={item.credits}
-                description={item.description}
-                key={item.id}
-              >
+              <Card {...item} key={item.id}>
                 <Button
                   type="btn secondary"
                   value="Quit"
-                  handleOnClick={() => quitChallenge(item.id)}
+                  handleOnClick={quitChallenge(item.id)}
                 />
                 <Button
                   type="btn primary flex-width-max"
-                  handleOnClick={() => completeChallenge(item.id)}
+                  handleOnClick={completeChallenge(item.id)}
                   value="Complete"
                 />
               </Card>
@@ -81,23 +75,14 @@ const InProgressCompleteChallenge = ({ userChallengesIds }) => {
 
         <ChallengesSection title="Completed Challenges">
           {dataCompleted.length ? (
-            dataCompleted.map(item => (
-              <Card
-                status={item.status}
-                title={item.title}
-                xp={item.xp}
-                credits={item.credits}
-                description={item.description}
-                key={item.id}
-              />
-            ))
+            dataCompleted.map(item => <Card {...item} key={item.id} />)
           ) : (
             <h2 className="challenges-subtilte">No Challenges to display</h2>
           )}
         </ChallengesSection>
       </div>
-    </>
-  );
+    );
+  }
 };
 
 export default InProgressCompleteChallenge;
