@@ -26,7 +26,7 @@ const adminPages = [
   {
     id: 1,
     page: "Challenges",
-    path: "/",
+    path: "/challenges-admin",
   },
   {
     id: 2,
@@ -36,7 +36,7 @@ const adminPages = [
   {
     id: 3,
     page: "Shop",
-    path: "/shop",
+    path: "/shop-admin",
   },
 ];
 
@@ -45,21 +45,21 @@ function Menu({ pagesToShow }) {
   return (
     <div className="pagesContainer">
       {pagesToShow === "User" &&
-        userPages.map(item => (
+        userPages.map(userPage => (
           <Page
-            page={item.page}
-            path={item.path}
+            page={userPage.page}
+            path={userPage.path}
             location={location.pathname}
-            key={item.id}
+            key={userPage.id}
           />
         ))}
       {pagesToShow === "Admin" &&
-        adminPages.map(item2 => (
+        adminPages.map(adminPage => (
           <Page
-            page={item2.page}
-            path={item2.path}
+            page={adminPage.page}
+            path={adminPage.path}
             location={location.pathname}
-            key={item2.id}
+            key={adminPage.id}
           />
         ))}
     </div>

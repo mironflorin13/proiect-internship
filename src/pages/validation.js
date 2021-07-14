@@ -2,12 +2,12 @@ import React from "react";
 
 import "../components/left-hand-panel/left-hand-panel.scss";
 
-function Shop(props) {
+function Validation(props) {
   return (
     <div className="cardsOverviewContainer">
-      <div className="container">Aici vor fi produsele din shop {props.role}</div>
+      <div className="container">Aici vor fi produsele validate</div>
     </div>
   );
 }
 
-export default Shop;
+export default Validation;

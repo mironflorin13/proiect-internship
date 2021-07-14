@@ -7,6 +7,7 @@ import Overview from "./pages/overview";
 import Challenges from "./pages/challenges";
 import Demo from "./pages/demo";
 import Shop from "./pages/shop";
+import Validation from "./pages/validation";
 import "./application.scss";
 import users from "./mock-functions/users.js";
 
@@ -47,7 +48,11 @@ function App() {
               component={() => <Overview userData={userData.challenges} />}
             />
             <Route path="/challenges" exact component={() => <Challenges />} />
-            <Route path="/shop" exact component={() => <Shop />} />
+            <Route
+              path="/shop"
+              exact
+              component={() => <Shop role={switchUserAdmin} />}
+            />
             <Route path="/demo" exact component={() => <Demo />} />
           </Switch>
         </Router>
@@ -61,13 +66,13 @@ function App() {
             switchRole={switchRoleHandler}
           />
           <Switch>
+            <Route path="/challenges-admin" exact component={() => <Challenges />} />
+            <Route path="/validation" exact component={() => <Validation />} />
             <Route
-              path="/"
+              path="/shop-admin"
               exact
-              component={() => <Overview userData={userData.challenges} />}
+              component={() => <Shop role={switchUserAdmin} />}
             />
-            <Route path="/challenges" exact component={() => <Challenges />} />
-            <Route path="/shop" exact component={() => <Shop />} />
             <Route path="/demo" exact component={() => <Demo />} />
           </Switch>
         </Router>
