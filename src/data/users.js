@@ -5,7 +5,13 @@ let users = [
     jobTitle: "Software Developer",
     image:
       "https://www.pngfind.com/pngs/m/488-4887957_facebook-teerasej-profile-ball-circle-circular-profile-picture.png",
-    challenges: [1, 2, 3, 4, 5],
+    challenges: [
+      { id: 1, status: "in-progress" },
+      { id: 2, status: "in-progress" },
+      { id: 3, status: "in-progress" },
+      { id: 4, status: "denied" },
+      { id: 5, status: "validated" },
+    ],
   },
 
   {

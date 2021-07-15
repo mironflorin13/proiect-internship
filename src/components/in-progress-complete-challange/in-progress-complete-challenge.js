@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 import ChallengesSection from "../challenges-section/challenges-section";
 import Button from "../button/button";
 import Card from "../card/card";
-import getUserChallenges from "../../mock-functions/get-user-challenges";
-import editChallengeStatus from "../../mock-functions/edit-challenge-status";
 import "./in-progress-complete-challenge.scss";
+import getUserChallengesInProgressAndCompleted from "../../mock-functions/get-user-challenges-in-progress-and-completed";
+import editUserChallengeStatus from "../../mock-functions/edit-user-challenge-status";
 
 const InProgressCompleteChallenge = ({ userId }) => {
   const [isPending, setIsPending] = useState(true);
@@ -15,16 +15,10 @@ const InProgressCompleteChallenge = ({ userId }) => {
   const [dataCompleted, setDataCompleted] = useState([]);
 
   const challengesRequest = () => {
-    getUserChallenges(userId)
+    getUserChallengesInProgressAndCompleted(userId)
       .then(challenges => {
-        setDataInProgress(
-          challenges.filter(item => item.status === "in-progress")
-        );
-        setDataCompleted(
-          challenges.filter(
-            item => item.status === "denied" || item.status === "validated"
-          )
-        );
+        setDataInProgress(challenges[0]);
+        setDataCompleted(challenges[1]);
         setIsPending(false);
       })
       .catch(error => {
@@ -33,13 +27,13 @@ const InProgressCompleteChallenge = ({ userId }) => {
       });
   };
 
-  const quitChallenge = id => () => {
-    editChallengeStatus(id, "denied");
+  const quitChallenge = itemId => () => {
+    editUserChallengeStatus(itemId, userId, "denied");
     challengesRequest();
   };
 
-  const completeChallenge = id => () => {
-    editChallengeStatus(id, "validated");
+  const completeChallenge = itemId => () => {
+    editUserChallengeStatus(itemId, userId, "validated");
     challengesRequest();
   };
 

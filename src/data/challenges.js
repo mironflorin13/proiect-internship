@@ -6,7 +6,6 @@ let challenges = [
     credits: 50,
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus. Sed at orci sit amet lectus euismod ultrices eget quis tortor.",
-    status: "in-progress",
   },
   {
     id: 2,
@@ -15,7 +14,6 @@ let challenges = [
     credits: 50,
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus. Sed at orci sit amet lectus euismod ultrices eget quis tortor.orem ipsum dolor sit amet, consectetur adipiscing elit",
-    status: "in-progress",
   },
   {
     id: 3,
@@ -23,7 +21,6 @@ let challenges = [
     xp: 30,
     credits: 50,
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    status: "in-progress",
   },
   {
     id: 4,
@@ -32,7 +29,6 @@ let challenges = [
     credits: 100,
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus. Sed at orci sit amet lectus euismod ultrices eget quis tortor. orem ipsum dolor sit amet, consectetur adipiscing elit",
-    status: "validated",
   },
   {
     id: 5,
@@ -41,7 +37,6 @@ let challenges = [
     credits: 500,
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus. Sed at orci sit amet lectus euismod ultrices eget quis tortor.Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus. Sed at orci sit amet le",
-    status: "denied",
   },
   {
     id: 6,
@@ -50,7 +45,6 @@ let challenges = [
     credits: 500,
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus. Sed at orci sit amet lectus euismod ultrices eget quis tortor.Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus. Sed at orci sit amet le",
-    status: "available",
   },
   {
     id: 7,
@@ -59,7 +53,6 @@ let challenges = [
     credits: 500,
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus. Sed at orci sit amet lectus euismod ultrices eget quis tortor.Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus. Sed at orci sit amet le",
-    status: "available",
   },
 ];
 
