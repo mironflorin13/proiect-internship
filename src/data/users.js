@@ -6,6 +6,7 @@ let users = [
     image:
       "https://www.pngfind.com/pngs/m/488-4887957_facebook-teerasej-profile-ball-circle-circular-profile-picture.png",
     challenges: [1, 2, 3, 4, 5],
+    isAdmin: true,
   },
 
   {
@@ -15,6 +16,7 @@ let users = [
     image:
       "https://i.pinimg.com/564x/65/25/a0/6525a08f1df98a2e3a545fe2ace4be47.jpg",
     challenges: [],
+    isAdmin: false,
   },
 ];
 export const setUsers = u => {

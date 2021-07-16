@@ -17,8 +17,10 @@ import Navigation from "./utils/navigation.js";
 
 function App() {
   const [userData, setUserData] = useState({});
-  const [switchUserAdmin, setSwitchUserAdmin] = useState("User");
+  const [role, setRole] = useState("User");
   const userId = 0;
+
+  // const history = useHistory();
 
   useEffect(() => {
     getUserInfo(userId)
@@ -31,9 +33,7 @@ function App() {
   }, []);
 
   function switchRoleHandler() {
-    switchUserAdmin === "User"
-      ? setSwitchUserAdmin("Admin")
-      : setSwitchUserAdmin("User");
+    setRole(role === "User" ? "Admin" : "User");
   }
 
   return (
@@ -42,17 +42,15 @@ function App() {
         <LeftHandPanel
           userAvatar={users}
           userData={userData}
-          role={switchUserAdmin}
+          role={role}
           switchRole={switchRoleHandler}
         />
-        {/* <Switch> */}
-          <Navigation
-            role={switchUserAdmin}
-            userData={userData}
-            userId={userId}
-          />
-          {/* <Route path="*" component={() => <NotFound />} /> */}
-        {/* </Switch> */}
+
+        <Navigation
+          role={role}
+          userData={userData}
+          userId={userId}
+        />
       </Router>
     </div>
   );

@@ -9,7 +9,7 @@ import adminPages from "../../../data/admin-pages";
 function Menu({ pagesToShow }) {
   const location = useLocation();
   return (
-    <div className="pagesContainer">
+    <div className="pages-container">
       {pagesToShow === "User" &&
         userPages.map(userPage => (
           <Page

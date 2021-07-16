@@ -5,8 +5,8 @@ import Overview from "../pages/overview";
 import Challenges from "../pages/challenges";
 import Demo from "../pages/demo";
 import Shop from "../pages/shop";
-import AdminChallenges from "../pages/admin-challenges";
-import Validation from "../pages/validation";
+import AdminChallenges from "../admin-pages/admin-challenges";
+import Validation from "../admin-pages/validation";
 import NotFound from "../pages/not-found";
 
 function Navigation({ role, userData, userId }) {
@@ -34,13 +34,13 @@ function Navigation({ role, userData, userId }) {
   ) : (
     <Switch>
       <Route
-        path="/challenges-admin"
+        path="/admin/challenges"
         exact
         component={() => <AdminChallenges userId={userId} />}
       />
-      <Route path="/validation" exact component={() => <Validation />} />
-      <Route path="/shop-admin" exact component={() => <Shop role={role} />} />
-      <Route path="/demo" exact component={() => <Demo />} />
+      <Route path="/admin/validation" exact component={() => <Validation />} />
+      <Route path="/admin/shop" exact component={() => <Shop role={role} />} />
+      <Route path="/admin/demo" exact component={() => <Demo />} />
       <Route path="*">
         {" "}
         <NotFound />{" "}

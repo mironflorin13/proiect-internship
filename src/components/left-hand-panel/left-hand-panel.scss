@@ -1,6 +1,6 @@
 @import "../../utils/partials";
 
-.LeftHandPanel {
+.left-hand-panel {
   display: flex;
   flex-direction: column;
   width: 300px;
@@ -11,9 +11,10 @@
   bottom: 0;
   background-color: $white;
   padding-top: 40px;
+  padding-left: 40px;
 }
 
-.LeftHandPanel_admin {
+.left-hand-panel-admin {
   align-self: flex-start;
   font-family: $fontRoboto;
   color: $fontColorGrey;
@@ -25,7 +26,7 @@
   cursor: pointer;
 }
 
-.cardsOverviewContainer {
+.cards-overview-container {
   height: 100vh;
   padding-left: 300px;
   width: 100%;

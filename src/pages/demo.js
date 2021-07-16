@@ -12,7 +12,7 @@ function Demo() {
   }
 
   return (
-    <div className="cardsOverviewContainer">
+    <div className="cards-overview-container">
       <div className="container">
         <ExperienceBar currentXP={count} />
         <span className="button-text counter">{count}</span>

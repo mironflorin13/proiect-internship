@@ -1,4 +1,4 @@
-let userPages = [
+const userPages = [
   {
     id: 1,
     page: "Overview",
@@ -15,8 +15,4 @@ let userPages = [
     path: "/shop",
   },
 ];
-export const setUserPages = u => {
-  userPages = u;
-};
-export const getUserPages = () => userPages;
 export default userPages;

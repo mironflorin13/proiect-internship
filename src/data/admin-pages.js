@@ -1,22 +1,18 @@
-let adminPages = [
+const adminPages = [
   {
     id: 1,
     page: "Challenges",
-    path: "/challenges-admin",
+    path: "/admin/challenges",
   },
   {
     id: 2,
     page: "Validation",
-    path: "/validation",
+    path: "/admin/validation",
   },
   {
     id: 3,
     page: "Shop",
-    path: "/shop-admin",
+    path: "/admin/shop",
   },
 ];
-export const setAdminPages = a => {
-  adminPages = a;
-};
-export const getAdminPages = () => adminPages;
 export default adminPages;

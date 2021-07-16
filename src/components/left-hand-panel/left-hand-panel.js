@@ -31,7 +31,7 @@ function LeftHandPanel(props) {
   }
 
   return (
-    <div className="LeftHandPanel">
+    <div className="left-hand-panel">
       <UserCard {...props.userData} />
 
       {props.role === "User" && (
@@ -44,8 +44,8 @@ function LeftHandPanel(props) {
       <Menu pagesToShow={props.role} />
 
       <Link
-        to={props.role === "User" ? "/challenges-admin" : "/"}
-        className="LeftHandPanel_admin"
+        to={props.role === "User" ? "/admin/challenges" : "/"}
+        className="left-hand-panel-admin"
         onClick={switchUserAdminHandler}
       >
         Switch to {props.role === "Admin" ? "User" : "Admin"}
