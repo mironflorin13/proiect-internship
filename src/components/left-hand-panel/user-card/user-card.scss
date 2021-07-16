@@ -2,11 +2,10 @@
 
 .UserCard {
   display: flex;
-  justify-content: space-between;
+  gap: 10px;
   align-items: flex-start;
   width: 210px;
   align-items: center;
-  padding-left: 40px;
 }
 
 .userName,

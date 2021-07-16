@@ -5,10 +5,20 @@
   background: white;
   color: $blue-color;
 }
+.secondary-r {
+  border: 1px solid $red-color;
+  background: white;
+  color: $red-color;
+}
 
 .primary {
   border: none;
   background: $blue-color;
+  color: white;
+}
+.primary-g {
+  border: none;
+  background: $green-color;
   color: white;
 }
 

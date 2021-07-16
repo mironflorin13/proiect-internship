@@ -11,6 +11,7 @@ let users = [
       { id: 3, status: "in-progress" },
       { id: 4, status: "denied" },
       { id: 5, status: "validated" },
+      { id: 7, status: "to-be-validated" },
     ],
   },
 
@@ -20,7 +21,10 @@ let users = [
     jobTitle: "Software Developer",
     image:
       "https://i.pinimg.com/564x/65/25/a0/6525a08f1df98a2e3a545fe2ace4be47.jpg",
-    challenges: [],
+    challenges: [
+      { id: 5, status: "to-be-validated" },
+      { id: 9, status: "to-be-validated" },
+    ],
   },
 ];
 export const setUsers = u => {

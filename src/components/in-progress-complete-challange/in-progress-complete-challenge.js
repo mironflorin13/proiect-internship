@@ -33,7 +33,7 @@ const InProgressCompleteChallenge = ({ userId }) => {
   };
 
   const completeChallenge = itemId => () => {
-    editUserChallengeStatus(itemId, userId, "validated");
+    editUserChallengeStatus(itemId, userId, "to-be-validated");
     challengesRequest();
   };
 

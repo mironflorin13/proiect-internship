@@ -24,7 +24,7 @@ let challenges = [
   },
   {
     id: 4,
-    title: "Do a byte-sized learning talkss sdasdas",
+    title: "Do a byte-sized learning talkss ",
     xp: 10,
     credits: 100,
     description:
@@ -32,7 +32,7 @@ let challenges = [
   },
   {
     id: 5,
-    title: "Do a byte-sized learning talk sadsada",
+    title: "Do a byte-sized learning talk",
     xp: 15,
     credits: 500,
     description:
@@ -48,6 +48,22 @@ let challenges = [
   },
   {
     id: 7,
+    title: "Do a byte-sized learning talk",
+    xp: 15,
+    credits: 500,
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus. Sed at orci sit amet lectus euismod ultrices eget quis tortor.Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus. Sed at orci sit amet le",
+  },
+  {
+    id: 8,
+    title: "Do a byte-sized learning talk",
+    xp: 15,
+    credits: 500,
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus. Sed at orci sit amet lectus euismod ultrices eget quis tortor.Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus. Sed at orci sit amet le",
+  },
+  {
+    id: 9,
     title: "Do a byte-sized learning talk",
     xp: 15,
     credits: 500,
