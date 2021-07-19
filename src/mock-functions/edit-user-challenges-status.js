@@ -1,8 +1,11 @@
 import { setUsers, getUsers } from "../data/users";
 
-import getUserChallenges from "./get-user-challenges";
-
-const editUserChallengesStatus = (userId, challengeId, newStatus, status) => {
+const editUserChallengesStatus = (
+  userId,
+  challengeId,
+  newStatus,
+  returnFunction
+) => {
   const users = getUsers();
 
   const usersCopy = users.map(item => {
@@ -18,8 +21,7 @@ const editUserChallengesStatus = (userId, challengeId, newStatus, status) => {
   });
 
   setUsers(usersCopy);
-
-  return getUserChallenges(userId, status);
+  return returnFunction();
 };
 
 export default editUserChallengesStatus;

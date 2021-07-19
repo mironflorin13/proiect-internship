@@ -29,13 +29,17 @@ const InProgressCompleteChallenge = ({ userId }) => {
 
   const quitChallenge = itemId => () => {
     challengesRequest(() =>
-      editUserChallengesStatus(userId, itemId, "denied", "InProgressCompleted")
+      editUserChallengesStatus(userId, itemId, "available", () =>
+        getUserChallenges(userId, "InProgressCompleted")
+      )
     );
   };
 
   const completeChallenge = itemId => () => {
     challengesRequest(() =>
-      editUserChallengesStatus(userId, itemId, "validated", "to-be-validated")
+      editUserChallengesStatus(userId, itemId, "to-be-validated", () =>
+        getUserChallenges(userId, "InProgressCompleted")
+      )
     );
   };
 

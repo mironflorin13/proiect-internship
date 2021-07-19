@@ -4,7 +4,6 @@ import { getUsers } from "../data/users";
 const getChallengesToBeValidated = () => {
   const challenges = getChallenges();
   const users = getUsers();
-  console.log(users);
   const result = [];
 
   users.map(item => {
