@@ -26,10 +26,7 @@ function Navigation({ role, userData, userId }) {
       />
       <Route path="/shop" exact component={() => <Shop role={role} />} />
       <Route path="/demo" exact component={() => <Demo />} />
-      <Route path="*">
-        {" "}
-        <NotFound />{" "}
-      </Route>
+      <Route path="*" component={() => <NotFound />} />
     </Switch>
   ) : (
     <Switch>
@@ -41,10 +38,7 @@ function Navigation({ role, userData, userId }) {
       <Route path="/admin/validation" exact component={() => <Validation />} />
       <Route path="/admin/shop" exact component={() => <Shop role={role} />} />
       <Route path="/admin/demo" exact component={() => <Demo />} />
-      <Route path="*">
-        {" "}
-        <NotFound />{" "}
-      </Route>
+      <Route path="*" component={() => <NotFound />} />
     </Switch>
   );
 }

@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { getChallenges } from "../../data/challenges";
+import userPages from "../../data/user-pages";
+import adminPages from "../../data/admin-pages";
 
 import UserCard from "./user-card/user-card";
 import "./left-hand-panel.scss";
@@ -24,7 +26,6 @@ function getNumberOfCredits() {
 }
 
 function LeftHandPanel(props) {
-
   function switchUserAdminHandler() {
     console.log(props.role);
     props.switchRole();
@@ -41,7 +42,8 @@ function LeftHandPanel(props) {
         </>
       )}
 
-      <Menu pagesToShow={props.role} />
+      {props.role === "User" && <Menu pagesToShow={userPages}/>}
+      {props.role === "Admin" && <Menu pagesToShow={adminPages}/>}
 
       <Link
         to={props.role === "User" ? "/admin/challenges" : "/"}
