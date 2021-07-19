@@ -35,23 +35,25 @@ function LeftHandPanel(props) {
     <div className="left-hand-panel">
       <UserCard {...props.userData} />
 
-      {props.role === "User" && (
+      {props.role !== "Admin" && (
         <>
           <Credits credits={getNumberOfCredits()} />
           <ExperienceBar currentXP={getInitialCurrentXP()} />
         </>
       )}
 
-      {props.role === "User" && <Menu pagesToShow={userPages}/>}
-      {props.role === "Admin" && <Menu pagesToShow={adminPages}/>}
+      {props.role === "User" && <Menu pagesToShow={userPages} />}
+      {props.role === "Admin" && <Menu pagesToShow={adminPages} />}
 
-      <Link
-        to={props.role === "User" ? "/admin/challenges" : "/"}
-        className="left-hand-panel-admin"
-        onClick={switchUserAdminHandler}
-      >
-        Switch to {props.role === "Admin" ? "User" : "Admin"}
-      </Link>
+      {props.initialRole === "UserAdmin" && (
+        <Link
+          to={props.role === "User" ? "/admin/challenges" : "/"}
+          className="left-hand-panel-admin"
+          onClick={switchUserAdminHandler}
+        >
+          Switch to {props.role === "Admin" ? "User" : "Admin"}
+        </Link>
+      )}
     </div>
   );
 }

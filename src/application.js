@@ -1,19 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-// import { Route } from "react-router-dom";
 
 import getUserInfo from "./mock-functions/get-user-info.js";
 import LeftHandPanel from "./components/left-hand-panel/left-hand-panel";
-// import Overview from "./pages/overview";
-// import Challenges from "./pages/challenges";
-// import Demo from "./pages/demo";
-// import Shop from "./pages/shop";
-// import AdminChallenges from "./pages/admin-challenges";
-// import Validation from "./pages/validation";
 import "./application.scss";
 import users from "./data/users.js";
 import Navigation from "./utils/navigation.js";
-// import NotFound from "./pages/not-found";
 
 function App() {
   const [userData, setUserData] = useState({});
@@ -33,25 +25,46 @@ function App() {
   }, []);
 
   function switchRoleHandler() {
+    console.log(role);
     setRole(role === "User" ? "Admin" : "User");
   }
 
   return (
     <div>
-      <Router>
-        <LeftHandPanel
-          userAvatar={users}
-          userData={userData}
-          role={role}
-          switchRole={switchRoleHandler}
-        />
+      {users[userId].role !== "UserAdmin" && (
+        <Router>
+          <LeftHandPanel
+            userAvatar={users}
+            userData={userData}
+            role={users[userId].role}
+          />
 
-        <Navigation
-          role={role}
-          userData={userData}
-          userId={userId}
-        />
-      </Router>
+          <Navigation
+            role={users[userId].role}
+            userData={userData}
+            userId={userId}
+          />
+        </Router>
+      )}
+
+      {users[userId].role === "UserAdmin" && (
+        <Router>
+          <LeftHandPanel
+            userAvatar={users}
+            userData={userData}
+            initialRole={users[userId].role}
+            role={role}
+            switchRole={switchRoleHandler}
+          />
+
+          <Navigation
+            initialRole={users[userId].role}
+            role={role}
+            userData={userData}
+            userId={userId}
+          />
+        </Router>
+      )}
     </div>
   );
 }

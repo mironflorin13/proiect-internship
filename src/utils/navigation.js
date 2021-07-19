@@ -1,46 +1,23 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
 
-import Overview from "../pages/overview";
-import Challenges from "../pages/challenges";
-import Demo from "../pages/demo";
-import Shop from "../pages/shop";
-import AdminChallenges from "../admin-pages/admin-challenges";
-import Validation from "../admin-pages/validation";
-import NotFound from "../pages/not-found";
+import UserRoutes from "./user-routes";
+import AdminRoutes from "./admin-routes";
+import UserAdminRoutes from "./user-admin-routes";
 
-function Navigation({ role, userData, userId }) {
-  return role === "User" ? (
-    <Switch>
-      <Route
-        exact
-        path="/"
-        component={() => (
-          <Overview userData={userData.challenges} userId={userId} />
-        )}
-      />
-      <Route
-        exact
-        path="/challenges"
-        component={() => <Challenges userId={userId} />}
-      />
-      <Route path="/shop" exact component={() => <Shop role={role} />} />
-      <Route path="/demo" exact component={() => <Demo />} />
-      <Route path="*" component={() => <NotFound />} />
-    </Switch>
-  ) : (
-    <Switch>
-      <Route
-        path="/admin/challenges"
-        exact
-        component={() => <AdminChallenges userId={userId} />}
-      />
-      <Route path="/admin/validation" exact component={() => <Validation />} />
-      <Route path="/admin/shop" exact component={() => <Shop role={role} />} />
-      <Route path="/admin/demo" exact component={() => <Demo />} />
-      <Route path="*" component={() => <NotFound />} />
-    </Switch>
-  );
+function Navigation({ role, userData, userId, initialRole }) {
+  if (initialRole === "UserAdmin") {
+    return role === "User" ? (
+      <UserRoutes userData={userData} userId={userId} role={role} />
+    ) : (
+      <UserAdminRoutes />
+    );
+  } else {
+    return role === "User" ? (
+      <UserRoutes userData={userData} userId={userId} role={role} />
+    ) : (
+      <AdminRoutes userId={userId} role={role} />
+    );
+  }
 }
 
 export default Navigation;
