@@ -4,8 +4,8 @@ import ChallengesSection from "../challenges-section/challenges-section";
 import Button from "../button/button";
 import Card from "../card/card";
 import "./in-progress-complete-challenge.scss";
-import getUserChallengesInProgressAndCompleted from "../../mock-functions/get-user-challenges-in-progress-and-completed";
-import editUserChallengeStatus from "../../mock-functions/edit-user-challenge-status";
+import editUserChallengesStatus from "../../mock-functions/edit-user-challenges-status";
+import getUserChallenges from "../../mock-functions/get-user-challenges";
 
 const InProgressCompleteChallenge = ({ userId }) => {
   const [isPending, setIsPending] = useState(true);
@@ -14,11 +14,11 @@ const InProgressCompleteChallenge = ({ userId }) => {
   const [dataInProgress, setDataInProgress] = useState([]);
   const [dataCompleted, setDataCompleted] = useState([]);
 
-  const challengesRequest = () => {
-    getUserChallengesInProgressAndCompleted(userId)
+  const challengesRequest = getChallenges => {
+    getChallenges()
       .then(challenges => {
-        setDataInProgress(challenges[0]);
-        setDataCompleted(challenges[1]);
+        setDataInProgress(challenges.inProgress);
+        setDataCompleted(challenges.completed);
         setIsPending(false);
       })
       .catch(error => {
@@ -28,16 +28,20 @@ const InProgressCompleteChallenge = ({ userId }) => {
   };
 
   const quitChallenge = itemId => () => {
-    editUserChallengeStatus(itemId, userId, "denied");
-    challengesRequest();
+    challengesRequest(() =>
+      editUserChallengesStatus(userId, itemId, "denied", "InProgressCompleted")
+    );
   };
 
   const completeChallenge = itemId => () => {
-    editUserChallengeStatus(itemId, userId, "to-be-validated");
-    challengesRequest();
+    challengesRequest(() =>
+      editUserChallengesStatus(userId, itemId, "validated", "to-be-validated")
+    );
   };
 
-  useEffect(challengesRequest, [userId]);
+  useEffect(() => {
+    challengesRequest(() => getUserChallenges(userId, "InProgressCompleted"));
+  }, [userId]);
 
   if (isPending) {
     return <div>Loading...</div>;

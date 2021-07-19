@@ -11,7 +11,10 @@ let users = [
       { id: 3, status: "in-progress" },
       { id: 4, status: "denied" },
       { id: 5, status: "validated" },
-      { id: 7, status: "to-be-validated" },
+      { id: 6, status: "available" },
+      { id: 7, status: "available" },
+      { id: 8, status: "to-be-validated" },
+      { id: 9, status: "to-be-validated" },
     ],
   },
 
@@ -22,7 +25,14 @@ let users = [
     image:
       "https://i.pinimg.com/564x/65/25/a0/6525a08f1df98a2e3a545fe2ace4be47.jpg",
     challenges: [
+      { id: 1, status: "available" },
+      { id: 2, status: "available" },
+      { id: 3, status: "available" },
+      { id: 4, status: "available" },
       { id: 5, status: "to-be-validated" },
+      { id: 6, status: "available" },
+      { id: 7, status: "available" },
+      { id: 8, status: "available" },
       { id: 9, status: "to-be-validated" },
     ],
   },
