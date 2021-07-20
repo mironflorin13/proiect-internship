@@ -6,38 +6,42 @@ const getUserChallenges = (userId, status) => {
   const users = getUsers();
 
   const userChallengesFromUsers = users.find(
-    item => item.id === userId
+    user => user.id === userId
   ).challenges;
 
   if (status === "InProgressCompleted") {
-    let userChallengesInProgress = challenges.filter(item =>
+    const userChallengesInProgress = challenges.filter(challenge =>
       userChallengesFromUsers.find(
-        i => i.id === item.id && i.status === "in-progress"
+        userChallenge =>
+          userChallenge.id === challenge.id &&
+          userChallenge.status === "in-progress"
       )
     );
 
-    userChallengesInProgress = userChallengesInProgress.map(item => ({
-      ...item,
-      status: "in-progress",
-    }));
-
-    let userChallengesValidated = challenges.filter(item =>
+    let userChallengesValidated = challenges.filter(challenge =>
       userChallengesFromUsers.find(
-        i => i.id === item.id && i.status === "validated"
+        userChallenge =>
+          userChallenge.id === challenge.id &&
+          userChallenge.status === "validated"
       )
     );
-    userChallengesValidated = userChallengesValidated.map(item => ({
-      ...item,
-      status: "validated",
-    }));
 
-    let userChallengesDenied = challenges.filter(item =>
+    userChallengesValidated = userChallengesValidated.map(
+      challengeValidated => ({
+        ...challengeValidated,
+        status: "validated",
+      })
+    );
+
+    let userChallengesDenied = challenges.filter(challenge =>
       userChallengesFromUsers.find(
-        i => i.id === item.id && i.status === "denied"
+        userChallenge =>
+          userChallenge.id === challenge.id && userChallenge.status === "denied"
       )
     );
-    userChallengesDenied = userChallengesDenied.map(item => ({
-      ...item,
+
+    userChallengesDenied = userChallengesDenied.map(challengeDenied => ({
+      ...challengeDenied,
       status: "denied",
     }));
 
@@ -47,9 +51,10 @@ const getUserChallenges = (userId, status) => {
     });
   } else {
     return Promise.resolve(
-      challenges.filter(item =>
+      challenges.filter(challenge =>
         userChallengesFromUsers.find(
-          i => i.id === item.id && i.status === status
+          userChallenge =>
+            userChallenge.id === challenge.id && userChallenge.status === status
         )
       )
     );

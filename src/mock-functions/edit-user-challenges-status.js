@@ -1,25 +1,29 @@
 import { setUsers, getUsers } from "../data/users";
 
-import getUserChallenges from "./get-user-challenges";
-
-const editUserChallengesStatus = (userId, challengeId, newStatus, status) => {
+const editUserChallengesStatus = (
+  userId,
+  challengeId,
+  newStatus,
+  returnFunction
+) => {
   const users = getUsers();
 
-  const usersCopy = users.map(item => {
-    if (item.id === userId) {
-      item.challenges.map(i => {
-        if (i.id === challengeId) {
-          i.status = newStatus;
+  const usersCopy = users.map(user => {
+    if (user.id === userId) {
+      const challengesCopy = user.challenges.map(challenge => {
+        if (challenge.id === challengeId) {
+          return { ...challenge, status: newStatus };
         }
-        return i;
+        return challenge;
       });
+      return { ...user, challenges: challengesCopy };
     }
-    return item;
+    return user;
   });
 
   setUsers(usersCopy);
 
-  return getUserChallenges(userId, status);
+  return returnFunction();
 };
 
 export default editUserChallengesStatus;

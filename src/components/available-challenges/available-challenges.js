@@ -25,7 +25,9 @@ const AvailableChallenges = ({ userId }) => {
 
   const enrollChallenge = itemId => () => {
     challengesRequest(() =>
-      editUserChallengesStatus(userId, itemId, "in-progress", "available")
+      editUserChallengesStatus(userId, itemId, "in-progress", () =>
+        getUserChallenges(userId, "available")
+      )
     );
   };
 
