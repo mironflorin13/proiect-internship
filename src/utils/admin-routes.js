@@ -18,7 +18,7 @@ function AdminRoutes({ role, userId }) {
       <Route path="/admin/validation" exact component={() => <Validation />} />
       <Route path="/admin/shop" exact component={() => <Shop role={role} />} />
       <Route path="/admin/demo" exact component={() => <Demo />} />
-      <Route path="*" component={() => <NotFound />} />
+      <Route path="*" component={() => <NotFound role={role} />} />
     </Switch>
   );
 }

@@ -24,7 +24,7 @@ function UserRoutes({ role, userData, userId }) {
       />
       <Route path="/shop" exact component={() => <Shop role={role} />} />
       <Route path="/demo" exact component={() => <Demo />} />
-      <Route path="*" exact component={() => <NotFound />} />
+      <Route path="*" exact component={() => <NotFound role={role}/>} />
     </Switch>
   );
 }

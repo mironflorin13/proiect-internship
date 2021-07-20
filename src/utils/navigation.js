@@ -4,18 +4,18 @@ import UserRoutes from "./user-routes";
 import AdminRoutes from "./admin-routes";
 import UserAdminRoutes from "./user-admin-routes";
 
-function Navigation({ role, userData, userId, initialRole }) {
-  if (initialRole === "UserAdmin") {
-    return role === "User" ? (
-      <UserRoutes userData={userData} userId={userId} role={role} />
+function Navigation({ roleType, userData, userId, hasMultipleRoles }) {
+  if (hasMultipleRoles) {
+    return roleType === "User" ? (
+      <UserRoutes userData={userData} userId={userId} role={roleType} />
     ) : (
-      <UserAdminRoutes />
+      <UserAdminRoutes userData={userData} userId={userId} role={roleType} />
     );
   } else {
-    return role === "User" ? (
-      <UserRoutes userData={userData} userId={userId} role={role} />
+    return roleType === "User" ? (
+      <UserRoutes userData={userData} userId={userId} role={roleType} />
     ) : (
-      <AdminRoutes userId={userId} role={role} />
+      <AdminRoutes userId={userId} role={roleType} />
     );
   }
 }

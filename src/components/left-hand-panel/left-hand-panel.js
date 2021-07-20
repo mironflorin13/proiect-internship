@@ -27,7 +27,7 @@ function getNumberOfCredits() {
 
 function LeftHandPanel(props) {
   function switchUserAdminHandler() {
-    console.log(props.role);
+    console.log(props.roleType);
     props.switchRole();
   }
 
@@ -35,23 +35,23 @@ function LeftHandPanel(props) {
     <div className="left-hand-panel">
       <UserCard {...props.userData} />
 
-      {props.role !== "Admin" && (
+      {props.roleType !== "Admin" && (
         <>
           <Credits credits={getNumberOfCredits()} />
           <ExperienceBar currentXP={getInitialCurrentXP()} />
         </>
       )}
 
-      {props.role === "User" && <Menu pagesToShow={userPages} />}
-      {props.role === "Admin" && <Menu pagesToShow={adminPages} />}
+      {props.roleType === "User" && <Menu pagesToShow={userPages} />}
+      {props.roleType === "Admin" && <Menu pagesToShow={adminPages} />}
 
-      {props.initialRole === "User" && (
+      {props.hasMultipleRoles && (
         <Link
-          to={props.role === "User" ? "/admin/challenges" : "/"}
+          to={props.roleType === "User" ? "/admin/challenges" : "/"}
           className="left-hand-panel-admin"
           onClick={switchUserAdminHandler}
         >
-          Switch to {props.role === "Admin" ? "User" : "Admin"}
+          Switch to {props.roleType === "Admin" ? "User" : "Admin"}
         </Link>
       )}
     </div>

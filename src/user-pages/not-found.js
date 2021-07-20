@@ -9,7 +9,9 @@ function NotFound({ role }) {
     <div className="cards-overview-container error">
       <h1>Sorry</h1>
       <p>That page cannot be found</p>
-      <Link to="/" className="home-redirect">
+      <Link to={role === "User" ? "/" : "/admin/challenges"}
+        className="home-redirect"
+      >
         Back to the homepage...
       </Link>
     </div>
