@@ -1,11 +1,11 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 
-import Overview from "../pages/overview";
-import Challenges from "../pages/challenges";
-import Demo from "../pages/demo";
-import Shop from "../pages/shop";
-import NotFound from "../pages/not-found";
+import Overview from "../user-pages/overview";
+import Challenges from "../user-pages/challenges";
+import Demo from "../user-pages/demo";
+import Shop from "../user-pages/shop";
+import NotFound from "../user-pages/not-found";
 
 function UserRoutes({ role, userData, userId }) {
   return (

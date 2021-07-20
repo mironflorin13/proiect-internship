@@ -45,7 +45,7 @@ function LeftHandPanel(props) {
       {props.role === "User" && <Menu pagesToShow={userPages} />}
       {props.role === "Admin" && <Menu pagesToShow={adminPages} />}
 
-      {props.initialRole === "UserAdmin" && (
+      {props.initialRole === "User" && (
         <Link
           to={props.role === "User" ? "/admin/challenges" : "/"}
           className="left-hand-panel-admin"

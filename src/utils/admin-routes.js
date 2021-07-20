@@ -1,11 +1,11 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 
-import Validation from "../pages/overview";
-import AdminChallenges from "../pages/challenges";
-import Demo from "../pages/demo";
-import Shop from "../pages/shop";
-import NotFound from "../pages/not-found";
+import Validation from "../admin-pages/validation";
+import AdminChallenges from "../admin-pages/admin-challenges";
+import Demo from "../user-pages/demo";
+import Shop from "../user-pages/shop";
+import NotFound from "../user-pages/not-found";
 
 function AdminRoutes({ role, userId }) {
   return (

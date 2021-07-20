@@ -31,13 +31,9 @@ function App() {
 
   return (
     <div>
-      {users[userId].role !== "UserAdmin" && (
+      {/* {users[userId].role !== "UserAdmin" && (
         <Router>
-          <LeftHandPanel
-            userAvatar={users}
-            userData={userData}
-            role={users[userId].role}
-          />
+          <LeftHandPanel userData={userData} role={users[userId].role} />
 
           <Navigation
             role={users[userId].role}
@@ -45,21 +41,29 @@ function App() {
             userId={userId}
           />
         </Router>
-      )}
+      )} */}
 
-      {users[userId].role === "UserAdmin" && (
+      {users[userId].roles.length > 1 ? (
         <Router>
           <LeftHandPanel
-            userAvatar={users}
             userData={userData}
-            initialRole={users[userId].role}
+            initialRole={users[userId].roles[0]}
             role={role}
             switchRole={switchRoleHandler}
           />
 
           <Navigation
-            initialRole={users[userId].role}
+            initialRole={users[userId].roles[0]}
             role={role}
+            userData={userData}
+            userId={userId}
+          />
+        </Router>
+      ) : (
+        <Router>
+          <LeftHandPanel userData={userData} role={users[userId].roles[0]} />
+          <Navigation
+            role={users[userId].roles[0]}
             userData={userData}
             userId={userId}
           />
