@@ -8,19 +8,24 @@ const editUserChallengesStatus = (
 ) => {
   const users = getUsers();
 
-  const usersCopy = users.map(item => {
-    if (item.id === userId) {
-      item.challenges.map(i => {
-        if (i.id === challengeId) {
-          i.status = newStatus;
+  const usersCopy = users.map(user => {
+    if (user.id === userId) {
+      const challengesCopy = user.challenges.map(challenge => {
+        if (challenge.id === challengeId) {
+          return { ...challenge, status: newStatus };
         }
-        return i;
+        return challenge;
       });
+      return { ...user, challenges: challengesCopy };
     }
-    return item;
+    return user;
   });
 
   setUsers(usersCopy);
+<<<<<<< HEAD
+=======
+
+>>>>>>> init-#-1
   return returnFunction();
 };
 
