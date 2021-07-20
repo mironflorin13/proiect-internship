@@ -2,9 +2,9 @@ import React from "react";
 
 import "./shop-card.scss";
 
-const ShopCard = ({ title, description, children }) => (
+const ShopCard = ({ title, description, children, imageURL }) => (
   <div className="shop-card">
-    <div className="image"></div>
+    <img className="image" src={imageURL} />
     <div className="bottom-section">
       <div className="title">{title}</div>
       <div className="description">{description}</div>
