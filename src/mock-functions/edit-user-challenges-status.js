@@ -22,10 +22,7 @@ const editUserChallengesStatus = (
   });
 
   setUsers(usersCopy);
-<<<<<<< HEAD
-=======
 
->>>>>>> init-#-1
   return returnFunction();
 };
 
