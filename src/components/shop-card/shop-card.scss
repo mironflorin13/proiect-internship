@@ -1,0 +1,46 @@
+@import "../../index.scss";
+
+.shop-card {
+  background: $white-color;
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.06);
+  border-radius: 6px;
+  height: 330px;
+  width: 300px;
+  overflow: hidden;
+
+  .image {
+    width: 100%;
+    height: 150px;
+    background: $background-grey-color;
+  }
+
+  .bottom-section {
+    padding: 20px 30px 30px 30px;
+    height: 180px;
+    position: relative;
+
+    .title {
+      font-family: $font-family;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 19px;
+      color: $dark-grey-color;
+      margin-bottom: 10px;
+    }
+    .description {
+      font-family: $font-family;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 22px;
+    }
+    .buttons-container {
+      display: flex;
+      gap: 20px;
+      position: absolute;
+      width: 240px;
+      bottom: 30px;
+    }
+  }
+}
