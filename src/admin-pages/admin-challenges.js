@@ -42,15 +42,19 @@ const AdminChallenges = () => {
     return <div>{error}</div>;
   } else {
     return (
-      <div className={openModal ? "overlay" : null}>
+      <div>
         <div className="cards-overview-container">
           <div className="challenges-container">
             <ChallengesSection title="Challenges">
               <>
-                <AddNewModal
-                  isModalOpened={openModal}
-                  closeModal={closeModalHandler}
-                />
+                {openModal && (
+                  <div className="overlay">
+                    <AddNewModal
+                      isModalOpened={openModal}
+                      closeModal={closeModalHandler}
+                    />
+                  </div>
+                )}
 
                 {availableChallenges.length ? (
                   availableChallenges.map(item => (
