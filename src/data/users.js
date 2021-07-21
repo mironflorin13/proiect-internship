@@ -6,6 +6,11 @@ let users = [
     image:
       "https://www.pngfind.com/pngs/m/488-4887957_facebook-teerasej-profile-ball-circle-circular-profile-picture.png",
     challenges: [1, 2, 3, 4, 5],
+    products: [
+      { id: 1, status: "bought" },
+      { id: 2, status: "bought" },
+      { id: 3, status: "bought" },
+    ],
   },
 
   {

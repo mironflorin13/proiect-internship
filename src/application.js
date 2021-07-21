@@ -39,7 +39,11 @@ function App() {
             exact
             component={() => <Challenges userId={userId} />}
           />
-          <Route path="/shop" exact component={() => <Shop />} />
+          <Route
+            path="/shop"
+            exact
+            component={() => <Shop userId={userId} />}
+          />
           <Route path="/demo" exact component={() => <Demo />} />
         </Switch>
       </Router>
