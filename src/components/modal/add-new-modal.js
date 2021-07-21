@@ -25,12 +25,17 @@ function AddNewModal({ isModalOpened, closeModal }) {
     setEnteredDescription(event.target.value);
   };
 
+  const addNewChallengeHandler = event => {
+    event.preventDefault();
+    console.log(enteredTitle);
+  };
+
   return (
     isModalOpened && (
       <div className="popup">
         <div className="inner-popup">
           <div className="modal-title">Add a challenge</div>
-          <form className="modal-form">
+          <form className="modal-form" onSubmit={addNewChallengeHandler}>
             <label htmlFor="title" className="modal-labels">
               Title
             </label>
@@ -79,14 +84,12 @@ function AddNewModal({ isModalOpened, closeModal }) {
               className="modal-inputs"
             />
             <div className="modal-buttons">
-              {/* <div> */}
               <Button
                 type="btn secondary"
                 value="Cancel"
                 handleOnClick={closeModal}
               />
               <Button type="btn primary" value="Add" special={true} />
-              {/* </div> */}
             </div>
           </form>
         </div>
