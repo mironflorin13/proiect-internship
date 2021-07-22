@@ -45,6 +45,7 @@ function App() {
           hasMultipleRoles={hasMultipleRoles}
           roleType={sectionDependingOnRole}
           switchRole={switchRoleHandler}
+          userId={userId}
         />
         <Navigation
           hasMultipleRoles={hasMultipleRoles}

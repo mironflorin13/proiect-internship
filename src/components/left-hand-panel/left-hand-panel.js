@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import { getUsers } from "../../data/users";
 import { getChallenges } from "../../data/challenges";
 import userPages from "../../data/user-pages";
 import adminPages from "../../data/admin-pages";
@@ -11,18 +12,32 @@ import Menu from "./menu/menu";
 import ExperienceBar from "./experience-bar/experience-bar";
 import Credits from "./credits/credits";
 
-function getInitialCurrentXP() {
+function getInitialCurrentXP(userId) {
+  let sum = 0;
+  const users = getUsers();
   const challenges = getChallenges();
-  return challenges
-    .filter(item => item.status === "validated")
-    .reduce((sum, item) => sum + item.xp, 0);
+  const validatedChallenges = users
+    .find(user => user.id === userId)
+    .challenges.filter(challenge => challenge.status === "validated");
+
+  validatedChallenges.forEach(challenge => {
+    sum += challenges.find(ch => ch.id === challenge.id).xp;
+  });
+  return sum;
 }
 
-function getNumberOfCredits() {
+function getNumberOfCredits(userId) {
+  let sum = 0;
+  const users = getUsers();
   const challenges = getChallenges();
-  return challenges
-    .filter(item => item.status === "validated")
-    .reduce((sum, item) => sum + item.credits, 0);
+  const validatedChallenges = users
+    .find(user => user.id === userId)
+    .challenges.filter(challenge => challenge.status === "validated");
+
+  validatedChallenges.forEach(challenge => {
+    sum += challenges.find(ch => ch.id === challenge.id).credits;
+  });
+  return sum;
 }
 
 function LeftHandPanel({
@@ -32,6 +47,7 @@ function LeftHandPanel({
   image,
   roleType,
   switchRole,
+  userId,
 }) {
   function switchUserAdminHandler() {
     console.log(roleType);
@@ -44,8 +60,8 @@ function LeftHandPanel({
 
       {roleType !== "Admin" && (
         <>
-          <Credits credits={getNumberOfCredits()} />
-          <ExperienceBar currentXP={getInitialCurrentXP()} />
+          <Credits credits={getNumberOfCredits(userId)} />
+          <ExperienceBar currentXP={getInitialCurrentXP(userId)} />
         </>
       )}
 
