@@ -14,7 +14,7 @@ const AvailableChallenges = ({ userId }) => {
   const challengesRequest = getChallenges => {
     getChallenges()
       .then(challenges => {
-        setAvailableChallenges(challenges);
+        setAvailableChallenges(challenges.available);
         setIsPending(false);
       })
       .catch(error => {
@@ -26,13 +26,13 @@ const AvailableChallenges = ({ userId }) => {
   const enrollChallenge = itemId => () => {
     challengesRequest(() =>
       editUserChallengesStatus(userId, itemId, "in-progress", () =>
-        getUserChallenges(userId, "available")
+        getUserChallenges(userId, ["available"])
       )
     );
   };
 
   useEffect(() => {
-    challengesRequest(() => getUserChallenges(userId, "available"));
+    challengesRequest(() => getUserChallenges(userId, ["available"]));
   }, [userId]);
 
   if (isPending) {

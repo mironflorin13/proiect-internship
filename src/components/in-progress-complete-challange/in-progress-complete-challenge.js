@@ -17,8 +17,8 @@ const InProgressCompleteChallenge = ({ userId }) => {
   const challengesRequest = getChallenges => {
     getChallenges()
       .then(challenges => {
-        setDataInProgress(challenges.inProgress);
-        setDataCompleted(challenges.completed);
+        setDataInProgress(challenges["in-progress"]);
+        setDataCompleted([...challenges.validated, ...challenges.denied]);
         setIsPending(false);
       })
       .catch(error => {
@@ -30,7 +30,7 @@ const InProgressCompleteChallenge = ({ userId }) => {
   const quitChallenge = itemId => () => {
     challengesRequest(() =>
       editUserChallengesStatus(userId, itemId, "available", () =>
-        getUserChallenges(userId, "InProgressCompleted")
+        getUserChallenges(userId, ["in-progress", "denied", "validated"])
       )
     );
   };
@@ -38,13 +38,15 @@ const InProgressCompleteChallenge = ({ userId }) => {
   const completeChallenge = itemId => () => {
     challengesRequest(() =>
       editUserChallengesStatus(userId, itemId, "to-be-validated", () =>
-        getUserChallenges(userId, "InProgressCompleted")
+        getUserChallenges(userId, ["in-progress", "denied", "validated"])
       )
     );
   };
 
   useEffect(() => {
-    challengesRequest(() => getUserChallenges(userId, "InProgressCompleted"));
+    challengesRequest(() =>
+      getUserChallenges(userId, ["in-progress", "denied", "validated"])
+    );
   }, [userId]);
 
   if (isPending) {
