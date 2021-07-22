@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 
 import getAllProducts from "../mock-functions/get-all-products";
+import ChallengesSection from "../components/challenges-section/challenges-section";
+import Button from "../components/button/button";
+import ShopCard from "../components/shop-card/shop-card";
 
 const AdminShop = () => {
   const [isPending, setIsPending] = useState(true);
@@ -28,10 +31,30 @@ const AdminShop = () => {
   } else if (error) {
     return <div>{error}</div>;
   } else {
-    console.log(allProducts);
     return (
       <div className="cardsOverviewContainer">
-        <div className="container">Aici vor fi produsele din shop admin</div>
+        <div className="challenges-container">
+          <ChallengesSection title="Shop">
+            <>
+              {allProducts.length ? (
+                allProducts.map(product => (
+                  <ShopCard
+                    title={product.title}
+                    imageURL={product.imageURL}
+                    description={product.description}
+                    key={product.id}
+                  >
+                    <Button type="btn secondary " value="Delete" />
+                    <Button type="btn primary flex-width-max" value="Edit" />
+                  </ShopCard>
+                ))
+              ) : (
+                <h2 className="challenges-subtilte">No Products to display</h2>
+              )}
+              <Button type="btn primary fix" value="Add New" />
+            </>
+          </ChallengesSection>
+        </div>
       </div>
     );
   }
