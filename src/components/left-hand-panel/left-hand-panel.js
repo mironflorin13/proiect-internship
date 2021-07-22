@@ -25,33 +25,40 @@ function getNumberOfCredits() {
     .reduce((sum, item) => sum + item.credits, 0);
 }
 
-function LeftHandPanel(props) {
+function LeftHandPanel({
+  hasMultipleRoles,
+  name,
+  jobTitle,
+  image,
+  roleType,
+  switchRole,
+}) {
   function switchUserAdminHandler() {
-    console.log(props.roleType);
-    props.switchRole();
+    console.log(roleType);
+    switchRole();
   }
 
   return (
     <div className="left-hand-panel">
-      <UserCard {...props.userData} />
+      <UserCard name={name} jobTitle={jobTitle} image={image} />
 
-      {props.roleType !== "Admin" && (
+      {roleType !== "Admin" && (
         <>
           <Credits credits={getNumberOfCredits()} />
           <ExperienceBar currentXP={getInitialCurrentXP()} />
         </>
       )}
 
-      {props.roleType === "User" && <Menu pagesToShow={userPages} />}
-      {props.roleType === "Admin" && <Menu pagesToShow={adminPages} />}
+      {roleType === "User" && <Menu pagesToShow={userPages} />}
+      {roleType === "Admin" && <Menu pagesToShow={adminPages} />}
 
-      {props.hasMultipleRoles && (
+      {hasMultipleRoles && (
         <Link
-          to={props.roleType === "User" ? "/admin/challenges" : "/"}
+          to={roleType === "User" ? "/admin/challenges" : "/"}
           className="left-hand-panel-admin"
           onClick={switchUserAdminHandler}
         >
-          Switch to {props.roleType === "Admin" ? "User" : "Admin"}
+          Switch to {roleType === "Admin" ? "User" : "Admin"}
         </Link>
       )}
     </div>

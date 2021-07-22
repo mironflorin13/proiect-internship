@@ -10,8 +10,7 @@ function Menu({ pagesToShow }) {
     <div className="pages-container">
       {pagesToShow.map(pageToShow => (
         <Page
-          page={pageToShow.page}
-          path={pageToShow.path}
+          {...pageToShow}
           location={location.pathname}
           key={pageToShow.id}
         />
