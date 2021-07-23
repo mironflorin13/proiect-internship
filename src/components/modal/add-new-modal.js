@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Button from "../button/button";
 import "./add-new-modal.scss";
 
-function AddNewModal({ isModalOpened, closeModal }) {
+function AddNewModal({ closeModal }) {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredXP, setEnteredXP] = useState("");
   const [enteredCredits, setEnteredCredits] = useState("");
@@ -19,11 +19,11 @@ function AddNewModal({ isModalOpened, closeModal }) {
   };
 
   const xpChangeHandler = event => {
-    setEnteredXP(event.target.value);
+    setEnteredXP(Number.parseInt(event.target.value));
   };
 
   const creditsChangeHandler = event => {
-    setEnteredCredits(event.target.value);
+    setEnteredCredits(Number.parseInt(event.target.value));
   };
 
   const descriptionChangeHandler = event => {
@@ -62,7 +62,7 @@ function AddNewModal({ isModalOpened, closeModal }) {
       isValid = false;
     }
 
-    if (enteredXP.trim().length === 0) {
+    if (!enteredXP) {
       xpErr.xpEmpty = "XP cannot be empty";
       isValid = false;
     } else if (enteredXP < 0) {
@@ -70,7 +70,7 @@ function AddNewModal({ isModalOpened, closeModal }) {
       isValid = false;
     }
 
-    if (enteredCredits.trim().length === 0) {
+    if (!enteredCredits) {
       creditsErr.creditsEmpty = "Credits cannot be empty";
       isValid = false;
     } else if (enteredCredits < 0) {
@@ -98,99 +98,94 @@ function AddNewModal({ isModalOpened, closeModal }) {
   }
 
   return (
-    isModalOpened && (
-      <div className="popup">
-        <div className="inner-popup">
-          <p className="modal-title">Add a challenge</p>
-          <form className="modal-form" onSubmit={addNewChallengeHandler}>
-            <label htmlFor="title" className="modal-labels">
-              Title
-            </label>
-            <input
-              id="title"
-              type="text"
-              value={enteredTitle}
-              onChange={titleChangeHandler}
-              className="modal-inputs"
-            />
-            {Object.keys(enteredTitleErr).map(item => (
-              <div className="input-error" key={Math.random()}>
-                {enteredTitleErr[item]}
-              </div>
-            ))}
-
-            <div className="inputs-group">
-              <div className="input-label-pair">
-                <label htmlFor="xp" className="modal-labels">
-                  XP earned on completion
-                </label>
-                <input
-                  id="xp"
-                  type="number"
-                  value={enteredXP}
-                  onChange={xpChangeHandler}
-                  className="modal-inputs"
-                />
-
-                {Object.keys(enteredXPErr).map(item => (
-                  <div className="input-error" key={Math.random()}>
-                    {enteredXPErr[item]}
-                  </div>
-                ))}
-              </div>
-
-              <div className="input-label-pair">
-                <label htmlFor="credits" className="modal-labels">
-                  Credits earned on completion
-                </label>
-                <input
-                  id="credits"
-                  type="number"
-                  value={enteredCredits}
-                  onChange={creditsChangeHandler}
-                  className="modal-inputs"
-                />
-
-                {Object.keys(enteredCreditsErr).map(item => (
-                  <div className="input-error" key={Math.random()}>
-                    {enteredCreditsErr[item]}
-                  </div>
-                ))}
-              </div>
+    <div className="popup">
+      <div className="inner-popup">
+        <p className="modal-title">Add a challenge</p>
+        <form className="modal-form" onSubmit={addNewChallengeHandler}>
+          <label htmlFor="title" className="modal-labels">
+            Title
+          </label>
+          <input
+            id="title"
+            type="text"
+            value={enteredTitle}
+            onChange={titleChangeHandler}
+            className="modal-inputs"
+          />
+          {Object.keys(enteredTitleErr).map(item => (
+            <div className="input-error" key={item.id}>
+              {enteredTitleErr[item]}
             </div>
-            <div className="inputs-column">
-              <label htmlFor="description" className="modal-labels">
-                Description
+          ))}
+
+          <div className="inputs-group">
+            <div className="input-label-pair">
+              <label htmlFor="xp" className="modal-labels">
+                XP earned on completion
               </label>
               <input
-                id="description"
-                type="text"
-                value={enteredDescription}
-                onChange={descriptionChangeHandler}
+                id="xp"
+                type="number"
+                value={enteredXP}
+                onChange={xpChangeHandler}
                 className="modal-inputs"
               />
 
-              {Object.keys(enteredDescriptionErr).map(item => (
-                <div className="input-error" key={Math.random()}>
-                  {enteredDescriptionErr[item]}
+              {Object.keys(enteredXPErr).map(item => (
+                <div className="input-error" key={item.id}>
+                  {enteredXPErr[item]}
                 </div>
               ))}
             </div>
-            <div className="modal-buttons">
-              <Button
-                type="btn secondary"
-                value="Cancel"
-                handleOnClick={closeModal}
+
+            <div className="input-label-pair">
+              <label htmlFor="credits" className="modal-labels">
+                Credits earned on completion
+              </label>
+              <input
+                id="credits"
+                type="number"
+                value={enteredCredits}
+                onChange={creditsChangeHandler}
+                className="modal-inputs"
               />
-              <Button
-                type="btn primary flex-width-max"
-                value="Add"
-              />
+
+              {Object.keys(enteredCreditsErr).map(item => (
+                <div className="input-error" key={item.id}>
+                  {enteredCreditsErr[item]}
+                </div>
+              ))}
             </div>
-          </form>
-        </div>
+          </div>
+          <div className="inputs-column">
+            <label htmlFor="description" className="modal-labels">
+              Description
+            </label>
+            <input
+              id="description"
+              type="text"
+              value={enteredDescription}
+              onChange={descriptionChangeHandler}
+              className="modal-inputs"
+            />
+
+            {Object.keys(enteredDescriptionErr).map(item => (
+              <div className="input-error" key={item.id}>
+                {enteredDescriptionErr[item]}
+              </div>
+            ))}
+          </div>
+          <div className="modal-buttons">
+            <Button
+              type="btn secondary"
+              value="Cancel"
+              handleOnClick={closeModal}
+            />
+            <Button type="btn primary flex-width-max" value="Add" />
+          </div>
+        </form>
       </div>
-    )
+    </div>
   );
 }
 

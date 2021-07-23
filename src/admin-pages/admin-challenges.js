@@ -11,7 +11,7 @@ const AdminChallenges = () => {
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState();
   const [availableChallenges, setAvailableChallenges] = useState([]);
-  const [openModal, setOpenModal] = useState(false);
+  const [isModalOpened, setIsModalOpened] = useState(false);
 
   const challengesRequest = () => {
     getAllChallenges()
@@ -28,12 +28,12 @@ const AdminChallenges = () => {
   useEffect(challengesRequest, []);
 
   function openPopUp() {
-    setOpenModal(true);
-    console.log(openModal);
+    setIsModalOpened(true);
+    console.log(isModalOpened);
   }
 
   function closeModalHandler() {
-    setOpenModal(false);
+    setIsModalOpened(false);
   }
 
   if (isPending) {
@@ -47,24 +47,15 @@ const AdminChallenges = () => {
           <div className="challenges-container">
             <ChallengesSection title="Challenges">
               <>
-                {openModal && (
+                {isModalOpened && (
                   <div className="overlay">
-                    <AddNewModal
-                      isModalOpened={openModal}
-                      closeModal={closeModalHandler}
-                    />
+                    <AddNewModal closeModal={closeModalHandler} />
                   </div>
                 )}
 
                 {availableChallenges.length ? (
                   availableChallenges.map(item => (
-                    <Card
-                      title={item.title}
-                      xp={item.xp}
-                      credits={item.credits}
-                      description={item.description}
-                      key={item.id}
-                    >
+                    <Card {...item} key={item.id}>
                       <Button type="btn secondary " value="Delete" />
                       <Button type="btn primary flex-width-max" value="Edit" />
                     </Card>

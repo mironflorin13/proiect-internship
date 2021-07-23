@@ -10,8 +10,8 @@
   width: 500px;
   height: 337px;
   z-index: 10;
-  background: #ffffff;
-  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.06);
+  background: $white;
+  box-shadow: 0px 6px 18px $boxShadowBlack;
   border-radius: 6px;
   font-family: $fontRoboto;
 }
@@ -27,7 +27,7 @@
 
 .modal-title {
   font-size: 20px;
-  color: #171717;
+  color: $blackNavigationPage;
   align-self: center;
 }
 
@@ -36,7 +36,7 @@
 }
 
 .modal-labels {
-  color: #6a758d;
+  color: $modalLabels;
   font-size: 14px;
 }
 
@@ -48,13 +48,13 @@ input[type="text"],
 input[type="number"] {
   background: transparent;
   border: none;
-  border-bottom: 1px solid #c0cfea;
+  border-bottom: 1px solid $inputLine;
   width: 100%;
 }
 
 input:focus {
   outline: none;
-  border-bottom: 1px solid #184fc4;
+  border-bottom: 1px solid $blue;
 }
 
 .inputs-group {
@@ -82,7 +82,7 @@ input:focus {
 }
 
 .input-error {
-  color: red;
+  color: $red;
   font-size: 12px;
   margin-bottom: -16px;
 }
