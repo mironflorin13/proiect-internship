@@ -5,7 +5,7 @@ import "../components/left-hand-panel/left-hand-panel.scss";
 
 function Overview({ userId }) {
   return (
-    <div className="cardsOverviewContainer">
+    <div className="cards-overview-container">
       <InProgressCompleteChallenge userId={userId} />
     </div>
   );

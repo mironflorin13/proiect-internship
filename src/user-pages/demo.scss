@@ -1,5 +1,9 @@
 @import "../utils/partials";
 
+.container-demo {
+  margin-left: 40px;
+}
+
 .button-text {
   font-family: $fontRoboto;
   font-size: 30px;
@@ -7,8 +11,11 @@
   margin-left: 10px;
 }
 
-.counter {
-  margin-left: 40px;
+.btn-demo {
+  width: 70px;
+  height: 40px;
+  border: 2px solid $blue;
+  background-color: $lightBlue;
 }
 
 // button {

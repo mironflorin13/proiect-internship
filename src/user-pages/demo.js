@@ -12,11 +12,14 @@ function Demo() {
   }
 
   return (
-    <div className="cardsOverviewContainer">
-      <div className="container">
+    <div className="cards-overview-container">
+      <div className="container-demo">
         <ExperienceBar currentXP={count} />
-        <span className="button-text counter">{count}</span>
-        <button onClick={incrementCountHandler} className="button-text">
+        <span className="button-text">{count}</span>
+        <button
+          onClick={incrementCountHandler}
+          className="button-text btn-demo"
+        >
           +
         </button>
       </div>

@@ -1,15 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Page(props) {
+function Page({location, page, path}) {
   return (
     <h3
       className={`page-container ${
-        props.location === props.path ? "active" : ""
+        location === path ? "active" : ""
       }`}
     >
-      <Link to={props.path} className="Link">
-        {props.page}
+      <Link to={path} className="Link">
+        {page}
       </Link>
     </h3>
   );

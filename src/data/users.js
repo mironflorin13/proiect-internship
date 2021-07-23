@@ -16,6 +16,7 @@ let users = [
       { id: 8, status: "to-be-validated" },
       { id: 9, status: "to-be-validated" },
     ],
+    roles: ["User", "Admin"],
   },
 
   {
@@ -35,6 +36,7 @@ let users = [
       { id: 8, status: "available" },
       { id: 9, status: "to-be-validated" },
     ],
+    roles: ["Admin"],
   },
 ];
 export const setUsers = u => {
