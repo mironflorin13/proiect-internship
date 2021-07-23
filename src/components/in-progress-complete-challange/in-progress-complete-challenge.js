@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 import ChallengesSection from "../challenges-section/challenges-section";
 import Button from "../button/button";
 import Card from "../card/card";
-import getUserChallenges from "../../mock-functions/get-user-challenges";
-import editChallengeStatus from "../../mock-functions/edit-challenge-status";
 import "./in-progress-complete-challenge.scss";
+import editUserChallengesStatus from "../../mock-functions/edit-user-challenges-status";
+import getUserChallenges from "../../mock-functions/get-user-challenges";
 
 const InProgressCompleteChallenge = ({ userId }) => {
   const [isPending, setIsPending] = useState(true);
@@ -14,17 +14,11 @@ const InProgressCompleteChallenge = ({ userId }) => {
   const [dataInProgress, setDataInProgress] = useState([]);
   const [dataCompleted, setDataCompleted] = useState([]);
 
-  const challengesRequest = () => {
-    getUserChallenges(userId)
+  const challengesRequest = getChallenges => {
+    getChallenges()
       .then(challenges => {
-        setDataInProgress(
-          challenges.filter(item => item.status === "in-progress")
-        );
-        setDataCompleted(
-          challenges.filter(
-            item => item.status === "denied" || item.status === "validated"
-          )
-        );
+        setDataInProgress(challenges.inProgress);
+        setDataCompleted(challenges.completed);
         setIsPending(false);
       })
       .catch(error => {
@@ -33,17 +27,25 @@ const InProgressCompleteChallenge = ({ userId }) => {
       });
   };
 
-  const quitChallenge = id => () => {
-    editChallengeStatus(id, "denied");
-    challengesRequest();
+  const quitChallenge = itemId => () => {
+    challengesRequest(() =>
+      editUserChallengesStatus(userId, itemId, "available", () =>
+        getUserChallenges(userId, "InProgressCompleted")
+      )
+    );
   };
 
-  const completeChallenge = id => () => {
-    editChallengeStatus(id, "validated");
-    challengesRequest();
+  const completeChallenge = itemId => () => {
+    challengesRequest(() =>
+      editUserChallengesStatus(userId, itemId, "to-be-validated", () =>
+        getUserChallenges(userId, "InProgressCompleted")
+      )
+    );
   };
 
-  useEffect(challengesRequest, [userId]);
+  useEffect(() => {
+    challengesRequest(() => getUserChallenges(userId, "InProgressCompleted"));
+  }, [userId]);
 
   if (isPending) {
     return <div>Loading...</div>;

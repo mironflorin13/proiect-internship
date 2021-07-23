@@ -26,24 +26,29 @@ function App() {
       });
   }, []);
 
+  function prevSectionDependingOnRole() {
+    return sectionDependingOnRole === "User" ? "Admin" : "User";
+  }
+
   function switchRoleHandler() {
     console.log(sectionDependingOnRole);
-    setSectionDependingOnRole(
-      sectionDependingOnRole === "User" ? "Admin" : "User"
-    );
+    setSectionDependingOnRole(prevSectionDependingOnRole());
   }
+
+  const hasMultipleRoles = users[userId].roles.length > 1;
 
   return (
     <div>
       <Router>
         <LeftHandPanel
-          userData={userData}
-          hasMultipleRoles={users[userId].roles.length > 1}
+          {...userData}
+          hasMultipleRoles={hasMultipleRoles}
           roleType={sectionDependingOnRole}
           switchRole={switchRoleHandler}
+          userId={userId}
         />
         <Navigation
-          hasMultipleRoles={users[userId].roles.length > 1}
+          hasMultipleRoles={hasMultipleRoles}
           roleType={sectionDependingOnRole}
           userData={userData}
           userId={userId}
