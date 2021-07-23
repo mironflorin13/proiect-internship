@@ -32,7 +32,7 @@
 }
 
 .modal-form {
-  margin-top: 22px;
+  margin-top: 20px;
 }
 
 .modal-labels {
@@ -42,7 +42,6 @@
 
 .modal-inputs {
   display: block;
-  margin-bottom: 30px;
 }
 
 input[type="text"],
@@ -62,6 +61,7 @@ input:focus {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  padding-top: 30px;
   .input-label-pair {
     width: 46%;
     display: flex;
@@ -69,17 +69,20 @@ input:focus {
   }
 }
 
+.inputs-column {
+  padding-top: 30px;
+}
+
 .modal-buttons {
   display: flex;
   justify-content: space-between;
   margin-left: 55%;
+  gap: 20px;
+  margin-top: 30px;
 }
 
-// .overlay {
-//   position: absolute;
-//   height: 160%;
-//   top: 0;
-//   left: 0;
-//   background: rgba(0, 0, 0, 0.75);
-//   z-index: 100;
-// }
+.input-error {
+  color: red;
+  font-size: 12px;
+  margin-bottom: -16px;
+}

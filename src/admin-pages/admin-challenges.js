@@ -27,7 +27,7 @@ const AdminChallenges = () => {
 
   useEffect(challengesRequest, []);
 
-  function addNewChallenge() {
+  function openPopUp() {
     setOpenModal(true);
     console.log(openModal);
   }
@@ -77,7 +77,7 @@ const AdminChallenges = () => {
                 <Button
                   type="btn primary fix"
                   value="Add New"
-                  handleOnClick={addNewChallenge}
+                  handleOnClick={openPopUp}
                 />
               </>
             </ChallengesSection>
