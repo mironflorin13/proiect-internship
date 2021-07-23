@@ -5,7 +5,7 @@ import AvailableChallenges from "../components/available-challenges/available-ch
 
 function Challenges({ userId }) {
   return (
-    <div className="cardsOverviewContainer">
+    <div className="cards-overview-container">
       <div className="container">
         <AvailableChallenges userId={userId} />
       </div>

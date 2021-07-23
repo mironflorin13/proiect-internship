@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 
 import getUserInfo from "./mock-functions/get-user-info.js";
 import LeftHandPanel from "./components/left-hand-panel/left-hand-panel";
-import Overview from "./pages/overview";
-import Challenges from "./pages/challenges";
-import Demo from "./pages/demo";
-import Shop from "./pages/shop";
 import "./application.scss";
 import users from "./data/users.js";
+import Navigation from "./utils/navigation.js";
 
 function App() {
-  const [userData, setUserData] = useState({});
   const userId = 0;
+  const [userData, setUserData] = useState({});
+  const [sectionDependingOnRole, setSectionDependingOnRole] = useState(
+    users[userId].roles[0]
+  );
+
+  // const history = useHistory();
 
   useEffect(() => {
     getUserInfo(userId)
@@ -24,9 +26,21 @@ function App() {
       });
   }, []);
 
+  function prevSectionDependingOnRole() {
+    return sectionDependingOnRole === "User" ? "Admin" : "User";
+  }
+
+  function switchRoleHandler() {
+    console.log(sectionDependingOnRole);
+    setSectionDependingOnRole(prevSectionDependingOnRole());
+  }
+
+  const hasMultipleRoles = users[userId].roles.length > 1;
+
   return (
     <div>
       <Router>
+<<<<<<< HEAD
         <LeftHandPanel userAvatar={users} userData={userData} />
         <Switch>
           <Route
@@ -46,6 +60,21 @@ function App() {
           />
           <Route path="/demo" exact component={() => <Demo />} />
         </Switch>
+=======
+        <LeftHandPanel
+          {...userData}
+          hasMultipleRoles={hasMultipleRoles}
+          roleType={sectionDependingOnRole}
+          switchRole={switchRoleHandler}
+          userId={userId}
+        />
+        <Navigation
+          hasMultipleRoles={hasMultipleRoles}
+          roleType={sectionDependingOnRole}
+          userData={userData}
+          userId={userId}
+        />
+>>>>>>> master
       </Router>
     </div>
   );

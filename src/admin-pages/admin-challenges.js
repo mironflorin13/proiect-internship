@@ -31,7 +31,7 @@ const AdminChallenges = () => {
     return <div>{error}</div>;
   } else {
     return (
-      <div className="cardsOverviewContainer">
+      <div className="cards-overview-container">
         <div className="challenges-container">
           <ChallengesSection title="Challenges">
             <>
