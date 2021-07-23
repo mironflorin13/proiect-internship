@@ -3,9 +3,11 @@ import { useState, useEffect } from "react";
 import ChallengesSection from "../challenges-section/challenges-section";
 import Button from "../button/button";
 import Card from "../card/card";
+import ShopCard from "../shop-card/shop-card";
 import "./in-progress-complete-challenge.scss";
 import editUserChallengesStatus from "../../mock-functions/edit-user-challenges-status";
 import getUserChallenges from "../../mock-functions/get-user-challenges";
+import getBoughtProducts from "../../mock-functions/get-bought-products";
 
 const InProgressCompleteChallenge = ({ userId }) => {
   const [isPending, setIsPending] = useState(true);
@@ -13,12 +15,24 @@ const InProgressCompleteChallenge = ({ userId }) => {
 
   const [dataInProgress, setDataInProgress] = useState([]);
   const [dataCompleted, setDataCompleted] = useState([]);
+  const [products, setProducts] = useState([]);
 
   const challengesRequest = getChallenges => {
     getChallenges()
       .then(challenges => {
         setDataInProgress(challenges.inProgress);
         setDataCompleted(challenges.completed);
+      })
+      .catch(error => {
+        setError(error.message);
+        setIsPending(false);
+      });
+  };
+
+  const productsRequest = userId => {
+    getBoughtProducts(userId)
+      .then(products => {
+        setProducts(products);
         setIsPending(false);
       })
       .catch(error => {
@@ -45,6 +59,7 @@ const InProgressCompleteChallenge = ({ userId }) => {
 
   useEffect(() => {
     challengesRequest(() => getUserChallenges(userId, "InProgressCompleted"));
+    productsRequest(userId);
   }, [userId]);
 
   if (isPending) {
@@ -80,6 +95,14 @@ const InProgressCompleteChallenge = ({ userId }) => {
             dataCompleted.map(item => <Card {...item} key={item.id} />)
           ) : (
             <h2 className="challenges-subtilte">No Challenges to display</h2>
+          )}
+        </ChallengesSection>
+
+        <ChallengesSection title="Bought Products">
+          {products.length ? (
+            products.map(item => <ShopCard {...item} key={item.id} />)
+          ) : (
+            <h2 className="challenges-subtilte">No Products to Display</h2>
           )}
         </ChallengesSection>
       </div>
