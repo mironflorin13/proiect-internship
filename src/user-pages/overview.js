@@ -7,6 +7,7 @@ import ShopCard from "../components/shop-card/shop-card";
 import editUserChallengesStatus from "../mock-functions/edit-user-challenges-status";
 import getUserChallenges from "../mock-functions/get-user-challenges";
 import getBoughtProducts from "../mock-functions/get-bought-products";
+import { CHALLENGES_STATUSES } from "../data/constants";
 
 const InProgressCompleteChallenge = ({ userId }) => {
   const [isPending, setIsPending] = useState(true);
@@ -15,12 +16,20 @@ const InProgressCompleteChallenge = ({ userId }) => {
   const [dataInProgress, setDataInProgress] = useState([]);
   const [dataCompleted, setDataCompleted] = useState([]);
   const [products, setProducts] = useState([]);
+  const [reload, setReload] = useState(1);
 
-  const challengesRequest = getChallenges => {
-    getChallenges()
+  const challengesRequest = userId => {
+    getUserChallenges(userId, [
+      CHALLENGES_STATUSES.IN_PROGRESS,
+      CHALLENGES_STATUSES.DENIED,
+      CHALLENGES_STATUSES.VALIDATED,
+    ])
       .then(challenges => {
-        setDataInProgress(challenges["in-progress"]);
-        setDataCompleted([...challenges.validated, ...challenges.denied]);
+        setDataInProgress(challenges[CHALLENGES_STATUSES.IN_PROGRESS]);
+        setDataCompleted([
+          ...challenges[CHALLENGES_STATUSES.VALIDATED],
+          ...challenges[CHALLENGES_STATUSES.DENIED],
+        ]);
         setIsPending(false);
       })
       .catch(error => {
@@ -42,27 +51,23 @@ const InProgressCompleteChallenge = ({ userId }) => {
   };
 
   const quitChallenge = itemId => () => {
-    challengesRequest(() =>
-      editUserChallengesStatus(userId, itemId, "available", () =>
-        getUserChallenges(userId, ["in-progress", "denied", "validated"])
-      )
-    );
+    editUserChallengesStatus(userId, itemId, CHALLENGES_STATUSES.AVAILABLE);
+    setReload(reload + 1);
   };
 
   const completeChallenge = itemId => () => {
-    challengesRequest(() =>
-      editUserChallengesStatus(userId, itemId, "to-be-validated", () =>
-        getUserChallenges(userId, ["in-progress", "denied", "validated"])
-      )
+    editUserChallengesStatus(
+      userId,
+      itemId,
+      CHALLENGES_STATUSES.TO_BE_VALIDATED
     );
+    setReload(reload + 1);
   };
 
   useEffect(() => {
-    challengesRequest(() =>
-      getUserChallenges(userId, ["in-progress", "denied", "validated"])
-    );
+    challengesRequest(userId);
     productsRequest(userId);
-  }, [userId]);
+  }, [userId, reload]);
 
   if (isPending) {
     return <div>Loading...</div>;
@@ -100,6 +105,7 @@ const InProgressCompleteChallenge = ({ userId }) => {
               <h2 className="challenges-subtilte">No Challenges to display</h2>
             )}
           </ChallengesSection>
+
           <ChallengesSection title="Bought Products">
             {products.length ? (
               products.map(item => <ShopCard {...item} key={item.id} />)

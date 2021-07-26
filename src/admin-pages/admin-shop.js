@@ -38,12 +38,7 @@ const AdminShop = () => {
             <>
               {allProducts.length ? (
                 allProducts.map(product => (
-                  <ShopCard
-                    title={product.title}
-                    imageURL={product.imageURL}
-                    description={product.description}
-                    key={product.id}
-                  >
+                  <ShopCard {...product} key={product.id}>
                     <Button type="btn secondary " value="Delete" />
                     <Button type="btn primary flex-width-max" value="Edit" />
                   </ShopCard>

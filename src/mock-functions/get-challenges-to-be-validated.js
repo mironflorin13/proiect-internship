@@ -1,4 +1,5 @@
 import { getChallenges } from "../data/challenges";
+import { CHALLENGES_STATUSES } from "../data/constants";
 import { getUsers } from "../data/users";
 
 const getChallengesToBeValidated = () => {
@@ -8,7 +9,7 @@ const getChallengesToBeValidated = () => {
 
   users.forEach(user => {
     user.challenges.forEach(userChallenge => {
-      if (userChallenge.status === "to-be-validated") {
+      if (userChallenge.status === CHALLENGES_STATUSES.TO_BE_VALIDATED) {
         result.push({
           user,
           challenge: challenges.find(
@@ -18,6 +19,7 @@ const getChallengesToBeValidated = () => {
       }
     });
   });
+
   return Promise.resolve(result);
 };
 

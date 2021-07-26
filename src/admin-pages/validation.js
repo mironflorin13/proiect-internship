@@ -6,14 +6,16 @@ import ChallengesSection from "../components/challenges-section/challenges-secti
 import Button from "../components/button/button";
 import Card from "../components/card/card";
 import editUserChallengesStatus from "../mock-functions/edit-user-challenges-status";
+import { CHALLENGES_STATUSES } from "../data/constants";
 
 function AdminChallengesToBeValidated() {
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState();
   const [challengesToBeValidated, setChallengesToBeValidated] = useState([]);
+  const [reload, setReload] = useState(1);
 
-  const challengesRequest = getChallenges => {
-    getChallenges()
+  const challengesRequest = () => {
+    getChallengesToBeValidated()
       .then(challenges => {
         setChallengesToBeValidated(challenges);
         setIsPending(false);
@@ -25,27 +27,16 @@ function AdminChallengesToBeValidated() {
   };
 
   const denyChallenge = (userId, itemId) => () => {
-    challengesRequest(() =>
-      editUserChallengesStatus(
-        itemId,
-        userId,
-        "denied",
-        getChallengesToBeValidated
-      )
-    );
+    editUserChallengesStatus(itemId, userId, CHALLENGES_STATUSES.DENIED);
+    setReload(reload + 1);
   };
 
   const validatedChallenge = (userId, itemId) => () => {
-    challengesRequest(() =>
-      editUserChallengesStatus(
-        itemId,
-        userId,
-        "validated",
-        getChallengesToBeValidated
-      )
-    );
+    editUserChallengesStatus(itemId, userId, CHALLENGES_STATUSES.VALIDATED);
+    setReload(reload + 1);
   };
-  useEffect(() => challengesRequest(getChallengesToBeValidated), []);
+
+  useEffect(() => challengesRequest(), [reload]);
 
   if (isPending) {
     return <div>Loading...</div>;
@@ -63,7 +54,7 @@ function AdminChallengesToBeValidated() {
                   xp={item.challenge.xp}
                   credits={item.challenge.credits}
                   description={item.challenge.description}
-                  key={item.challenge.id + item.user.id}
+                  key={`${item.user.id}.${item.challenge.id}`}
                   image={item.user.image}
                   name={item.user.name}
                 >
