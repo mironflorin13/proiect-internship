@@ -6,12 +6,15 @@ import ChallengesSection from "../components/challenges-section/challenges-secti
 import Button from "../components/button/button";
 import Card from "../components/card/card";
 import AddNewModal from "../components/modal/add-new-modal";
+import { getChallenges } from "../data/challenges";
 
 const AdminChallenges = () => {
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState();
   const [availableChallenges, setAvailableChallenges] = useState([]);
   const [isModalOpened, setIsModalOpened] = useState(false);
+  const [modalTitle, setModalTitle] = useState("Add challenge");
+  const [isInEditMode, setIsInEditMode] = useState(false);
 
   const challengesRequest = () => {
     getAllChallenges()
@@ -42,6 +45,21 @@ const AdminChallenges = () => {
     ]);
   }
 
+  function editChallenge(id, title, xp, credits, description) {
+    const editedChallenge = {
+      id,
+      title,
+      xp,
+      credits,
+      description,
+    };
+
+    const challenges = getChallenges().splice(id, 1, editedChallenge);
+    console.log(challenges);
+
+    setAvailableChallenges(challenges);
+  }
+
   function openPopUp() {
     setIsModalOpened(true);
     console.log(isModalOpened);
@@ -49,6 +67,14 @@ const AdminChallenges = () => {
 
   function closeModalHandler() {
     setIsModalOpened(false);
+    setIsInEditMode(false);
+    setModalTitle("Add challenge");
+  }
+
+  function openPopUpForEditing() {
+    setIsModalOpened(true);
+    setIsInEditMode(true);
+    setModalTitle("Edit challenge");
   }
 
   if (isPending) {
@@ -62,11 +88,13 @@ const AdminChallenges = () => {
           <div className="challenges-container">
             <ChallengesSection title="Challenges">
               <>
-                {isModalOpened && (
+                {isModalOpened && !isInEditMode && (
                   <div className="overlay">
                     <AddNewModal
                       closeModal={closeModalHandler}
                       addChallenge={addNewChallenge}
+                      modalTitle={modalTitle}
+                      isInEditMode={isInEditMode}
                     />
                   </div>
                 )}
@@ -75,7 +103,20 @@ const AdminChallenges = () => {
                   availableChallenges.map(item => (
                     <Card {...item} key={item.id}>
                       <Button type="btn secondary " value="Delete" />
-                      <Button type="btn primary flex-width-max" value="Edit" />
+                      <Button
+                        type="btn primary flex-width-max"
+                        value="Edit"
+                        handleOnClick={openPopUpForEditing}
+                      />
+                      {isInEditMode && (
+                        <AddNewModal
+                          closeModal={closeModalHandler}
+                          editChallenge={editChallenge}
+                          modalTitle={modalTitle}
+                          isInEditMode={isInEditMode}
+                          challengeId={item.id}
+                        />
+                      )}
                     </Card>
                   ))
                 ) : (

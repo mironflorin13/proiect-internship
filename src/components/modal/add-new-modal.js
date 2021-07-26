@@ -1,9 +1,23 @@
 import React, { useState } from "react";
 
+import { getChallenges } from "../../data/challenges";
 import Button from "../button/button";
 import "./add-new-modal.scss";
 
-function AddNewModal({ closeModal, addChallenge }) {
+function getChallengeInfo(challengeId) {
+  return getChallenges().find(ch => ch.id === challengeId);
+  // console.log(challenge);
+  // return challenge;
+}
+
+function AddNewModal({
+  closeModal,
+  addChallenge,
+  editChallenge,
+  modalTitle,
+  isInEditMode,
+  challengeId,
+}) {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredXP, setEnteredXP] = useState("");
   const [enteredCredits, setEnteredCredits] = useState("");
@@ -35,7 +49,22 @@ function AddNewModal({ closeModal, addChallenge }) {
     const isValid = formValidation();
     if (isValid) {
       console.log(enteredTitle, enteredXP, enteredCredits, enteredDescription);
-      addChallenge(enteredTitle, enteredXP, enteredCredits, enteredDescription);
+      if (isInEditMode) {
+        editChallenge(
+          challengeId,
+          enteredTitle,
+          enteredXP,
+          enteredCredits,
+          enteredDescription
+        );
+      } else {
+        addChallenge(
+          enteredTitle,
+          enteredXP,
+          enteredCredits,
+          enteredDescription
+        );
+      }
       setEnteredTitle("");
       setEnteredXP("");
       setEnteredCredits("");
@@ -84,7 +113,7 @@ function AddNewModal({ closeModal, addChallenge }) {
     } else if (enteredDescription.trim().length < 4) {
       descriptionErr.descriptionShort = "Description is too short";
       isValid = false;
-    } else if (enteredDescription.trim().length > 50) {
+    } else if (enteredDescription.trim().length > 300) {
       descriptionErr.descriptionLong = "Description is too long";
       isValid = false;
     }
@@ -100,7 +129,7 @@ function AddNewModal({ closeModal, addChallenge }) {
   return (
     <div className="popup">
       <div className="inner-popup">
-        <p className="modal-title">Add a challenge</p>
+        <p className="modal-title">{modalTitle}</p>
         <form className="modal-form" onSubmit={addNewChallengeHandler}>
           <label htmlFor="title" className="modal-labels">
             Title
@@ -108,7 +137,9 @@ function AddNewModal({ closeModal, addChallenge }) {
           <input
             id="title"
             type="text"
-            value={enteredTitle}
+            defaultValue={
+              isInEditMode ? getChallengeInfo(challengeId).title : enteredTitle
+            }
             onChange={titleChangeHandler}
             className="modal-inputs"
           />
@@ -126,7 +157,9 @@ function AddNewModal({ closeModal, addChallenge }) {
               <input
                 id="xp"
                 type="number"
-                value={enteredXP}
+                defaultValue={
+                  isInEditMode ? getChallengeInfo(challengeId).xp : enteredXP
+                }
                 onChange={xpChangeHandler}
                 className="modal-inputs"
               />
@@ -145,7 +178,11 @@ function AddNewModal({ closeModal, addChallenge }) {
               <input
                 id="credits"
                 type="number"
-                value={enteredCredits}
+                defaultValue={
+                  isInEditMode
+                    ? getChallengeInfo(challengeId).credits
+                    : enteredCredits
+                }
                 onChange={creditsChangeHandler}
                 className="modal-inputs"
               />
@@ -164,7 +201,11 @@ function AddNewModal({ closeModal, addChallenge }) {
             <input
               id="description"
               type="text"
-              value={enteredDescription}
+              defaultValue={
+                isInEditMode
+                  ? getChallengeInfo(challengeId).description
+                  : enteredDescription
+              }
               onChange={descriptionChangeHandler}
               className="modal-inputs"
             />
@@ -181,7 +222,10 @@ function AddNewModal({ closeModal, addChallenge }) {
               value="Cancel"
               handleOnClick={closeModal}
             />
-            <Button type="btn primary flex-width-max" value="Add" />
+            <Button
+              type="btn primary flex-width-max"
+              value={isInEditMode ? "Edit" : "Add"}
+            />
           </div>
         </form>
       </div>
