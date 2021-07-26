@@ -22,7 +22,11 @@ function UserRoutes({ role, userData, userId, showNotFoundRoute }) {
         path="/challenges"
         component={() => <Challenges userId={userId} />}
       />
-      <Route path="/shop" exact component={() => <Shop role={role} />} />
+      <Route
+        path="/shop"
+        exact
+        component={() => <Shop role={role} userId={userId} />}
+      />
       <Route path="/demo" exact component={() => <Demo />} />
       {showNotFoundRoute && (
         <Route path="*" exact component={() => <NotFound role={role} />} />

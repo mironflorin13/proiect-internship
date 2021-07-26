@@ -40,27 +40,6 @@ function App() {
   return (
     <div>
       <Router>
-<<<<<<< HEAD
-        <LeftHandPanel userAvatar={users} userData={userData} />
-        <Switch>
-          <Route
-            path="/"
-            exact
-            component={() => <Overview userId={userId} />}
-          />
-          <Route
-            path="/challenges"
-            exact
-            component={() => <Challenges userId={userId} />}
-          />
-          <Route
-            path="/shop"
-            exact
-            component={() => <Shop userId={userId} />}
-          />
-          <Route path="/demo" exact component={() => <Demo />} />
-        </Switch>
-=======
         <LeftHandPanel
           {...userData}
           hasMultipleRoles={hasMultipleRoles}
@@ -74,7 +53,6 @@ function App() {
           userData={userData}
           userId={userId}
         />
->>>>>>> master
       </Router>
     </div>
   );

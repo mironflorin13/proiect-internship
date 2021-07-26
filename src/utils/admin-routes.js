@@ -4,8 +4,8 @@ import { Route, Switch } from "react-router-dom";
 import Validation from "../admin-pages/validation";
 import AdminChallenges from "../admin-pages/admin-challenges";
 import Demo from "../user-pages/demo";
-import Shop from "../user-pages/shop";
 import NotFound from "../user-pages/not-found";
+import AdminShop from "../admin-pages/admin-shop";
 
 function AdminRoutes({ role, userId }) {
   return (
@@ -16,7 +16,11 @@ function AdminRoutes({ role, userId }) {
         component={() => <AdminChallenges userId={userId} />}
       />
       <Route path="/admin/validation" exact component={() => <Validation />} />
-      <Route path="/admin/shop" exact component={() => <Shop role={role} />} />
+      <Route
+        path="/admin/shop"
+        exact
+        component={() => <AdminShop role={role} />}
+      />
       <Route path="/admin/demo" exact component={() => <Demo />} />
       <Route path="*" component={() => <NotFound role={role} />} />
     </Switch>

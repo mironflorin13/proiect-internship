@@ -16,15 +16,12 @@ let users = [
       { id: 8, status: "to-be-validated" },
       { id: 9, status: "to-be-validated" },
     ],
-<<<<<<< HEAD
     products: [
       { id: 1, status: "bought" },
       { id: 2, status: "bought" },
       { id: 3, status: "bought" },
     ],
-=======
     roles: ["User", "Admin"],
->>>>>>> master
   },
 
   {
