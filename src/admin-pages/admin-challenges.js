@@ -27,6 +27,21 @@ const AdminChallenges = () => {
 
   useEffect(challengesRequest, []);
 
+  function addNewChallenge(title, xp, credits, description) {
+    const chellengeToInsert = {
+      id: availableChallenges.length + 1,
+      title,
+      xp,
+      credits,
+      description,
+    };
+
+    setAvailableChallenges(prevChallenges => [
+      ...prevChallenges,
+      chellengeToInsert,
+    ]);
+  }
+
   function openPopUp() {
     setIsModalOpened(true);
     console.log(isModalOpened);
@@ -49,7 +64,10 @@ const AdminChallenges = () => {
               <>
                 {isModalOpened && (
                   <div className="overlay">
-                    <AddNewModal closeModal={closeModalHandler} />
+                    <AddNewModal
+                      closeModal={closeModalHandler}
+                      addChallenge={addNewChallenge}
+                    />
                   </div>
                 )}
 

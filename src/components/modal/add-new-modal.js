@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Button from "../button/button";
 import "./add-new-modal.scss";
 
-function AddNewModal({ closeModal }) {
+function AddNewModal({ closeModal, addChallenge }) {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredXP, setEnteredXP] = useState("");
   const [enteredCredits, setEnteredCredits] = useState("");
@@ -35,7 +35,7 @@ function AddNewModal({ closeModal }) {
     const isValid = formValidation();
     if (isValid) {
       console.log(enteredTitle, enteredXP, enteredCredits, enteredDescription);
-      // addChallenge(enteredTitle, enteredXP, enteredCredits, enteredDescription);
+      addChallenge(enteredTitle, enteredXP, enteredCredits, enteredDescription);
       setEnteredTitle("");
       setEnteredXP("");
       setEnteredCredits("");
