@@ -33,7 +33,7 @@ let challenges = [
   {
     id: 5,
     title: "5-Do a byte-sized learning talk ",
-    xp: 15,
+    xp: 10,
     credits: 500,
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus. Sed at orci sit amet lectus euismod ultrices eget quis tortor.Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sodales lacus sed urna iaculis, et gravida sem faucibus. Sed at orci sit amet le",

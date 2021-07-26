@@ -1,0 +1,25 @@
+@import "../utils/partials";
+
+.error {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h1,
+  p,
+  .home-redirect {
+    color: $blackNavigationPage;
+    font-family: $fontRoboto;
+    text-decoration: none;
+    margin-top: 10px;
+  }
+
+  .home-redirect {
+    color: $orange;
+
+    &:hover {
+      font-size: 20px;
+    }
+  }
+}

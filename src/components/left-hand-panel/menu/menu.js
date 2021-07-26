@@ -4,34 +4,15 @@ import { useLocation } from "react-router-dom";
 import "./menu.scss";
 import Page from "../page";
 
-const pages = [
-  {
-    id: 1,
-    page: "Overview",
-    path: "/",
-  },
-  {
-    id: 2,
-    page: "Challenges",
-    path: "/challenges",
-  },
-  {
-    id: 3,
-    page: "Shop",
-    path: "/shop",
-  },
-];
-
-function Menu(props) {
+function Menu({ pagesToShow }) {
   const location = useLocation();
   return (
-    <div className="pagesContainer">
-      {pages.map(item => (
+    <div className="pages-container">
+      {pagesToShow.map(pageToShow => (
         <Page
-          page={item.page}
-          path={item.path}
+          {...pageToShow}
           location={location.pathname}
-          key={item.id}
+          key={pageToShow.id}
         />
       ))}
     </div>
