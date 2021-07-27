@@ -12,10 +12,9 @@ function AdminChallengesToBeValidated() {
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState();
   const [challengesToBeValidated, setChallengesToBeValidated] = useState([]);
-  const [reload, setReload] = useState(1);
 
-  const challengesRequest = () => {
-    getChallengesToBeValidated()
+  const challengesRequest = getChallenges => {
+    getChallenges()
       .then(challenges => {
         setChallengesToBeValidated(challenges);
         setIsPending(false);
@@ -27,16 +26,22 @@ function AdminChallengesToBeValidated() {
   };
 
   const denyChallenge = (userId, itemId) => () => {
-    editUserChallengesStatus(itemId, userId, CHALLENGE_STATUSES.DENIED);
-    setReload(reload + 1);
+    challengesRequest(() =>
+      editUserChallengesStatus(itemId, userId, CHALLENGE_STATUSES.DENIED, [
+        CHALLENGE_STATUSES.TO_BE_VALIDATED,
+      ])
+    );
   };
 
   const validatedChallenge = (userId, itemId) => () => {
-    editUserChallengesStatus(itemId, userId, CHALLENGE_STATUSES.VALIDATED);
-    setReload(reload + 1);
+    challengesRequest(() =>
+      editUserChallengesStatus(itemId, userId, CHALLENGE_STATUSES.VALIDATED, [
+        CHALLENGE_STATUSES.TO_BE_VALIDATED,
+      ])
+    );
   };
 
-  useEffect(() => challengesRequest(), [reload]);
+  useEffect(() => challengesRequest(() => getChallengesToBeValidated()), []);
 
   if (isPending) {
     return <div>Loading...</div>;

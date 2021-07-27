@@ -8,6 +8,7 @@ import editUserChallengesStatus from "../mock-functions/edit-user-challenges-sta
 import getUserChallenges from "../mock-functions/get-user-challenges";
 import getBoughtProducts from "../mock-functions/get-bought-products";
 import { CHALLENGE_STATUSES } from "../data/constants";
+import deleteChallengeFromAUser from "../mock-functions/delete-challange-from-a-user";
 
 const InProgressCompleteChallenge = ({ userId }) => {
   const [isPending, setIsPending] = useState(true);
@@ -16,14 +17,9 @@ const InProgressCompleteChallenge = ({ userId }) => {
   const [dataInProgress, setDataInProgress] = useState([]);
   const [dataCompleted, setDataCompleted] = useState([]);
   const [products, setProducts] = useState([]);
-  const [reload, setReload] = useState(1);
 
-  const challengesRequest = userId => {
-    getUserChallenges(userId, [
-      CHALLENGE_STATUSES.IN_PROGRESS,
-      CHALLENGE_STATUSES.DENIED,
-      CHALLENGE_STATUSES.VALIDATED,
-    ])
+  const challengesRequest = getChallenges => {
+    getChallenges()
       .then(challenges => {
         setDataInProgress(challenges[CHALLENGE_STATUSES.IN_PROGRESS]);
         setDataCompleted([
@@ -51,23 +47,40 @@ const InProgressCompleteChallenge = ({ userId }) => {
   };
 
   const quitChallenge = itemId => () => {
-    editUserChallengesStatus(userId, itemId, CHALLENGE_STATUSES.AVAILABLE);
-    setReload(reload + 1);
+    challengesRequest(() =>
+      deleteChallengeFromAUser(userId, itemId, [
+        CHALLENGE_STATUSES.IN_PROGRESS,
+        CHALLENGE_STATUSES.DENIED,
+        CHALLENGE_STATUSES.VALIDATED,
+      ])
+    );
   };
 
   const completeChallenge = itemId => () => {
-    editUserChallengesStatus(
-      userId,
-      itemId,
-      CHALLENGE_STATUSES.TO_BE_VALIDATED
+    challengesRequest(() =>
+      editUserChallengesStatus(
+        userId,
+        itemId,
+        CHALLENGE_STATUSES.TO_BE_VALIDATED,
+        [
+          CHALLENGE_STATUSES.IN_PROGRESS,
+          CHALLENGE_STATUSES.DENIED,
+          CHALLENGE_STATUSES.VALIDATED,
+        ]
+      )
     );
-    setReload(reload + 1);
   };
 
   useEffect(() => {
-    challengesRequest(userId);
+    challengesRequest(() =>
+      getUserChallenges(userId, [
+        CHALLENGE_STATUSES.IN_PROGRESS,
+        CHALLENGE_STATUSES.DENIED,
+        CHALLENGE_STATUSES.VALIDATED,
+      ])
+    );
     productsRequest(userId);
-  }, [userId, reload]);
+  }, [userId]);
 
   if (isPending) {
     return <div>Loading...</div>;
