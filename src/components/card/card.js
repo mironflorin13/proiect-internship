@@ -17,7 +17,7 @@ const Card = ({
   const completed =
     status === CHALLENGE_STATUSES.VALIDATED ||
     status === CHALLENGE_STATUSES.DENIED
-      ? status
+      ? status.toLowerCase()
       : "";
   const height = image ? "height" : "";
 
