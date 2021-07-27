@@ -12,9 +12,9 @@ const AdminChallenges = () => {
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState();
   const [availableChallenges, setAvailableChallenges] = useState([]);
-  const [isModalOpened, setIsModalOpened] = useState(false);
   const [modalTitle, setModalTitle] = useState("Add challenge");
-  const [isInEditMode, setIsInEditMode] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [item, setItem] = useState();
 
   const challengesRequest = () => {
     getAllChallenges()
@@ -60,21 +60,20 @@ const AdminChallenges = () => {
     setAvailableChallenges(challenges);
   }
 
-  function openPopUp() {
-    setIsModalOpened(true);
-    console.log(isModalOpened);
-  }
-
   function closeModalHandler() {
-    setIsModalOpened(false);
-    setIsInEditMode(false);
+    setIsVisible(false);
     setModalTitle("Add challenge");
+    setItem();
   }
 
-  function openPopUpForEditing() {
-    setIsModalOpened(true);
-    setIsInEditMode(true);
+  function handleOnEdit(item) {
     setModalTitle("Edit challenge");
+    setIsVisible(true);
+    setItem(item);
+  }
+
+  function handleOnAdd() {
+    setIsVisible(true);
   }
 
   if (isPending) {
@@ -88,7 +87,7 @@ const AdminChallenges = () => {
           <div className="challenges-container">
             <ChallengesSection title="Challenges">
               <>
-                {isModalOpened && !isInEditMode && (
+                {/* {isModalOpened && !isInEditMode && (
                   <div className="overlay">
                     <AddNewModal
                       closeModal={closeModalHandler}
@@ -97,26 +96,34 @@ const AdminChallenges = () => {
                       isInEditMode={isInEditMode}
                     />
                   </div>
+                )} */}
+
+                {isVisible && (
+                  <div className="overlay">
+                    <AddNewModal
+                      isEditMode={Boolean(item)}
+                      item={item}
+                      modalTitle={modalTitle}
+                      closeModal={closeModalHandler}
+                      addChallenge={addNewChallenge}
+                      editChallenge={editChallenge}
+                    />
+                  </div>
                 )}
 
                 {availableChallenges.length ? (
                   availableChallenges.map(item => (
-                    <Card {...item} key={item.id}>
+                    <Card
+                      {...item}
+                      key={item.id}
+                      onClick={() => handleOnEdit(item)}
+                    >
                       <Button type="btn secondary " value="Delete" />
                       <Button
                         type="btn primary flex-width-max"
                         value="Edit"
-                        handleOnClick={openPopUpForEditing}
+                        handleOnClick={() => handleOnEdit(item)}
                       />
-                      {isInEditMode && (
-                        <AddNewModal
-                          closeModal={closeModalHandler}
-                          editChallenge={editChallenge}
-                          modalTitle={modalTitle}
-                          isInEditMode={isInEditMode}
-                          challengeId={item.id}
-                        />
-                      )}
                     </Card>
                   ))
                 ) : (
@@ -127,7 +134,7 @@ const AdminChallenges = () => {
                 <Button
                   type="btn primary fix"
                   value="Add New"
-                  handleOnClick={openPopUp}
+                  handleOnClick={handleOnAdd}
                 />
               </>
             </ChallengesSection>

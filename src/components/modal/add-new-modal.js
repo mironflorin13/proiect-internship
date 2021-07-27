@@ -1,22 +1,16 @@
 import React, { useState } from "react";
 
-import { getChallenges } from "../../data/challenges";
 import Button from "../button/button";
 import "./add-new-modal.scss";
-
-function getChallengeInfo(challengeId) {
-  return getChallenges().find(ch => ch.id === challengeId);
-  // console.log(challenge);
-  // return challenge;
-}
 
 function AddNewModal({
   closeModal,
   addChallenge,
   editChallenge,
   modalTitle,
-  isInEditMode,
+  isEditMode,
   challengeId,
+  item,
 }) {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredXP, setEnteredXP] = useState("");
@@ -49,7 +43,7 @@ function AddNewModal({
     const isValid = formValidation();
     if (isValid) {
       console.log(enteredTitle, enteredXP, enteredCredits, enteredDescription);
-      if (isInEditMode) {
+      if (isEditMode) {
         editChallenge(
           challengeId,
           enteredTitle,
@@ -137,9 +131,7 @@ function AddNewModal({
           <input
             id="title"
             type="text"
-            defaultValue={
-              isInEditMode ? getChallengeInfo(challengeId).title : enteredTitle
-            }
+            defaultValue={isEditMode ? item.title : enteredTitle}
             onChange={titleChangeHandler}
             className="modal-inputs"
           />
@@ -157,9 +149,7 @@ function AddNewModal({
               <input
                 id="xp"
                 type="number"
-                defaultValue={
-                  isInEditMode ? getChallengeInfo(challengeId).xp : enteredXP
-                }
+                defaultValue={isEditMode ? item.xp : enteredXP}
                 onChange={xpChangeHandler}
                 className="modal-inputs"
               />
@@ -178,11 +168,7 @@ function AddNewModal({
               <input
                 id="credits"
                 type="number"
-                defaultValue={
-                  isInEditMode
-                    ? getChallengeInfo(challengeId).credits
-                    : enteredCredits
-                }
+                defaultValue={isEditMode ? item.credits : enteredCredits}
                 onChange={creditsChangeHandler}
                 className="modal-inputs"
               />
@@ -201,11 +187,7 @@ function AddNewModal({
             <input
               id="description"
               type="text"
-              defaultValue={
-                isInEditMode
-                  ? getChallengeInfo(challengeId).description
-                  : enteredDescription
-              }
+              defaultValue={isEditMode ? item.description : enteredDescription}
               onChange={descriptionChangeHandler}
               className="modal-inputs"
             />
@@ -224,7 +206,7 @@ function AddNewModal({
             />
             <Button
               type="btn primary flex-width-max"
-              value={isInEditMode ? "Edit" : "Add"}
+              value={isEditMode ? "Edit" : "Add"}
             />
           </div>
         </form>
