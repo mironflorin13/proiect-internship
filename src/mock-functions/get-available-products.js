@@ -1,16 +1,14 @@
 import { getProducts } from "../data/products";
-import { getUsers } from "../data/users";
+import { getUser } from "../data/users";
 
 const getAvailableProducts = userId => {
   const products = getProducts();
-  const users = getUsers();
-
-  const userProducts = users.find(user => user.id === userId).products;
+  const userProducts = getUser(userId).products;
 
   return Promise.resolve(
     products.filter(
       product =>
-        !userProducts.find(userProduct => userProduct.id === product.id)
+        !userProducts.some(userProduct => userProduct.id === product.id)
     )
   );
 };

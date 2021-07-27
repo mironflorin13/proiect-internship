@@ -6,6 +6,7 @@ import ChallengesSection from "../components/challenges-section/challenges-secti
 import Button from "../components/button/button";
 import Card from "../components/card/card";
 import editUserChallengesStatus from "../mock-functions/edit-user-challenges-status";
+import { CHALLENGE_STATUSES } from "../data/constants";
 
 function AdminChallengesToBeValidated() {
   const [isPending, setIsPending] = useState(true);
@@ -26,26 +27,21 @@ function AdminChallengesToBeValidated() {
 
   const denyChallenge = (userId, itemId) => () => {
     challengesRequest(() =>
-      editUserChallengesStatus(
-        itemId,
-        userId,
-        "denied",
-        getChallengesToBeValidated
-      )
+      editUserChallengesStatus(itemId, userId, CHALLENGE_STATUSES.DENIED, [
+        CHALLENGE_STATUSES.TO_BE_VALIDATED,
+      ])
     );
   };
 
   const validatedChallenge = (userId, itemId) => () => {
     challengesRequest(() =>
-      editUserChallengesStatus(
-        itemId,
-        userId,
-        "validated",
-        getChallengesToBeValidated
-      )
+      editUserChallengesStatus(itemId, userId, CHALLENGE_STATUSES.VALIDATED, [
+        CHALLENGE_STATUSES.TO_BE_VALIDATED,
+      ])
     );
   };
-  useEffect(() => challengesRequest(getChallengesToBeValidated), []);
+
+  useEffect(() => challengesRequest(() => getChallengesToBeValidated()), []);
 
   if (isPending) {
     return <div>Loading...</div>;
@@ -63,7 +59,7 @@ function AdminChallengesToBeValidated() {
                   xp={item.challenge.xp}
                   credits={item.challenge.credits}
                   description={item.challenge.description}
-                  key={item.challenge.id + item.user.id}
+                  key={`${item.user.id}.${item.challenge.id}`}
                   image={item.user.image}
                   name={item.user.name}
                 >

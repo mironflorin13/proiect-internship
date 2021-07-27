@@ -1,6 +1,6 @@
 import { getChallenges } from "../data/challenges";
 
-const getAllChallenges = userChallengesIds => {
+const getAllChallenges = () => {
   const challenges = getChallenges();
 
   return Promise.resolve(challenges);
