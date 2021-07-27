@@ -6,7 +6,7 @@ import ChallengesSection from "../components/challenges-section/challenges-secti
 import Button from "../components/button/button";
 import Card from "../components/card/card";
 import editUserChallengesStatus from "../mock-functions/edit-user-challenges-status";
-import { CHALLENGES_STATUSES } from "../data/constants";
+import { CHALLENGE_STATUSES } from "../data/constants";
 
 function AdminChallengesToBeValidated() {
   const [isPending, setIsPending] = useState(true);
@@ -27,12 +27,12 @@ function AdminChallengesToBeValidated() {
   };
 
   const denyChallenge = (userId, itemId) => () => {
-    editUserChallengesStatus(itemId, userId, CHALLENGES_STATUSES.DENIED);
+    editUserChallengesStatus(itemId, userId, CHALLENGE_STATUSES.DENIED);
     setReload(reload + 1);
   };
 
   const validatedChallenge = (userId, itemId) => () => {
-    editUserChallengesStatus(itemId, userId, CHALLENGES_STATUSES.VALIDATED);
+    editUserChallengesStatus(itemId, userId, CHALLENGE_STATUSES.VALIDATED);
     setReload(reload + 1);
   };
 

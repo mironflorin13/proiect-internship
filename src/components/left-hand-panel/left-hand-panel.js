@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { getUsers } from "../../data/users";
 import { getChallenges } from "../../data/challenges";
-import { CHALLENGES_STATUSES } from "../../data/constants";
+import { CHALLENGE_STATUSES } from "../../data/constants";
 import userPages from "../../data/user-pages";
 import adminPages from "../../data/admin-pages";
 
@@ -20,7 +20,7 @@ function getInitialCurrentXP(userId) {
   const validatedChallenges = users
     .find(user => user.id === userId)
     .challenges.filter(
-      challenge => challenge.status === CHALLENGES_STATUSES.VALIDATED
+      challenge => challenge.status === CHALLENGE_STATUSES.VALIDATED
     );
 
   validatedChallenges.forEach(challenge => {
@@ -36,7 +36,7 @@ function getNumberOfCredits(userId) {
   const validatedChallenges = users
     .find(user => user.id === userId)
     .challenges.filter(
-      challenge => challenge.status === CHALLENGES_STATUSES.VALIDATED
+      challenge => challenge.status === CHALLENGE_STATUSES.VALIDATED
     );
 
   validatedChallenges.forEach(challenge => {

@@ -14,13 +14,13 @@
   }
 }
 
-.denied {
+.DENIED {
   border-top: 3px $red-color solid;
 
   @include completeChallengeBottomStyle($red-color);
 }
 
-.validated {
+.VALIDATED {
   border-top: 3px $green-color solid;
 
   @include completeChallengeBottomStyle($green-color);

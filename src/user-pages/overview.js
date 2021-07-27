@@ -7,7 +7,7 @@ import ShopCard from "../components/shop-card/shop-card";
 import editUserChallengesStatus from "../mock-functions/edit-user-challenges-status";
 import getUserChallenges from "../mock-functions/get-user-challenges";
 import getBoughtProducts from "../mock-functions/get-bought-products";
-import { CHALLENGES_STATUSES } from "../data/constants";
+import { CHALLENGE_STATUSES } from "../data/constants";
 
 const InProgressCompleteChallenge = ({ userId }) => {
   const [isPending, setIsPending] = useState(true);
@@ -20,15 +20,15 @@ const InProgressCompleteChallenge = ({ userId }) => {
 
   const challengesRequest = userId => {
     getUserChallenges(userId, [
-      CHALLENGES_STATUSES.IN_PROGRESS,
-      CHALLENGES_STATUSES.DENIED,
-      CHALLENGES_STATUSES.VALIDATED,
+      CHALLENGE_STATUSES.IN_PROGRESS,
+      CHALLENGE_STATUSES.DENIED,
+      CHALLENGE_STATUSES.VALIDATED,
     ])
       .then(challenges => {
-        setDataInProgress(challenges[CHALLENGES_STATUSES.IN_PROGRESS]);
+        setDataInProgress(challenges[CHALLENGE_STATUSES.IN_PROGRESS]);
         setDataCompleted([
-          ...challenges[CHALLENGES_STATUSES.VALIDATED],
-          ...challenges[CHALLENGES_STATUSES.DENIED],
+          ...challenges[CHALLENGE_STATUSES.VALIDATED],
+          ...challenges[CHALLENGE_STATUSES.DENIED],
         ]);
         setIsPending(false);
       })
@@ -51,7 +51,7 @@ const InProgressCompleteChallenge = ({ userId }) => {
   };
 
   const quitChallenge = itemId => () => {
-    editUserChallengesStatus(userId, itemId, CHALLENGES_STATUSES.AVAILABLE);
+    editUserChallengesStatus(userId, itemId, CHALLENGE_STATUSES.AVAILABLE);
     setReload(reload + 1);
   };
 
@@ -59,7 +59,7 @@ const InProgressCompleteChallenge = ({ userId }) => {
     editUserChallengesStatus(
       userId,
       itemId,
-      CHALLENGES_STATUSES.TO_BE_VALIDATED
+      CHALLENGE_STATUSES.TO_BE_VALIDATED
     );
     setReload(reload + 1);
   };

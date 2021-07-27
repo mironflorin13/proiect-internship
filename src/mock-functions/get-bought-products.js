@@ -1,4 +1,4 @@
-import { PRODUCTS_STATUSES } from "../data/constants";
+import { PRODUCT_STATUSES } from "../data/constants";
 import { getProducts } from "../data/products";
 import { getUser } from "../data/users";
 
@@ -11,7 +11,7 @@ const getBoughtProducts = userId => {
       userProducts.some(
         userProduct =>
           userProduct.id === product.id &&
-          userProduct.status === PRODUCTS_STATUSES.BOUGHT
+          userProduct.status === PRODUCT_STATUSES.BOUGHT
       )
     )
   );

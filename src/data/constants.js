@@ -1,11 +1,10 @@
-export const CHALLENGES_STATUSES = {
-  VALIDATED: "validated",
-  DENIED: "denied",
-  TO_BE_VALIDATED: "to-be-validated",
-  IN_PROGRESS: "in-progress",
-  AVAILABLE: "available",
+export const CHALLENGE_STATUSES = {
+  VALIDATED: "VALIDATED",
+  DENIED: "DENIED",
+  TO_BE_VALIDATED: "TO_BE_VALIDATED",
+  IN_PROGRESS: "IN_PROGRESS",
 };
 
-export const PRODUCTS_STATUSES = {
-  BOUGHT: "bought",
+export const PRODUCT_STATUSES = {
+  BOUGHT: "BOUGHT",
 };
