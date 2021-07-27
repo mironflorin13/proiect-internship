@@ -9,7 +9,7 @@ function AddNewModal({
   editChallenge,
   modalTitle,
   isEditMode,
-  challengeId,
+  deleteChallenge,
   item,
 }) {
   const [enteredTitle, setEnteredTitle] = useState("");

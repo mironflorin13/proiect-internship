@@ -55,6 +55,13 @@ const AdminChallenges = () => {
     setAvailableChallenges(challenges);
   }
 
+  function deleteChallenge(id) {
+    const challenges = availableChallenges;
+    const challengesAfterDeletion = challenges.filter(ch => ch.id !== id);
+
+    setAvailableChallenges(challengesAfterDeletion);
+  }
+
   function closeModalHandler() {
     setIsVisible(false);
     setModalTitle("Add challenge");
@@ -102,7 +109,11 @@ const AdminChallenges = () => {
                       key={item.id}
                       onClick={() => handleOnEdit(item)}
                     >
-                      <Button type="btn secondary " value="Delete" />
+                      <Button
+                        type="btn secondary "
+                        value="Delete"
+                        handleOnClick={() => deleteChallenge(item.id)}
+                      />
                       <Button
                         type="btn primary flex-width-max"
                         value="Edit"
