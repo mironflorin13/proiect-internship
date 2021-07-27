@@ -6,7 +6,6 @@ import ChallengesSection from "../components/challenges-section/challenges-secti
 import Button from "../components/button/button";
 import Card from "../components/card/card";
 import AddNewModal from "../components/modal/add-new-modal";
-import { getChallenges } from "../data/challenges";
 
 const AdminChallenges = () => {
   const [isPending, setIsPending] = useState(true);
@@ -16,8 +15,8 @@ const AdminChallenges = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [item, setItem] = useState();
 
-  const challengesRequest = () => {
-    getAllChallenges()
+  const challengesRequest = getCh => {
+    getCh()
       .then(challenges => {
         setAvailableChallenges(challenges);
         setIsPending(false);
@@ -28,21 +27,16 @@ const AdminChallenges = () => {
       });
   };
 
-  useEffect(challengesRequest, []);
+  useEffect(() => challengesRequest(() => getAllChallenges()), []);
 
   function addNewChallenge(title, xp, credits, description) {
-    const chellengeToInsert = {
-      id: availableChallenges.length + 1,
-      title,
-      xp,
-      credits,
-      description,
-    };
+    const challenges = availableChallenges;
+    const challengesCopy = [
+      ...challenges,
+      { id: availableChallenges.length + 1, title, xp, credits, description },
+    ];
 
-    setAvailableChallenges(prevChallenges => [
-      ...prevChallenges,
-      chellengeToInsert,
-    ]);
+    setAvailableChallenges(challengesCopy);
   }
 
   function editChallenge(id, title, xp, credits, description) {
@@ -54,8 +48,9 @@ const AdminChallenges = () => {
       description,
     };
 
-    const challenges = getChallenges().splice(id, 1, editedChallenge);
-    console.log(challenges);
+    const challenges = availableChallenges;
+    const foundIndex = challenges.findIndex(x => x.id === id);
+    challenges[foundIndex] = editedChallenge;
 
     setAvailableChallenges(challenges);
   }
@@ -87,17 +82,6 @@ const AdminChallenges = () => {
           <div className="challenges-container">
             <ChallengesSection title="Challenges">
               <>
-                {/* {isModalOpened && !isInEditMode && (
-                  <div className="overlay">
-                    <AddNewModal
-                      closeModal={closeModalHandler}
-                      addChallenge={addNewChallenge}
-                      modalTitle={modalTitle}
-                      isInEditMode={isInEditMode}
-                    />
-                  </div>
-                )} */}
-
                 {isVisible && (
                   <div className="overlay">
                     <AddNewModal

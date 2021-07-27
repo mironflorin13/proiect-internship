@@ -45,7 +45,7 @@ function AddNewModal({
       console.log(enteredTitle, enteredXP, enteredCredits, enteredDescription);
       if (isEditMode) {
         editChallenge(
-          challengeId,
+          item.id,
           enteredTitle,
           enteredXP,
           enteredCredits,
