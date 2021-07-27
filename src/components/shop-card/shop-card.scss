@@ -18,7 +18,10 @@
   .bottom-section {
     padding: 20px 30px 30px 30px;
     height: 180px;
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
 
     .title {
       font-family: $font-family;
@@ -27,7 +30,6 @@
       font-size: 16px;
       line-height: 19px;
       color: $dark-grey-color;
-      margin-bottom: 10px;
     }
     .description {
       font-family: $font-family;
@@ -35,13 +37,24 @@
       font-weight: normal;
       font-size: 14px;
       line-height: 22px;
+      overflow: auto;
+
+      &::-webkit-scrollbar {
+        width: 7px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: $scroll-backgroud-color;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: $scroll-bar-color;
+        border-radius: 40px;
+      }
     }
     .buttons-container {
       display: flex;
       gap: 20px;
-      position: absolute;
-      width: 240px;
-      bottom: 30px;
     }
   }
 }

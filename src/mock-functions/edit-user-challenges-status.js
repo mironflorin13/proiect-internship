@@ -1,10 +1,14 @@
+import { CHALLENGE_STATUSES } from "../data/constants";
 import { setUsers, getUsers } from "../data/users";
+
+import getChallengesToBeValidated from "./get-challenges-to-be-validated";
+import getUserChallenges from "./get-user-challenges";
 
 const editUserChallengesStatus = (
   userId,
   challengeId,
   newStatus,
-  returnFunction
+  returnStatuses
 ) => {
   const users = getUsers();
 
@@ -23,7 +27,10 @@ const editUserChallengesStatus = (
 
   setUsers(usersCopy);
 
-  return returnFunction();
+  if (returnStatuses[0] === CHALLENGE_STATUSES.TO_BE_VALIDATED) {
+    return getChallengesToBeValidated();
+  }
+  return getUserChallenges(userId, returnStatuses);
 };
 
 export default editUserChallengesStatus;

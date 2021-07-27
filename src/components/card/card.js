@@ -1,5 +1,6 @@
 import React from "react";
 
+import { CHALLENGE_STATUSES } from "../../data/constants";
 import UserCard from "../left-hand-panel/user-card/user-card";
 import "./card.scss";
 
@@ -13,7 +14,11 @@ const Card = ({
   image,
   name,
 }) => {
-  const completed = status === "validated" || status === "denied" ? status : "";
+  const completed =
+    status === CHALLENGE_STATUSES.VALIDATED ||
+    status === CHALLENGE_STATUSES.DENIED
+      ? status.toLowerCase()
+      : "";
   const height = image ? "height" : "";
 
   return (

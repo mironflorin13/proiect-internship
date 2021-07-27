@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import ChallengesSection from "../components/challenges-section/challenges-section";
 import Button from "../components/button/button";
 import Card from "../components/card/card";
-import editUserChallengesStatus from "../mock-functions/edit-user-challenges-status";
-import getUserChallenges from "../mock-functions/get-user-challenges";
+import getAvailableChallenges from "../mock-functions/get-available-challenges";
+import addChallengeToAUser from "../mock-functions/add-challenge-to-a-user";
 
 const AvailableChallenges = ({ userId }) => {
   const [isPending, setIsPending] = useState(true);
@@ -14,7 +14,7 @@ const AvailableChallenges = ({ userId }) => {
   const challengesRequest = getChallenges => {
     getChallenges()
       .then(challenges => {
-        setAvailableChallenges(challenges.available);
+        setAvailableChallenges(challenges);
         setIsPending(false);
       })
       .catch(error => {
@@ -24,15 +24,11 @@ const AvailableChallenges = ({ userId }) => {
   };
 
   const enrollChallenge = itemId => () => {
-    challengesRequest(() =>
-      editUserChallengesStatus(userId, itemId, "in-progress", () =>
-        getUserChallenges(userId, ["available"])
-      )
-    );
+    challengesRequest(() => addChallengeToAUser(userId, itemId));
   };
 
   useEffect(() => {
-    challengesRequest(() => getUserChallenges(userId, ["available"]));
+    challengesRequest(() => getAvailableChallenges(userId));
   }, [userId]);
 
   if (isPending) {

@@ -37,12 +37,7 @@ const Shop = ({ userId }) => {
           <ChallengesSection title="Shop">
             {availableProducts.length ? (
               availableProducts.map(product => (
-                <ShopCard
-                  title={product.title}
-                  imageURL={product.imageURL}
-                  description={product.description}
-                  key={product.id}
-                >
+                <ShopCard {...product} key={product.id}>
                   <Button
                     type="btn primary flex-width-max"
                     value={`Buy - ${product.credit} Credits`}
