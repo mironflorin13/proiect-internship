@@ -4,16 +4,20 @@ import getAllChallenges from "./get-all-challenges";
 
 const editChallenge = (id, title, xp, credits, description) => {
   const challenges = getChallenges();
-  const foundIndex = challenges.findIndex(x => x.id === id);
-  challenges[foundIndex] = {
-    id,
-    title,
-    xp,
-    credits,
-    description,
-  };
+  const challengesCopy = challenges.map(challenge => {
+    if (challenge.id === id) {
+      return {
+        id,
+        title,
+        xp,
+        credits,
+        description,
+      };
+    }
+    return challenge;
+  });
 
-  setChallenges(challenges);
+  setChallenges(challengesCopy);
   return getAllChallenges();
 };
 

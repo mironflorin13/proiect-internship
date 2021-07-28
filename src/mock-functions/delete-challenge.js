@@ -10,7 +10,7 @@ const deleteChallenge = id => {
   const users = getUsers();
   const usersCopy = users.map(user => ({
     ...user,
-    challenges: [...user.challenges.filter(challenge => challenge.id !== id)],
+    challenges: [user.challenges.filter(challenge => challenge.id !== id)],
   }));
 
   setUsers(usersCopy);

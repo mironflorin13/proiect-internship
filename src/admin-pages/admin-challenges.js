@@ -72,10 +72,11 @@ const AdminChallenges = () => {
                   <div className="overlay">
                     <AddNewModal
                       isEditMode={Boolean(item)}
-                      item={item}
+                      {...item}
                       closeModal={closeModalHandler}
                       addChallenge={addNewChallenge}
                       editChallenge={handleEdit}
+                      key={Math.random()}
                     />
                   </div>
                 )}

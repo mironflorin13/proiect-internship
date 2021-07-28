@@ -8,12 +8,18 @@ function AddNewModal({
   addChallenge,
   editChallenge,
   isEditMode,
-  item,
+  id,
+  title,
+  xp,
+  credits,
+  description,
 }) {
-  const [enteredTitle, setEnteredTitle] = useState("");
-  const [enteredXP, setEnteredXP] = useState("");
-  const [enteredCredits, setEnteredCredits] = useState("");
-  const [enteredDescription, setEnteredDescription] = useState("");
+  const [enteredTitle, setEnteredTitle] = useState(title ? title : "");
+  const [enteredXP, setEnteredXP] = useState(xp ? xp : "");
+  const [enteredCredits, setEnteredCredits] = useState(credits ? credits : "");
+  const [enteredDescription, setEnteredDescription] = useState(
+    description ? description : ""
+  );
 
   const [enteredTitleErr, setEnteredTitleErr] = useState({});
   const [enteredXPErr, setEnteredXPErr] = useState({});
@@ -40,10 +46,9 @@ function AddNewModal({
     event.preventDefault();
     const isValid = formValidation();
     if (isValid) {
-      console.log(enteredTitle, enteredXP, enteredCredits, enteredDescription);
       if (isEditMode) {
         editChallenge(
-          item.id,
+          id,
           enteredTitle,
           enteredXP,
           enteredCredits,
@@ -78,7 +83,7 @@ function AddNewModal({
     } else if (enteredTitle.trim().length < 3) {
       titleErr.titleShort = "Title is too short";
       isValid = false;
-    } else if (enteredTitle.trim().length > 30) {
+    } else if (enteredTitle.trim().length > 60) {
       titleErr.titleLong = "Title is too long";
       isValid = false;
     }
@@ -105,7 +110,7 @@ function AddNewModal({
     } else if (enteredDescription.trim().length < 4) {
       descriptionErr.descriptionShort = "Description is too short";
       isValid = false;
-    } else if (enteredDescription.trim().length > 300) {
+    } else if (enteredDescription.trim().length > 700) {
       descriptionErr.descriptionLong = "Description is too long";
       isValid = false;
     }
@@ -121,9 +126,7 @@ function AddNewModal({
   return (
     <div className="popup">
       <div className="inner-popup">
-        <p className="modal-title">
-          {item ? "Edit challenge" : "Add challenge"}
-        </p>
+        <p className="modal-title">{id ? "Edit challenge" : "Add challenge"}</p>
         <form className="modal-form" onSubmit={addNewChallengeHandler}>
           <label htmlFor="title" className="modal-labels">
             Title
@@ -131,7 +134,7 @@ function AddNewModal({
           <input
             id="title"
             type="text"
-            defaultValue={isEditMode ? item.title : enteredTitle}
+            defaultValue={isEditMode ? title : enteredTitle}
             onChange={titleChangeHandler}
             className="modal-inputs"
           />
@@ -149,7 +152,7 @@ function AddNewModal({
               <input
                 id="xp"
                 type="number"
-                defaultValue={isEditMode ? item.xp : enteredXP}
+                defaultValue={isEditMode ? xp : enteredXP}
                 onChange={xpChangeHandler}
                 className="modal-inputs"
               />
@@ -168,7 +171,7 @@ function AddNewModal({
               <input
                 id="credits"
                 type="number"
-                defaultValue={isEditMode ? item.credits : enteredCredits}
+                defaultValue={isEditMode ? credits : enteredCredits}
                 onChange={creditsChangeHandler}
                 className="modal-inputs"
               />
@@ -187,7 +190,7 @@ function AddNewModal({
             <input
               id="description"
               type="text"
-              defaultValue={isEditMode ? item.description : enteredDescription}
+              defaultValue={isEditMode ? description : enteredDescription}
               onChange={descriptionChangeHandler}
               className="modal-inputs"
             />
