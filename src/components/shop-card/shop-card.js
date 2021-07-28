@@ -1,10 +1,12 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 import "./shop-card.scss";
 
-const ShopCard = ({ title, description, children, imageURL }) => (
+const ShopCard = ({ id, title, description, children, imageURL }) => (
   <div className="shop-card">
-    <img className="image" src={imageURL} />
+    <Link to={`/product/details/${id}`}>
+      <img className="image" src={imageURL} />
+    </Link>
     <div className="bottom-section">
       <div className="title">{title}</div>
       <div className="description">{description}</div>

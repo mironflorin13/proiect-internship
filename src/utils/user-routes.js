@@ -6,6 +6,7 @@ import Challenges from "../user-pages/challenges";
 import Demo from "../user-pages/demo";
 import Shop from "../user-pages/shop";
 import NotFound from "../user-pages/not-found";
+import ProductDetails from "../user-pages/product-details";
 
 function UserRoutes({ role, userData, userId, showNotFoundRoute }) {
   return (
@@ -28,6 +29,11 @@ function UserRoutes({ role, userData, userId, showNotFoundRoute }) {
         component={() => <Shop role={role} userId={userId} />}
       />
       <Route path="/demo" exact component={() => <Demo />} />
+      <Route
+        path="/product/details/:id"
+        exact
+        component={props => <ProductDetails />}
+      />
       {showNotFoundRoute && (
         <Route path="*" exact component={() => <NotFound role={role} />} />
       )}
