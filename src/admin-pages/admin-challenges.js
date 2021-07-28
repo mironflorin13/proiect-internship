@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 
 import getAllChallenges from "../mock-functions/get-all-challenges";
+import addChallenge from "../mock-functions/add-challenge";
+import deleteChallenge from "../mock-functions/delete-challenge";
+import editChallenge from "../mock-functions/edit-challenge";
 import "../components/left-hand-panel/left-hand-panel.scss";
 import ChallengesSection from "../components/challenges-section/challenges-section";
 import Button from "../components/button/button";
@@ -10,15 +13,14 @@ import AddNewModal from "../components/modal/add-new-modal";
 const AdminChallenges = () => {
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState();
-  const [availableChallenges, setAvailableChallenges] = useState([]);
-  const [modalTitle, setModalTitle] = useState("Add challenge");
+  const [allChallenges, setAllChallenges] = useState([]);
   const [isVisible, setIsVisible] = useState(false);
   const [item, setItem] = useState();
 
-  const challengesRequest = getCh => {
-    getCh()
+  const challengesRequest = getChallenges => {
+    getChallenges()
       .then(challenges => {
-        setAvailableChallenges(challenges);
+        setAllChallenges(challenges);
         setIsPending(false);
       })
       .catch(error => {
@@ -30,46 +32,23 @@ const AdminChallenges = () => {
   useEffect(() => challengesRequest(() => getAllChallenges()), []);
 
   function addNewChallenge(title, xp, credits, description) {
-    const challenges = availableChallenges;
-    const challengesCopy = [
-      ...challenges,
-      { id: availableChallenges.length + 1, title, xp, credits, description },
-    ];
-
-    setAvailableChallenges(challengesCopy);
+    challengesRequest(() => addChallenge(title, xp, credits, description));
   }
 
-  function editChallenge(id, title, xp, credits, description) {
-    const editedChallenge = {
-      id,
-      title,
-      xp,
-      credits,
-      description,
-    };
-
-    const challenges = availableChallenges;
-    const foundIndex = challenges.findIndex(x => x.id === id);
-    challenges[foundIndex] = editedChallenge;
-
-    setAvailableChallenges(challenges);
+  function handleEdit(id, title, xp, credits, description) {
+    challengesRequest(() => editChallenge(id, title, xp, credits, description));
   }
 
-  function deleteChallenge(id) {
-    const challenges = availableChallenges;
-    const challengesAfterDeletion = challenges.filter(ch => ch.id !== id);
-
-    setAvailableChallenges(challengesAfterDeletion);
+  function handleDelete(id) {
+    challengesRequest(() => deleteChallenge(id));
   }
 
   function closeModalHandler() {
     setIsVisible(false);
-    setModalTitle("Add challenge");
     setItem();
   }
 
   function handleOnEdit(item) {
-    setModalTitle("Edit challenge");
     setIsVisible(true);
     setItem(item);
   }
@@ -94,16 +73,15 @@ const AdminChallenges = () => {
                     <AddNewModal
                       isEditMode={Boolean(item)}
                       item={item}
-                      modalTitle={modalTitle}
                       closeModal={closeModalHandler}
                       addChallenge={addNewChallenge}
-                      editChallenge={editChallenge}
+                      editChallenge={handleEdit}
                     />
                   </div>
                 )}
 
-                {availableChallenges.length ? (
-                  availableChallenges.map(item => (
+                {allChallenges.length ? (
+                  allChallenges.map(item => (
                     <Card
                       {...item}
                       key={item.id}
@@ -112,7 +90,7 @@ const AdminChallenges = () => {
                       <Button
                         type="btn secondary "
                         value="Delete"
-                        handleOnClick={() => deleteChallenge(item.id)}
+                        handleOnClick={() => handleDelete(item.id)}
                       />
                       <Button
                         type="btn primary flex-width-max"

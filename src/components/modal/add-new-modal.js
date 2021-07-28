@@ -7,9 +7,7 @@ function AddNewModal({
   closeModal,
   addChallenge,
   editChallenge,
-  modalTitle,
   isEditMode,
-  deleteChallenge,
   item,
 }) {
   const [enteredTitle, setEnteredTitle] = useState("");
@@ -123,7 +121,9 @@ function AddNewModal({
   return (
     <div className="popup">
       <div className="inner-popup">
-        <p className="modal-title">{modalTitle}</p>
+        <p className="modal-title">
+          {item ? "Edit challenge" : "Add challenge"}
+        </p>
         <form className="modal-form" onSubmit={addNewChallengeHandler}>
           <label htmlFor="title" className="modal-labels">
             Title
