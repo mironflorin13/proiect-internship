@@ -37,24 +37,22 @@ const AvailableChallenges = ({ userId }) => {
     return <div>{error}</div>;
   } else {
     return (
-      <div className="cards-overview-container">
-        <div className="challenges-container">
-          <ChallengesSection title="Available Challenges">
-            {availableChallenges.length ? (
-              availableChallenges.map(item => (
-                <Card {...item} key={item.id}>
-                  <Button
-                    type="btn primary flex-width-max"
-                    value="Enroll"
-                    handleOnClick={enrollChallenge(item.id)}
-                  />
-                </Card>
-              ))
-            ) : (
-              <h2 className="challenges-subtilte">No Challenges to display</h2>
-            )}
-          </ChallengesSection>
-        </div>
+      <div className="challenges-container">
+        <ChallengesSection title="Available Challenges">
+          {availableChallenges.length ? (
+            availableChallenges.map(item => (
+              <Card {...item} key={item.id}>
+                <Button
+                  type="btn primary flex-width-max"
+                  value="Enroll"
+                  handleOnClick={enrollChallenge(item.id)}
+                />
+              </Card>
+            ))
+          ) : (
+            <h2 className="challenges-subtilte">No Challenges to display</h2>
+          )}
+        </ChallengesSection>
       </div>
     );
   }

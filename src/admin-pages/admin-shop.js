@@ -32,24 +32,22 @@ const AdminShop = () => {
     return <div>{error}</div>;
   } else {
     return (
-      <div className="cards-overview-container">
-        <div className="challenges-container">
-          <ChallengesSection title="Shop">
-            <>
-              {allProducts.length ? (
-                allProducts.map(product => (
-                  <ShopCard {...product} key={product.id}>
-                    <Button type="btn secondary " value="Delete" />
-                    <Button type="btn primary flex-width-max" value="Edit" />
-                  </ShopCard>
-                ))
-              ) : (
-                <h2 className="challenges-subtilte">No Products to display</h2>
-              )}
-              <Button type="btn primary fix" value="Add New" />
-            </>
-          </ChallengesSection>
-        </div>
+      <div className="challenges-container">
+        <ChallengesSection title="Shop">
+          <>
+            {allProducts.length ? (
+              allProducts.map(product => (
+                <ShopCard {...product} key={product.id}>
+                  <Button type="btn secondary " value="Delete" />
+                  <Button type="btn primary flex-width-max" value="Edit" />
+                </ShopCard>
+              ))
+            ) : (
+              <h2 className="challenges-subtilte">No Products to display</h2>
+            )}
+            <Button type="btn primary fix" value="Add New" />
+          </>
+        </ChallengesSection>
       </div>
     );
   }

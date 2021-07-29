@@ -88,45 +88,43 @@ const InProgressCompleteChallenge = ({ userId }) => {
     return <div>{error}</div>;
   } else {
     return (
-      <div className="cards-overview-container">
-        <div className="challenges-container">
-          <ChallengesSection title="In progress Challenges">
-            {dataInProgress.length ? (
-              dataInProgress.map(item => (
-                <Card {...item} key={item.id}>
-                  <Button
-                    type="btn secondary"
-                    value="Quit"
-                    handleOnClick={quitChallenge(item.id)}
-                  />
-                  <Button
-                    type="btn primary flex-width-max"
-                    handleOnClick={completeChallenge(item.id)}
-                    value="Complete"
-                  />
-                </Card>
-              ))
-            ) : (
-              <h2 className="challenges-subtilte">No Challenges to display</h2>
-            )}
-          </ChallengesSection>
+      <div className="challenges-container">
+        <ChallengesSection title="In progress Challenges">
+          {dataInProgress.length ? (
+            dataInProgress.map(item => (
+              <Card {...item} key={item.id}>
+                <Button
+                  type="btn secondary"
+                  value="Quit"
+                  handleOnClick={quitChallenge(item.id)}
+                />
+                <Button
+                  type="btn primary flex-width-max"
+                  handleOnClick={completeChallenge(item.id)}
+                  value="Complete"
+                />
+              </Card>
+            ))
+          ) : (
+            <h2 className="challenges-subtilte">No Challenges to display</h2>
+          )}
+        </ChallengesSection>
 
-          <ChallengesSection title="Completed Challenges">
-            {dataCompleted.length ? (
-              dataCompleted.map(item => <Card {...item} key={item.id} />)
-            ) : (
-              <h2 className="challenges-subtilte">No Challenges to display</h2>
-            )}
-          </ChallengesSection>
+        <ChallengesSection title="Completed Challenges">
+          {dataCompleted.length ? (
+            dataCompleted.map(item => <Card {...item} key={item.id} />)
+          ) : (
+            <h2 className="challenges-subtilte">No Challenges to display</h2>
+          )}
+        </ChallengesSection>
 
-          <ChallengesSection title="Bought Products">
-            {products.length ? (
-              products.map(item => <ShopCard {...item} key={item.id} />)
-            ) : (
-              <h2 className="challenges-subtilte">No Products to Display</h2>
-            )}
-          </ChallengesSection>
-        </div>
+        <ChallengesSection title="Bought Products">
+          {products.length ? (
+            products.map(item => <ShopCard {...item} key={item.id} />)
+          ) : (
+            <h2 className="challenges-subtilte">No Products to Display</h2>
+          )}
+        </ChallengesSection>
       </div>
     );
   }

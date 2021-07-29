@@ -5,7 +5,7 @@ import "./shop-card.scss";
 const ShopCard = ({ id, title, description, children, imageURL }) => (
   <div className="shop-card">
     <Link to={`/product/details/${id}`}>
-      <img className="image" src={imageURL} />
+      <img className="image" src={imageURL[0]} />
     </Link>
     <div className="bottom-section">
       <div className="title">{title}</div>

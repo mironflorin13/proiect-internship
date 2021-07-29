@@ -42,38 +42,32 @@ const AdminChallenges = () => {
     return <div>{error}</div>;
   } else {
     return (
-      <div>
-        <div className="cards-overview-container">
-          <div className="challenges-container">
-            <ChallengesSection title="Challenges">
-              <>
-                {isModalOpened && (
-                  <div className="overlay">
-                    <AddNewModal closeModal={closeModalHandler} />
-                  </div>
-                )}
+      <div className="challenges-container">
+        <ChallengesSection title="Challenges">
+          <>
+            {isModalOpened && (
+              <div className="overlay">
+                <AddNewModal closeModal={closeModalHandler} />
+              </div>
+            )}
 
-                {availableChallenges.length ? (
-                  availableChallenges.map(item => (
-                    <Card {...item} key={item.id}>
-                      <Button type="btn secondary " value="Delete" />
-                      <Button type="btn primary flex-width-max" value="Edit" />
-                    </Card>
-                  ))
-                ) : (
-                  <h2 className="challenges-subtilte">
-                    No Challenges to display
-                  </h2>
-                )}
-                <Button
-                  type="btn primary fix"
-                  value="Add New"
-                  handleOnClick={openPopUp}
-                />
-              </>
-            </ChallengesSection>
-          </div>
-        </div>
+            {availableChallenges.length ? (
+              availableChallenges.map(item => (
+                <Card {...item} key={item.id}>
+                  <Button type="btn secondary " value="Delete" />
+                  <Button type="btn primary flex-width-max" value="Edit" />
+                </Card>
+              ))
+            ) : (
+              <h2 className="challenges-subtilte">No Challenges to display</h2>
+            )}
+            <Button
+              type="btn primary fix"
+              value="Add New"
+              handleOnClick={openPopUp}
+            />
+          </>
+        </ChallengesSection>
       </div>
     );
   }

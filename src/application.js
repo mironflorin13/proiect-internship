@@ -47,12 +47,14 @@ function App() {
           switchRole={switchRoleHandler}
           userId={userId}
         />
-        <Navigation
-          hasMultipleRoles={hasMultipleRoles}
-          roleType={sectionDependingOnRole}
-          userData={userData}
-          userId={userId}
-        />
+        <div className="cards-overview-container">
+          <Navigation
+            hasMultipleRoles={hasMultipleRoles}
+            roleType={sectionDependingOnRole}
+            userData={userData}
+            userId={userId}
+          />
+        </div>
       </Router>
     </div>
   );
