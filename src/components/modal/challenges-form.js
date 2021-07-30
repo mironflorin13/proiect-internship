@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
 import Button from "../button/button";
-import "./add-new-modal.scss";
+import "./modal.scss";
 
-function AddNewModal({
+function ChallengesForm({
   closeModal,
   addChallenge,
   editChallenge,
@@ -218,4 +218,4 @@ function AddNewModal({
   );
 }
 
-export default AddNewModal;
+export default ChallengesForm;
