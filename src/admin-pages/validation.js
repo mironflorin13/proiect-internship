@@ -27,17 +27,21 @@ function AdminChallengesToBeValidated() {
 
   const denyChallenge = (userId, itemId) => () => {
     challengesRequest(() =>
-      editUserChallengesStatus(itemId, userId, CHALLENGE_STATUSES.DENIED, [
+      editUserChallengesStatus(itemId, userId, 0, CHALLENGE_STATUSES.DENIED, [
         CHALLENGE_STATUSES.TO_BE_VALIDATED,
       ])
     );
   };
 
-  const validatedChallenge = (userId, itemId) => () => {
+  const validatedChallenge = (userId, itemId, challengeCredits) => () => {
     challengesRequest(() =>
-      editUserChallengesStatus(itemId, userId, CHALLENGE_STATUSES.VALIDATED, [
-        CHALLENGE_STATUSES.TO_BE_VALIDATED,
-      ])
+      editUserChallengesStatus(
+        itemId,
+        userId,
+        challengeCredits,
+        CHALLENGE_STATUSES.VALIDATED,
+        [CHALLENGE_STATUSES.TO_BE_VALIDATED]
+      )
     );
   };
 
@@ -76,7 +80,8 @@ function AdminChallengesToBeValidated() {
                     value="Validate"
                     handleOnClick={validatedChallenge(
                       item.challenge.id,
-                      item.user.id
+                      item.user.id,
+                      item.challenge.credits
                     )}
                   />
                 </Card>

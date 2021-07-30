@@ -4,6 +4,7 @@ import getAvailableProducts from "../mock-functions/get-available-products";
 import ChallengesSection from "../components/challenges-section/challenges-section";
 import Button from "../components/button/button";
 import ShopCard from "../components/shop-card/shop-card";
+import addProductToAUser from "../mock-functions/add-product-to-a-user";
 
 const Shop = ({ userId }) => {
   const [isPending, setIsPending] = useState(true);
@@ -20,6 +21,12 @@ const Shop = ({ userId }) => {
         setError(error.message);
         setIsPending(false);
       });
+  };
+
+  const buyProduct = (productId, credit) => () => {
+    credit > 50
+      ? alert("You do not have enough credit to buy this product")
+      : productsRequest(() => addProductToAUser(userId, productId, credit));
   };
 
   useEffect(() => {
@@ -41,6 +48,7 @@ const Shop = ({ userId }) => {
                   <Button
                     type="btn primary flex-width-max"
                     value={`Buy - ${product.credit} Credits`}
+                    handleOnClick={buyProduct(product.id, product.credit)}
                   />
                 </ShopCard>
               ))

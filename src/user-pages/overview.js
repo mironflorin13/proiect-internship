@@ -48,7 +48,7 @@ const InProgressCompleteChallenge = ({ userId }) => {
 
   const quitChallenge = itemId => () => {
     challengesRequest(() =>
-      deleteChallengeFromAUser(userId, itemId, [
+      deleteChallengeFromAUser(userId, itemId, 0, [
         CHALLENGE_STATUSES.IN_PROGRESS,
         CHALLENGE_STATUSES.DENIED,
         CHALLENGE_STATUSES.VALIDATED,
@@ -61,6 +61,7 @@ const InProgressCompleteChallenge = ({ userId }) => {
       editUserChallengesStatus(
         userId,
         itemId,
+        0,
         CHALLENGE_STATUSES.TO_BE_VALIDATED,
         [
           CHALLENGE_STATUSES.IN_PROGRESS,

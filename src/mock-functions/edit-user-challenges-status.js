@@ -7,6 +7,7 @@ import getUserChallenges from "./get-user-challenges";
 const editUserChallengesStatus = (
   userId,
   challengeId,
+  challengeCredits,
   newStatus,
   returnStatuses
 ) => {
@@ -20,12 +21,18 @@ const editUserChallengesStatus = (
         }
         return challenge;
       });
-      return { ...user, challenges: challengesCopy };
+
+      return {
+        ...user,
+        challenges: challengesCopy,
+        credits: user.credits + challengeCredits,
+      };
     }
     return user;
   });
 
   setUsers(usersCopy);
+  console.log(usersCopy);
 
   if (returnStatuses[0] === CHALLENGE_STATUSES.TO_BE_VALIDATED) {
     return getChallengesToBeValidated();

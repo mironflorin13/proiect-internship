@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { getUsers } from "../../data/users";
+import { getUser, getUsers } from "../../data/users";
 import { getChallenges } from "../../data/challenges";
 import { CHALLENGE_STATUSES } from "../../data/constants";
 import userPages from "../../data/user-pages";
@@ -30,19 +30,7 @@ function getInitialCurrentXP(userId) {
 }
 
 function getNumberOfCredits(userId) {
-  let sum = 0;
-  const users = getUsers();
-  const challenges = getChallenges();
-  const validatedChallenges = users
-    .find(user => user.id === userId)
-    .challenges.filter(
-      challenge => challenge.status === CHALLENGE_STATUSES.VALIDATED
-    );
-
-  validatedChallenges.forEach(challenge => {
-    sum += challenges.find(ch => ch.id === challenge.id).credits;
-  });
-  return sum;
+  return getUser(userId).credits;
 }
 
 function LeftHandPanel({
