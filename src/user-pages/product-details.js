@@ -21,7 +21,7 @@ const ProductDetails = () => {
   const [current, setCurrent] = useState(0);
   const [length, setLength] = useState(0);
 
-  const challengesRequest = () => {
+  useEffect(() => {
     getSingleProduct(id)
       .then(product => {
         setProduct(product);
@@ -32,9 +32,7 @@ const ProductDetails = () => {
         setError(error.message);
         setIsPending(false);
       });
-  };
-
-  useEffect(challengesRequest, [id]);
+  }, [id]);
 
   const nextSlide = () => {
     setCurrent(current + 1);
@@ -78,25 +76,27 @@ const ProductDetails = () => {
             }`}
           />
 
-          {product.imageURL.map((url, index) => (
-            <div
-              className={`slide ${index === current && "image-active"}`}
-              key={index}
-            >
-              {index === current && (
-                <img src={url} alt="product image" className="image" />
-              )}
-            </div>
-          ))}
+          {product.imageURL &&
+            product.imageURL.map((url, index) => (
+              <div
+                className={`slide ${index === current && "image-active"}`}
+                key={index}
+              >
+                {index === current && (
+                  <img src={url} alt="product image" className="image" />
+                )}
+              </div>
+            ))}
 
           <div className="cercles">
-            {product.imageURL.map((a, index) => (
-              <div
-                className={`cercle ${index === current && "darker"}`}
-                key={index}
-                onClick={() => changeSlide(index)}
-              />
-            ))}
+            {length > 1 &&
+              product.imageURL.map((a, index) => (
+                <div
+                  className={`cercle ${index === current && "darker"}`}
+                  key={index}
+                  onClick={() => changeSlide(index)}
+                />
+              ))}
           </div>
         </div>
         <div className="right-side">

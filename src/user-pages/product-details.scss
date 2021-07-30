@@ -59,6 +59,8 @@
   position: absolute;
   top: 50%;
   font-size: 30px;
+  cursor: pointer;
+  color: $grey-color;
 }
 
 .a-left {
@@ -83,7 +85,7 @@
 }
 
 .cercle {
-  background: white;
+  background: $white-color;
   width: 10px;
   height: 10px;
   border-radius: 50px;
@@ -91,7 +93,7 @@
 }
 
 .darker {
-  background: #6a758d;
+  background: $grey-color;
 }
 
 .x-close {
