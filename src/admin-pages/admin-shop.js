@@ -7,7 +7,8 @@ import deleteProduct from "../mock-functions/delete-product";
 import ChallengesSection from "../components/challenges-section/challenges-section";
 import Button from "../components/button/button";
 import ShopCard from "../components/shop-card/shop-card";
-import AddProductModal from "../components/modal/add-product-modal";
+import ProductsForm from "../components/modal/products-form";
+import Modal from "../components/modal/modal";
 
 const AdminShop = () => {
   const [isPending, setIsPending] = useState(true);
@@ -37,7 +38,9 @@ const AdminShop = () => {
   }
 
   function handleEdit(id, title, imageURL, credit, description) {
-    productsRequest(() => editProduct(id, title, imageURL, credit, description));
+    productsRequest(() =>
+      editProduct(id, title, imageURL, credit, description)
+    );
   }
 
   function handleDelete(id) {
@@ -69,15 +72,17 @@ const AdminShop = () => {
           <ChallengesSection title="Shop">
             <>
               {isVisible && (
-                <div className="overlay">
-                  <AddProductModal
-                    isEditMode={Boolean(product)}
-                    {...product}
-                    closeModal={closeModalHandler}
-                    addProduct={addNewProduct}
-                    editProduct={handleEdit}
-                  />
-                </div>
+                <Modal>
+                  <div className="overlay">
+                    <ProductsForm
+                      isEditMode={Boolean(product)}
+                      {...product}
+                      closeModal={closeModalHandler}
+                      addProduct={addNewProduct}
+                      editProduct={handleEdit}
+                    />
+                  </div>
+                </Modal>
               )}
               {allProducts.length ? (
                 allProducts.map(product => (
