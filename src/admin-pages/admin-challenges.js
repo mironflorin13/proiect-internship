@@ -8,7 +8,8 @@ import "../components/left-hand-panel/left-hand-panel.scss";
 import ChallengesSection from "../components/challenges-section/challenges-section";
 import Button from "../components/button/button";
 import Card from "../components/card/card";
-import AddNewModal from "../components/modal/add-new-modal";
+import ChallengesForm from "../components/modal/challenges-form";
+import Modal from "../components/modal/modal";
 
 const AdminChallenges = () => {
   const [isPending, setIsPending] = useState(true);
@@ -69,16 +70,17 @@ const AdminChallenges = () => {
             <ChallengesSection title="Challenges">
               <>
                 {isVisible && (
-                  <div className="overlay">
-                    <AddNewModal
-                      isEditMode={Boolean(item)}
-                      {...item}
-                      closeModal={closeModalHandler}
-                      addChallenge={addNewChallenge}
-                      editChallenge={handleEdit}
-                      key={Math.random()}
-                    />
-                  </div>
+                  <Modal>
+                    <div className="overlay">
+                      <ChallengesForm
+                        isEditMode={Boolean(item)}
+                        {...item}
+                        closeModal={closeModalHandler}
+                        addChallenge={addNewChallenge}
+                        editChallenge={handleEdit}
+                      />
+                    </div>
+                  </Modal>
                 )}
 
                 {allChallenges.length ? (
