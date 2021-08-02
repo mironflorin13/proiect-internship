@@ -14,11 +14,11 @@ function ChallengesForm({
   credits,
   description,
 }) {
-  const [enteredTitle, setEnteredTitle] = useState(title ? title : "");
-  const [enteredXP, setEnteredXP] = useState(xp ? xp : "");
-  const [enteredCredits, setEnteredCredits] = useState(credits ? credits : "");
+  const [enteredTitle, setEnteredTitle] = useState(title || "");
+  const [enteredXP, setEnteredXP] = useState(xp || "");
+  const [enteredCredits, setEnteredCredits] = useState(credits || "");
   const [enteredDescription, setEnteredDescription] = useState(
-    description ? description : ""
+    description || ""
   );
 
   const [enteredTitleErr, setEnteredTitleErr] = useState({});
