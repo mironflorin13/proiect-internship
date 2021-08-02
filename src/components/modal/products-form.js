@@ -14,11 +14,11 @@ function ProductsForm({
   imageURL,
   description,
 }) {
-  const [enteredTitle, setEnteredTitle] = useState(title ? title : "");
-  const [enteredImage, setEnteredImage] = useState(imageURL ? imageURL : "");
-  const [enteredCredit, setEnteredCredit] = useState(credit ? credit : "");
+  const [enteredTitle, setEnteredTitle] = useState(title || "");
+  const [enteredImage, setEnteredImage] = useState(imageURL || "");
+  const [enteredCredit, setEnteredCredit] = useState(credit || "");
   const [enteredDescription, setEnteredDescription] = useState(
-    description ? description : ""
+    description || ""
   );
 
   const [enteredTitleErr, setEnteredTitleErr] = useState({});

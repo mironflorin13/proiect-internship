@@ -71,19 +71,16 @@ const AdminShop = () => {
         <div className="challenges-container">
           <ChallengesSection title="Shop">
             <>
-              {isVisible && (
-                <Modal>
-                  <div className="overlay">
-                    <ProductsForm
-                      isEditMode={Boolean(product)}
-                      {...product}
-                      closeModal={closeModalHandler}
-                      addProduct={addNewProduct}
-                      editProduct={handleEdit}
-                    />
-                  </div>
-                </Modal>
-              )}
+              <Modal isVisible={isVisible}>
+                <ProductsForm
+                  isEditMode={Boolean(product)}
+                  {...product}
+                  closeModal={closeModalHandler}
+                  addProduct={addNewProduct}
+                  editProduct={handleEdit}
+                />
+              </Modal>
+
               {allProducts.length ? (
                 allProducts.map(product => (
                   <ShopCard {...product} key={product.id}>
