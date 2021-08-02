@@ -32,7 +32,6 @@ const editUserChallengesStatus = (
   });
 
   setUsers(usersCopy);
-  console.log(usersCopy);
 
   if (returnStatuses[0] === CHALLENGE_STATUSES.TO_BE_VALIDATED) {
     return getChallengesToBeValidated();

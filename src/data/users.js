@@ -3,7 +3,7 @@ let users = [
     id: 0,
     name: "Daniel Toma",
     jobTitle: "Software Developer",
-    credits: 500,
+    credits: 511,
     image:
       "https://www.pngfind.com/pngs/m/488-4887957_facebook-teerasej-profile-ball-circle-circular-profile-picture.png",
     challenges: [
@@ -27,7 +27,7 @@ let users = [
     id: 1,
     name: "Andrei Otea",
     jobTitle: "Software Developer",
-    credits: 500,
+    credits: 521,
     image:
       "https://i.pinimg.com/564x/65/25/a0/6525a08f1df98a2e3a545fe2ace4be47.jpg",
     challenges: [

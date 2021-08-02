@@ -6,6 +6,7 @@ import LeftHandPanel from "./components/left-hand-panel/left-hand-panel";
 import "./application.scss";
 import users from "./data/users.js";
 import Navigation from "./utils/navigation.js";
+import ContextProvider from "./context/context-provider.js";
 
 function App() {
   const userId = 0;
@@ -40,19 +41,21 @@ function App() {
   return (
     <div>
       <Router>
-        <LeftHandPanel
-          {...userData}
-          hasMultipleRoles={hasMultipleRoles}
-          roleType={sectionDependingOnRole}
-          switchRole={switchRoleHandler}
-          userId={userId}
-        />
-        <Navigation
-          hasMultipleRoles={hasMultipleRoles}
-          roleType={sectionDependingOnRole}
-          userData={userData}
-          userId={userId}
-        />
+        <ContextProvider credits={userData.credits}>
+          <LeftHandPanel
+            {...userData}
+            hasMultipleRoles={hasMultipleRoles}
+            roleType={sectionDependingOnRole}
+            switchRole={switchRoleHandler}
+            userId={userId}
+          />
+          <Navigation
+            hasMultipleRoles={hasMultipleRoles}
+            roleType={sectionDependingOnRole}
+            userData={userData}
+            userId={userId}
+          />
+        </ContextProvider>
       </Router>
     </div>
   );

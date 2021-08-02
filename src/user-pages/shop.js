@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
+import { Context } from "../context/context-provider";
 import getAvailableProducts from "../mock-functions/get-available-products";
 import ChallengesSection from "../components/challenges-section/challenges-section";
 import Button from "../components/button/button";
@@ -10,6 +11,7 @@ const Shop = ({ userId }) => {
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState();
   const [availableProducts, setAvailableProducts] = useState([]);
+  const { userCredit, setCredit } = useContext(Context);
 
   const productsRequest = getProducts => {
     getProducts()
@@ -24,9 +26,12 @@ const Shop = ({ userId }) => {
   };
 
   const buyProduct = (productId, credit) => () => {
-    credit > 50
-      ? alert("You do not have enough credit to buy this product")
-      : productsRequest(() => addProductToAUser(userId, productId, credit));
+    if (userCredit >= credit) {
+      productsRequest(() => addProductToAUser(userId, productId, credit));
+      setCredit(userCredit - credit);
+    } else {
+      alert("you do not have enough credit to buy this product");
+    }
   };
 
   useEffect(() => {

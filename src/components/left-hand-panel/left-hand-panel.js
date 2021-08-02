@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { getUser, getUsers } from "../../data/users";
+import { getUsers } from "../../data/users";
 import { getChallenges } from "../../data/challenges";
 import { CHALLENGE_STATUSES } from "../../data/constants";
+import { Context } from "../../context/context-provider";
 import userPages from "../../data/user-pages";
 import adminPages from "../../data/admin-pages";
 
@@ -29,10 +30,6 @@ function getInitialCurrentXP(userId) {
   return sum;
 }
 
-function getNumberOfCredits(userId) {
-  return getUser(userId).credits;
-}
-
 function LeftHandPanel({
   hasMultipleRoles,
   name,
@@ -48,29 +45,37 @@ function LeftHandPanel({
   }
 
   return (
-    <div className="left-hand-panel">
-      <UserCard name={name} jobTitle={jobTitle} image={image} />
+    <Context.Consumer>
+      {context => {
+        const { userCredit } = context;
 
-      {roleType !== "Admin" && (
-        <>
-          <Credits credits={getNumberOfCredits(userId)} />
-          <ExperienceBar currentXP={getInitialCurrentXP(userId)} />
-        </>
-      )}
+        return (
+          <div className="left-hand-panel">
+            <UserCard name={name} jobTitle={jobTitle} image={image} />
 
-      {roleType === "User" && <Menu pagesToShow={userPages} />}
-      {roleType === "Admin" && <Menu pagesToShow={adminPages} />}
+            {roleType !== "Admin" && (
+              <>
+                <Credits credits={userCredit} />
+                <ExperienceBar currentXP={getInitialCurrentXP(userId)} />
+              </>
+            )}
 
-      {hasMultipleRoles && (
-        <Link
-          to={roleType === "User" ? "/admin/challenges" : "/"}
-          className="left-hand-panel-admin"
-          onClick={switchUserAdminHandler}
-        >
-          Switch to {roleType === "Admin" ? "User" : "Admin"}
-        </Link>
-      )}
-    </div>
+            {roleType === "User" && <Menu pagesToShow={userPages} />}
+            {roleType === "Admin" && <Menu pagesToShow={adminPages} />}
+
+            {hasMultipleRoles && (
+              <Link
+                to={roleType === "User" ? "/admin/challenges" : "/"}
+                className="left-hand-panel-admin"
+                onClick={switchUserAdminHandler}
+              >
+                Switch to {roleType === "Admin" ? "User" : "Admin"}
+              </Link>
+            )}
+          </div>
+        );
+      }}
+    </Context.Consumer>
   );
 }
 

@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
+import { Context } from "../context/context-provider";
 import getChallengesToBeValidated from "../mock-functions/get-challenges-to-be-validated";
 import "../components/left-hand-panel/left-hand-panel.scss";
 import ChallengesSection from "../components/challenges-section/challenges-section";
@@ -12,6 +13,7 @@ function AdminChallengesToBeValidated() {
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState();
   const [challengesToBeValidated, setChallengesToBeValidated] = useState([]);
+  const { userCredit, setCredit } = useContext(Context);
 
   const challengesRequest = getChallenges => {
     getChallenges()
@@ -43,6 +45,7 @@ function AdminChallengesToBeValidated() {
         [CHALLENGE_STATUSES.TO_BE_VALIDATED]
       )
     );
+    setCredit(userCredit + challengeCredits);
   };
 
   useEffect(() => challengesRequest(() => getChallengesToBeValidated()), []);

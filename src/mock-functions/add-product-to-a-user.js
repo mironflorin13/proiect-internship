@@ -21,7 +21,7 @@ const addProductToAUser = (userId, productId, cost) => {
   });
 
   setUsers(usersCopy);
-  console.log(usersCopy);
+
   return getAvailableProducts(userId);
 };
 
