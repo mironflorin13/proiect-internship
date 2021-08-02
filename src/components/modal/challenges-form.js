@@ -1,13 +1,25 @@
 import React, { useState } from "react";
 
 import Button from "../button/button";
-import "./add-new-modal.scss";
+import "./modal.scss";
 
-function AddNewModal({ closeModal }) {
-  const [enteredTitle, setEnteredTitle] = useState("");
-  const [enteredXP, setEnteredXP] = useState("");
-  const [enteredCredits, setEnteredCredits] = useState("");
-  const [enteredDescription, setEnteredDescription] = useState("");
+function ChallengesForm({
+  closeModal,
+  addChallenge,
+  editChallenge,
+  isEditMode,
+  id,
+  title,
+  xp,
+  credits,
+  description,
+}) {
+  const [enteredTitle, setEnteredTitle] = useState(title || "");
+  const [enteredXP, setEnteredXP] = useState(xp || "");
+  const [enteredCredits, setEnteredCredits] = useState(credits || "");
+  const [enteredDescription, setEnteredDescription] = useState(
+    description || ""
+  );
 
   const [enteredTitleErr, setEnteredTitleErr] = useState({});
   const [enteredXPErr, setEnteredXPErr] = useState({});
@@ -34,8 +46,22 @@ function AddNewModal({ closeModal }) {
     event.preventDefault();
     const isValid = formValidation();
     if (isValid) {
-      console.log(enteredTitle, enteredXP, enteredCredits, enteredDescription);
-      // addChallenge(enteredTitle, enteredXP, enteredCredits, enteredDescription);
+      if (isEditMode) {
+        editChallenge(
+          id,
+          enteredTitle,
+          enteredXP,
+          enteredCredits,
+          enteredDescription
+        );
+      } else {
+        addChallenge(
+          enteredTitle,
+          enteredXP,
+          enteredCredits,
+          enteredDescription
+        );
+      }
       setEnteredTitle("");
       setEnteredXP("");
       setEnteredCredits("");
@@ -57,7 +83,7 @@ function AddNewModal({ closeModal }) {
     } else if (enteredTitle.trim().length < 3) {
       titleErr.titleShort = "Title is too short";
       isValid = false;
-    } else if (enteredTitle.trim().length > 30) {
+    } else if (enteredTitle.trim().length > 60) {
       titleErr.titleLong = "Title is too long";
       isValid = false;
     }
@@ -84,7 +110,7 @@ function AddNewModal({ closeModal }) {
     } else if (enteredDescription.trim().length < 4) {
       descriptionErr.descriptionShort = "Description is too short";
       isValid = false;
-    } else if (enteredDescription.trim().length > 50) {
+    } else if (enteredDescription.trim().length > 700) {
       descriptionErr.descriptionLong = "Description is too long";
       isValid = false;
     }
@@ -100,7 +126,7 @@ function AddNewModal({ closeModal }) {
   return (
     <div className="popup">
       <div className="inner-popup">
-        <p className="modal-title">Add a challenge</p>
+        <p className="modal-title">{id ? "Edit challenge" : "Add challenge"}</p>
         <form className="modal-form" onSubmit={addNewChallengeHandler}>
           <label htmlFor="title" className="modal-labels">
             Title
@@ -108,7 +134,7 @@ function AddNewModal({ closeModal }) {
           <input
             id="title"
             type="text"
-            value={enteredTitle}
+            defaultValue={isEditMode ? title : enteredTitle}
             onChange={titleChangeHandler}
             className="modal-inputs"
           />
@@ -126,7 +152,7 @@ function AddNewModal({ closeModal }) {
               <input
                 id="xp"
                 type="number"
-                value={enteredXP}
+                defaultValue={isEditMode ? xp : enteredXP}
                 onChange={xpChangeHandler}
                 className="modal-inputs"
               />
@@ -145,7 +171,7 @@ function AddNewModal({ closeModal }) {
               <input
                 id="credits"
                 type="number"
-                value={enteredCredits}
+                defaultValue={isEditMode ? credits : enteredCredits}
                 onChange={creditsChangeHandler}
                 className="modal-inputs"
               />
@@ -164,7 +190,7 @@ function AddNewModal({ closeModal }) {
             <input
               id="description"
               type="text"
-              value={enteredDescription}
+              defaultValue={isEditMode ? description : enteredDescription}
               onChange={descriptionChangeHandler}
               className="modal-inputs"
             />
@@ -181,7 +207,10 @@ function AddNewModal({ closeModal }) {
               value="Cancel"
               handleOnClick={closeModal}
             />
-            <Button type="btn primary flex-width-max" value="Add" />
+            <Button
+              type="btn primary flex-width-max"
+              value={isEditMode ? "Edit" : "Add"}
+            />
           </div>
         </form>
       </div>
@@ -189,4 +218,4 @@ function AddNewModal({ closeModal }) {
   );
 }
 
-export default AddNewModal;
+export default ChallengesForm;
