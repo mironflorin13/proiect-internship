@@ -12,8 +12,8 @@ import Button from "../components/button/button";
 import "./product-details.scss";
 
 const ProductDetails = () => {
-  let { id } = useParams();
-  id = Number.parseInt(id);
+  const id = Number.parseInt(useParams().id);
+
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState();
   const [product, setProduct] = useState({});

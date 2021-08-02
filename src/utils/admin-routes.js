@@ -22,7 +22,7 @@ function AdminRoutes({ role, userId }) {
         component={() => <AdminShop role={role} />}
       />
       <Route path="/admin/demo" exact component={() => <Demo />} />
-      <Route path="/product/details/:id" />
+
       <Route path="*" component={() => <NotFound role={role} />} />
     </Switch>
   );

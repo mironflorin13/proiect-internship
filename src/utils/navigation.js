@@ -2,21 +2,26 @@ import React from "react";
 
 import UserRoutes from "./user-routes";
 import AdminRoutes from "./admin-routes";
+import CommonRoutes from "./common-routes";
 
 function Navigation({ roleType, userData, userId, hasMultipleRoles }) {
   function getRoutes(rolesList) {
     if (rolesList.includes("User") && roleType === "User") {
       return (
-        <UserRoutes
-          userData={userData}
-          userId={userId}
-          role={roleType}
-          showNotFoundRoute={true}
-        />
+        <>
+          <CommonRoutes />
+          <UserRoutes
+            userData={userData}
+            userId={userId}
+            role={roleType}
+            showNotFoundRoute={true}
+          />
+        </>
       );
     } else if (rolesList.includes("Admin") && roleType === "Admin") {
       return (
         <>
+          <CommonRoutes />
           {rolesList.length > 1 && (
             <UserRoutes
               userData={userData}
