@@ -69,19 +69,15 @@ const AdminChallenges = () => {
           <div className="challenges-container">
             <ChallengesSection title="Challenges">
               <>
-                {isVisible && (
-                  <Modal>
-                    <div className="overlay">
-                      <ChallengesForm
-                        isEditMode={Boolean(item)}
-                        {...item}
-                        closeModal={closeModalHandler}
-                        addChallenge={addNewChallenge}
-                        editChallenge={handleEdit}
-                      />
-                    </div>
-                  </Modal>
-                )}
+                <Modal isVisible={isVisible}>
+                  <ChallengesForm
+                    isEditMode={Boolean(item)}
+                    {...item}
+                    closeModal={closeModalHandler}
+                    addChallenge={addNewChallenge}
+                    editChallenge={handleEdit}
+                  />
+                </Modal>
 
                 {allChallenges.length ? (
                   allChallenges.map(item => (
