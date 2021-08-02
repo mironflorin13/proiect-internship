@@ -1,22 +1,27 @@
 import { useState, useEffect } from "react";
 
 import getAllChallenges from "../mock-functions/get-all-challenges";
+import addChallenge from "../mock-functions/add-challenge";
+import deleteChallenge from "../mock-functions/delete-challenge";
+import editChallenge from "../mock-functions/edit-challenge";
 import "../components/left-hand-panel/left-hand-panel.scss";
 import ChallengesSection from "../components/challenges-section/challenges-section";
 import Button from "../components/button/button";
 import Card from "../components/card/card";
-import AddNewModal from "../components/modal/add-new-modal";
+import ChallengesForm from "../components/modal/challenges-form";
+import Modal from "../components/modal/modal";
 
 const AdminChallenges = () => {
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState();
-  const [availableChallenges, setAvailableChallenges] = useState([]);
-  const [isModalOpened, setIsModalOpened] = useState(false);
+  const [allChallenges, setAllChallenges] = useState([]);
+  const [isVisible, setIsVisible] = useState(false);
+  const [item, setItem] = useState();
 
-  const challengesRequest = () => {
-    getAllChallenges()
+  const challengesRequest = getChallenges => {
+    getChallenges()
       .then(challenges => {
-        setAvailableChallenges(challenges);
+        setAllChallenges(challenges);
         setIsPending(false);
       })
       .catch(error => {
@@ -25,15 +30,32 @@ const AdminChallenges = () => {
       });
   };
 
-  useEffect(challengesRequest, []);
+  useEffect(() => challengesRequest(() => getAllChallenges()), []);
 
-  function openPopUp() {
-    setIsModalOpened(true);
-    console.log(isModalOpened);
+  function addNewChallenge(title, xp, credits, description) {
+    challengesRequest(() => addChallenge(title, xp, credits, description));
+  }
+
+  function handleEdit(id, title, xp, credits, description) {
+    challengesRequest(() => editChallenge(id, title, xp, credits, description));
+  }
+
+  function handleDelete(id) {
+    challengesRequest(() => deleteChallenge(id));
   }
 
   function closeModalHandler() {
-    setIsModalOpened(false);
+    setIsVisible(false);
+    setItem();
+  }
+
+  function handleOnEdit(item) {
+    setIsVisible(true);
+    setItem(item);
+  }
+
+  function handleOnAdd() {
+    setIsVisible(true);
   }
 
   if (isPending) {
@@ -47,17 +69,33 @@ const AdminChallenges = () => {
           <div className="challenges-container">
             <ChallengesSection title="Challenges">
               <>
-                {isModalOpened && (
-                  <div className="overlay">
-                    <AddNewModal closeModal={closeModalHandler} />
-                  </div>
-                )}
+                <Modal isVisible={isVisible}>
+                  <ChallengesForm
+                    isEditMode={Boolean(item)}
+                    {...item}
+                    closeModal={closeModalHandler}
+                    addChallenge={addNewChallenge}
+                    editChallenge={handleEdit}
+                  />
+                </Modal>
 
-                {availableChallenges.length ? (
-                  availableChallenges.map(item => (
-                    <Card {...item} key={item.id}>
-                      <Button type="btn secondary " value="Delete" />
-                      <Button type="btn primary flex-width-max" value="Edit" />
+                {allChallenges.length ? (
+                  allChallenges.map(item => (
+                    <Card
+                      {...item}
+                      key={item.id}
+                      onClick={() => handleOnEdit(item)}
+                    >
+                      <Button
+                        type="btn secondary "
+                        value="Delete"
+                        handleOnClick={() => handleDelete(item.id)}
+                      />
+                      <Button
+                        type="btn primary flex-width-max"
+                        value="Edit"
+                        handleOnClick={() => handleOnEdit(item)}
+                      />
                     </Card>
                   ))
                 ) : (
@@ -68,7 +106,7 @@ const AdminChallenges = () => {
                 <Button
                   type="btn primary fix"
                   value="Add New"
-                  handleOnClick={openPopUp}
+                  handleOnClick={handleOnAdd}
                 />
               </>
             </ChallengesSection>
