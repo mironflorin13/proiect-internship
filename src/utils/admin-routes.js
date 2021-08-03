@@ -6,6 +6,7 @@ import AdminChallenges from "../admin-pages/admin-challenges";
 import Demo from "../user-pages/demo";
 import NotFound from "../user-pages/not-found";
 import AdminShop from "../admin-pages/admin-shop";
+import ProductDetails from "../user-pages/product-details";
 
 function AdminRoutes({ role, userId }) {
   return (
@@ -20,6 +21,12 @@ function AdminRoutes({ role, userId }) {
         path="/admin/shop"
         exact
         component={() => <AdminShop role={role} />}
+      />
+
+      <Route
+        path="/product/details/:id"
+        exact
+        component={() => <ProductDetails />}
       />
       <Route path="/admin/demo" exact component={() => <Demo />} />
 

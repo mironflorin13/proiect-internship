@@ -2,37 +2,16 @@ import React from "react";
 
 import UserRoutes from "./user-routes";
 import AdminRoutes from "./admin-routes";
-import CommonRoutes from "./common-routes";
+import AllRoutes from "./all-routes";
 
-function Navigation({ roleType, userData, userId, hasMultipleRoles }) {
-  function getRoutes(rolesList) {
-    if (rolesList.includes("User") && roleType === "User") {
-      return (
-        <>
-          <CommonRoutes />
-          <UserRoutes
-            userData={userData}
-            userId={userId}
-            role={roleType}
-            showNotFoundRoute={true}
-          />
-        </>
-      );
-    } else if (rolesList.includes("Admin") && roleType === "Admin") {
-      return (
-        <>
-          <CommonRoutes />
-          {rolesList.length > 1 && (
-            <UserRoutes
-              userData={userData}
-              userId={userId}
-              role={roleType}
-              showNotFoundRoute={false}
-            />
-          )}
-          <AdminRoutes userId={userId} role={roleType} />
-        </>
-      );
+function Navigation({ roles, id }) {
+  if (roles) {
+    if (roles.includes("User") && roles.includes("Admin")) {
+      return <AllRoutes userId={id} role="User" />;
+    } else if (roles.includes("Admin")) {
+      return <AdminRoutes userId={id} role="Admin" />;
+    } else if (roles.includes("User")) {
+      return <UserRoutes userId={id} role="User" />;
     } else {
       return (
         <div>
@@ -40,14 +19,8 @@ function Navigation({ roleType, userData, userId, hasMultipleRoles }) {
         </div>
       );
     }
-  }
-
-  if (hasMultipleRoles) {
-    return roleType === "User"
-      ? getRoutes(["User"])
-      : getRoutes(["User", "Admin"]);
   } else {
-    return roleType === "User" ? getRoutes(["User"]) : getRoutes(["Admin"]);
+    return <p>You cannot access these routes</p>;
   }
 }
 
