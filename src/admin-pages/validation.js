@@ -54,13 +54,9 @@ function AdminChallengesToBeValidated() {
           {challengesToBeValidated.length ? (
             challengesToBeValidated.map(item => (
               <Card
-                title={item.challenge.title}
-                xp={item.challenge.xp}
-                credits={item.challenge.credits}
-                description={item.challenge.description}
+                {...item.challenge}
+                {...item.user}
                 key={`${item.user.id}.${item.challenge.id}`}
-                image={item.user.image}
-                name={item.user.name}
               >
                 <Button
                   type="btn secondary-r "

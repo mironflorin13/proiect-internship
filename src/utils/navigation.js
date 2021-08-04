@@ -1,24 +1,29 @@
 import React from "react";
+import { Route, Switch } from "react-router";
 
-import UserRoutes from "./user-routes";
-import AdminRoutes from "./admin-routes";
-import AllRoutes from "./all-routes";
+import list from "../data/routes";
 
 function Navigation({ roles, id }) {
   if (roles) {
-    if (roles.includes("User") && roles.includes("Admin")) {
-      return <AllRoutes userId={id} role="User" />;
-    } else if (roles.includes("Admin")) {
-      return <AdminRoutes userId={id} role="Admin" />;
-    } else if (roles.includes("User")) {
-      return <UserRoutes userId={id} role="User" />;
-    } else {
-      return (
-        <div>
-          <p>You cannot access these routes</p>
-        </div>
-      );
-    }
+    const userList = list.filter(route =>
+      roles.find(role => route.role.includes(role))
+    );
+
+    return (
+      <Switch>
+        {userList.map(route => {
+          const Component = route.component;
+          return (
+            <Route
+              key={route.path}
+              path={route.path}
+              exact={route.exact}
+              component={() => <Component userId={id} role={roles[0]} />}
+            />
+          );
+        })}
+      </Switch>
+    );
   } else {
     return <p>You cannot access these routes</p>;
   }
