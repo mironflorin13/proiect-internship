@@ -6,7 +6,7 @@ import list from "../data/routes";
 function Navigation({ roles, id }) {
   if (roles) {
     const userList = list.filter(route =>
-      roles.find(role => route.role.includes(role))
+      roles.some(role => route.role.includes(role))
     );
 
     return (
