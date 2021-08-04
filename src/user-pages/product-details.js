@@ -35,11 +35,11 @@ const ProductDetails = () => {
   }, [id]);
 
   const nextSlide = () => {
-    setCurrent(current + 1);
+    setCurrent(prevCurrent => prevCurrent + 1);
   };
 
   const prevSlide = () => {
-    setCurrent(current - 1);
+    setCurrent(prevCurrent => prevCurrent - 1);
   };
 
   const changeSlide = id => {
