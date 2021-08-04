@@ -32,7 +32,6 @@ function App() {
   }
 
   function switchRoleHandler() {
-    console.log(sectionDependingOnRole);
     setSectionDependingOnRole(prevSectionDependingOnRole());
   }
 

@@ -1,44 +1,70 @@
 import React, { useState } from "react";
 
 import Button from "../button/button";
-import "./add-new-modal.scss";
+import "./modal.scss";
 
-function AddNewModal({ closeModal }) {
-  const [enteredTitle, setEnteredTitle] = useState("");
-  const [enteredXP, setEnteredXP] = useState("");
-  const [enteredCredits, setEnteredCredits] = useState("");
-  const [enteredDescription, setEnteredDescription] = useState("");
+function ProductsForm({
+  closeModal,
+  addProduct,
+  editProduct,
+  isEditMode,
+  id,
+  title,
+  credit,
+  imageURL,
+  description,
+}) {
+  const [enteredTitle, setEnteredTitle] = useState(title || "");
+  const [enteredImage, setEnteredImage] = useState(imageURL || "");
+  const [enteredCredit, setEnteredCredit] = useState(credit || "");
+  const [enteredDescription, setEnteredDescription] = useState(
+    description || ""
+  );
 
   const [enteredTitleErr, setEnteredTitleErr] = useState({});
-  const [enteredXPErr, setEnteredXPErr] = useState({});
-  const [enteredCreditsErr, setEnteredCreditsErr] = useState({});
+  const [enteredImageErr, setEnteredImageErr] = useState({});
+  const [enteredCreditErr, setEnteredCreditErr] = useState({});
   const [enteredDescriptionErr, setEnteredDescriptionErr] = useState({});
 
   const titleChangeHandler = event => {
     setEnteredTitle(event.target.value);
   };
 
-  const xpChangeHandler = event => {
-    setEnteredXP(Number.parseInt(event.target.value));
+  const imageChangeHandler = event => {
+    setEnteredImage(event.target.value);
   };
 
-  const creditsChangeHandler = event => {
-    setEnteredCredits(Number.parseInt(event.target.value));
+  const creditChangeHandler = event => {
+    setEnteredCredit(Number.parseInt(event.target.value));
   };
 
   const descriptionChangeHandler = event => {
     setEnteredDescription(event.target.value);
   };
 
-  const addNewChallengeHandler = event => {
+  const addNewProductHandler = event => {
     event.preventDefault();
     const isValid = formValidation();
     if (isValid) {
-      console.log(enteredTitle, enteredXP, enteredCredits, enteredDescription);
-      // addChallenge(enteredTitle, enteredXP, enteredCredits, enteredDescription);
+      if (isEditMode) {
+        editProduct(
+          id,
+          enteredTitle,
+          enteredImage,
+          enteredCredit,
+          enteredDescription
+        );
+      } else {
+        addProduct(
+          enteredTitle,
+          enteredImage,
+          enteredCredit,
+          enteredDescription
+        );
+      }
       setEnteredTitle("");
-      setEnteredXP("");
-      setEnteredCredits("");
+      setEnteredImage("");
+      setEnteredCredit("");
       setEnteredDescription("");
       closeModal();
     }
@@ -46,8 +72,8 @@ function AddNewModal({ closeModal }) {
 
   function formValidation() {
     const titleErr = {};
-    const xpErr = {};
-    const creditsErr = {};
+    const imageErr = {};
+    const creditErr = {};
     const descriptionErr = {};
     let isValid = true;
 
@@ -57,24 +83,28 @@ function AddNewModal({ closeModal }) {
     } else if (enteredTitle.trim().length < 3) {
       titleErr.titleShort = "Title is too short";
       isValid = false;
-    } else if (enteredTitle.trim().length > 30) {
+    } else if (enteredTitle.trim().length > 60) {
       titleErr.titleLong = "Title is too long";
       isValid = false;
     }
 
-    if (!enteredXP) {
-      xpErr.xpEmpty = "XP cannot be empty";
+    if (enteredImage.trim().length === 0) {
+      imageErr.imageEmpty = "Image cannot be empty";
       isValid = false;
-    } else if (enteredXP < 0) {
-      xpErr.xpNegative = "XP cannot be negative";
+    } else if (enteredImage.trim().length < 5) {
+      imageErr.imageShort = "Image is too short";
       isValid = false;
     }
+    // } else if (enteredImage.trim().length > 400) {
+    //   imageErr.imageLong = "Image is too long";
+    //   isValid = false;
+    // }
 
-    if (!enteredCredits) {
-      creditsErr.creditsEmpty = "Credits cannot be empty";
+    if (!enteredCredit) {
+      creditErr.creditEmpty = "Credit cannot be empty";
       isValid = false;
-    } else if (enteredCredits < 0) {
-      creditsErr.creditsNegative = "Credits cannot be negative";
+    } else if (enteredCredit < 0) {
+      creditErr.creditNegative = "Credit cannot be negative";
       isValid = false;
     }
 
@@ -84,14 +114,14 @@ function AddNewModal({ closeModal }) {
     } else if (enteredDescription.trim().length < 4) {
       descriptionErr.descriptionShort = "Description is too short";
       isValid = false;
-    } else if (enteredDescription.trim().length > 50) {
+    } else if (enteredDescription.trim().length > 700) {
       descriptionErr.descriptionLong = "Description is too long";
       isValid = false;
     }
 
     setEnteredTitleErr(titleErr);
-    setEnteredXPErr(xpErr);
-    setEnteredCreditsErr(creditsErr);
+    setEnteredImageErr(imageErr);
+    setEnteredCreditErr(creditErr);
     setEnteredDescriptionErr(descriptionErr);
 
     return isValid;
@@ -100,15 +130,15 @@ function AddNewModal({ closeModal }) {
   return (
     <div className="popup">
       <div className="inner-popup">
-        <p className="modal-title">Add a challenge</p>
-        <form className="modal-form" onSubmit={addNewChallengeHandler}>
+        <p className="modal-title">{id ? "Edit shop item" : "Add shop item"}</p>
+        <form className="modal-form" onSubmit={addNewProductHandler}>
           <label htmlFor="title" className="modal-labels">
             Title
           </label>
           <input
             id="title"
             type="text"
-            value={enteredTitle}
+            defaultValue={isEditMode ? title : enteredTitle}
             onChange={titleChangeHandler}
             className="modal-inputs"
           />
@@ -120,39 +150,39 @@ function AddNewModal({ closeModal }) {
 
           <div className="inputs-group">
             <div className="input-label-pair">
-              <label htmlFor="xp" className="modal-labels">
-                XP earned on completion
+              <label htmlFor="image" className="modal-labels">
+                Image URL
               </label>
               <input
-                id="xp"
-                type="number"
-                value={enteredXP}
-                onChange={xpChangeHandler}
+                id="image"
+                type="text"
+                defaultValue={isEditMode ? imageURL : enteredImage}
+                onChange={imageChangeHandler}
                 className="modal-inputs"
               />
 
-              {Object.keys(enteredXPErr).map(item => (
+              {Object.keys(enteredImageErr).map(item => (
                 <div className="input-error" key={item.id}>
-                  {enteredXPErr[item]}
+                  {enteredImageErr[item]}
                 </div>
               ))}
             </div>
 
             <div className="input-label-pair">
               <label htmlFor="credits" className="modal-labels">
-                Credits earned on completion
+                Credits cost
               </label>
               <input
                 id="credits"
                 type="number"
-                value={enteredCredits}
-                onChange={creditsChangeHandler}
+                defaultValue={isEditMode ? credit : enteredCredit}
+                onChange={creditChangeHandler}
                 className="modal-inputs"
               />
 
-              {Object.keys(enteredCreditsErr).map(item => (
+              {Object.keys(enteredCreditErr).map(item => (
                 <div className="input-error" key={item.id}>
-                  {enteredCreditsErr[item]}
+                  {enteredCreditErr[item]}
                 </div>
               ))}
             </div>
@@ -164,7 +194,7 @@ function AddNewModal({ closeModal }) {
             <input
               id="description"
               type="text"
-              value={enteredDescription}
+              defaultValue={isEditMode ? description : enteredDescription}
               onChange={descriptionChangeHandler}
               className="modal-inputs"
             />
@@ -181,7 +211,10 @@ function AddNewModal({ closeModal }) {
               value="Cancel"
               handleOnClick={closeModal}
             />
-            <Button type="btn primary flex-width-max" value="Add" />
+            <Button
+              type="btn primary flex-width-max"
+              value={isEditMode ? "Edit" : "Add"}
+            />
           </div>
         </form>
       </div>
@@ -189,4 +222,4 @@ function AddNewModal({ closeModal }) {
   );
 }
 
-export default AddNewModal;
+export default ProductsForm;

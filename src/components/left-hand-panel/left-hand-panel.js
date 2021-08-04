@@ -40,7 +40,6 @@ function LeftHandPanel({
   userId,
 }) {
   function switchUserAdminHandler() {
-    console.log(roleType);
     switchRole();
   }
 
