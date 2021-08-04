@@ -11,17 +11,14 @@ function Navigation({ roles, id }) {
 
     return (
       <Switch>
-        {userList.map(route => {
-          const Component = route.component;
-          return (
-            <Route
-              key={route.path}
-              path={route.path}
-              exact={route.exact}
-              component={() => <Component userId={id} role={roles[0]} />}
-            />
-          );
-        })}
+        {userList.map(route => (
+          <Route
+            key={route.path}
+            path={route.path}
+            exact={route.exact}
+            component={() => <route.component userId={id} role={roles[0]} />}
+          />
+        ))}
       </Switch>
     );
   } else {
