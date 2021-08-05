@@ -14,8 +14,6 @@ function App() {
     users[userId].roles[0]
   );
 
-  // const history = useHistory();
-
   useEffect(() => {
     getUserInfo(userId)
       .then(data => {
@@ -37,23 +35,18 @@ function App() {
   const hasMultipleRoles = users[userId].roles.length > 1;
 
   return (
-    <div>
-      <Router>
-        <LeftHandPanel
-          {...userData}
-          hasMultipleRoles={hasMultipleRoles}
-          roleType={sectionDependingOnRole}
-          switchRole={switchRoleHandler}
-          userId={userId}
-        />
-        <Navigation
-          hasMultipleRoles={hasMultipleRoles}
-          roleType={sectionDependingOnRole}
-          userData={userData}
-          userId={userId}
-        />
-      </Router>
-    </div>
+    <Router>
+      <LeftHandPanel
+        {...userData}
+        hasMultipleRoles={hasMultipleRoles}
+        roleType={sectionDependingOnRole}
+        switchRole={switchRoleHandler}
+        userId={userId}
+      />
+      <div className="cards-overview-container">
+        <Navigation id={userId} roles={userData.roles} />
+      </div>
+    </Router>
   );
 }
 

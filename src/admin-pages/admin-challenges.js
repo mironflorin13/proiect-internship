@@ -64,54 +64,48 @@ const AdminChallenges = () => {
     return <div>{error}</div>;
   } else {
     return (
-      <div>
-        <div className="cards-overview-container">
-          <div className="challenges-container">
-            <ChallengesSection title="Challenges">
-              <>
-                <Modal isVisible={isVisible}>
-                  <ChallengesForm
-                    isEditMode={Boolean(item)}
-                    {...item}
-                    closeModal={closeModalHandler}
-                    addChallenge={addNewChallenge}
-                    editChallenge={handleEdit}
-                  />
-                </Modal>
+      <div className="challenges-container">
+        <ChallengesSection title="Challenges">
+          <>
+            <Modal isVisible={isVisible}>
+              <ChallengesForm
+                isEditMode={Boolean(item)}
+                {...item}
+                closeModal={closeModalHandler}
+                addChallenge={addNewChallenge}
+                editChallenge={handleEdit}
+              />
+            </Modal>
 
-                {allChallenges.length ? (
-                  allChallenges.map(item => (
-                    <Card
-                      {...item}
-                      key={item.id}
-                      onClick={() => handleOnEdit(item)}
-                    >
-                      <Button
-                        type="btn secondary "
-                        value="Delete"
-                        handleOnClick={() => handleDelete(item.id)}
-                      />
-                      <Button
-                        type="btn primary flex-width-max"
-                        value="Edit"
-                        handleOnClick={() => handleOnEdit(item)}
-                      />
-                    </Card>
-                  ))
-                ) : (
-                  <h2 className="challenges-subtilte">
-                    No Challenges to display
-                  </h2>
-                )}
-                <Button
-                  type="btn primary fix"
-                  value="Add New"
-                  handleOnClick={handleOnAdd}
-                />
-              </>
-            </ChallengesSection>
-          </div>
-        </div>
+            {allChallenges.length ? (
+              allChallenges.map(item => (
+                <Card
+                  {...item}
+                  key={item.id}
+                  onClick={() => handleOnEdit(item)}
+                >
+                  <Button
+                    type="btn secondary "
+                    value="Delete"
+                    handleOnClick={() => handleDelete(item.id)}
+                  />
+                  <Button
+                    type="btn primary flex-width-max"
+                    value="Edit"
+                    handleOnClick={() => handleOnEdit(item)}
+                  />
+                </Card>
+              ))
+            ) : (
+              <h2 className="challenges-subtilte">No Challenges to display</h2>
+            )}
+            <Button
+              type="btn primary fix"
+              value="Add New"
+              handleOnClick={handleOnAdd}
+            />
+          </>
+        </ChallengesSection>
       </div>
     );
   }

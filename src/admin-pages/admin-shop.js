@@ -67,46 +67,44 @@ const AdminShop = () => {
     return <div>{error}</div>;
   } else {
     return (
-      <div className="cards-overview-container">
-        <div className="challenges-container">
-          <ChallengesSection title="Shop">
-            <>
-              <Modal isVisible={isVisible}>
-                <ProductsForm
-                  isEditMode={Boolean(product)}
-                  {...product}
-                  closeModal={closeModalHandler}
-                  addProduct={addNewProduct}
-                  editProduct={handleEdit}
-                />
-              </Modal>
-
-              {allProducts.length ? (
-                allProducts.map(product => (
-                  <ShopCard {...product} key={product.id}>
-                    <Button
-                      type="btn secondary "
-                      value="Delete"
-                      handleOnClick={() => handleDelete(product.id)}
-                    />
-                    <Button
-                      type="btn primary flex-width-max"
-                      value="Edit"
-                      handleOnClick={() => handleOnEdit(product)}
-                    />
-                  </ShopCard>
-                ))
-              ) : (
-                <h2 className="challenges-subtilte">No Products to display</h2>
-              )}
-              <Button
-                type="btn primary fix"
-                value="Add New"
-                handleOnClick={handleOnAdd}
+      <div className="challenges-container">
+        <ChallengesSection title="Shop">
+          <>
+            <Modal isVisible={isVisible}>
+              <ProductsForm
+                isEditMode={Boolean(product)}
+                {...product}
+                closeModal={closeModalHandler}
+                addProduct={addNewProduct}
+                editProduct={handleEdit}
               />
-            </>
-          </ChallengesSection>
-        </div>
+            </Modal>
+
+            {allProducts.length ? (
+              allProducts.map(product => (
+                <ShopCard {...product} key={product.id}>
+                  <Button
+                    type="btn secondary "
+                    value="Delete"
+                    handleOnClick={() => handleDelete(product.id)}
+                  />
+                  <Button
+                    type="btn primary flex-width-max"
+                    value="Edit"
+                    handleOnClick={() => handleOnEdit(product)}
+                  />
+                </ShopCard>
+              ))
+            ) : (
+              <h2 className="challenges-subtilte">No Products to display</h2>
+            )}
+            <Button
+              type="btn primary fix"
+              value="Add New"
+              handleOnClick={handleOnAdd}
+            />
+          </>
+        </ChallengesSection>
       </div>
     );
   }

@@ -1,48 +1,28 @@
 import React from "react";
+import { Route, Switch } from "react-router";
 
-import UserRoutes from "./user-routes";
-import AdminRoutes from "./admin-routes";
+import list from "../data/routes";
 
-function Navigation({ roleType, userData, userId, hasMultipleRoles }) {
-  function getRoutes(rolesList) {
-    if (rolesList.includes("User") && roleType === "User") {
-      return (
-        <UserRoutes
-          userData={userData}
-          userId={userId}
-          role={roleType}
-          showNotFoundRoute={true}
-        />
-      );
-    } else if (rolesList.includes("Admin") && roleType === "Admin") {
-      return (
-        <>
-          {rolesList.length > 1 && (
-            <UserRoutes
-              userData={userData}
-              userId={userId}
-              role={roleType}
-              showNotFoundRoute={false}
-            />
-          )}
-          <AdminRoutes userId={userId} role={roleType} />
-        </>
-      );
-    } else {
-      return (
-        <div>
-          <p>You cannot access these routes</p>
-        </div>
-      );
-    }
-  }
+function Navigation({ roles, id }) {
+  if (roles) {
+    const userList = list.filter(route =>
+      roles.some(role => route.role.includes(role))
+    );
 
-  if (hasMultipleRoles) {
-    return roleType === "User"
-      ? getRoutes(["User"])
-      : getRoutes(["User", "Admin"]);
+    return (
+      <Switch>
+        {userList.map(route => (
+          <Route
+            key={route.path}
+            path={route.path}
+            exact={route.exact}
+            component={() => <route.component userId={id} role={roles[0]} />}
+          />
+        ))}
+      </Switch>
+    );
   } else {
-    return roleType === "User" ? getRoutes(["User"]) : getRoutes(["Admin"]);
+    return <p>You cannot access these routes</p>;
   }
 }
 

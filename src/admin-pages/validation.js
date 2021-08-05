@@ -49,43 +49,34 @@ function AdminChallengesToBeValidated() {
     return <div>{error}</div>;
   } else {
     return (
-      <div className="cards-overview-container">
-        <div className="challenges-container">
-          <ChallengesSection title="Challenges to be validated">
-            {challengesToBeValidated.length ? (
-              challengesToBeValidated.map(item => (
-                <Card
-                  title={item.challenge.title}
-                  xp={item.challenge.xp}
-                  credits={item.challenge.credits}
-                  description={item.challenge.description}
-                  key={`${item.user.id}.${item.challenge.id}`}
-                  image={item.user.image}
-                  name={item.user.name}
-                >
-                  <Button
-                    type="btn secondary-r "
-                    value="Deny"
-                    handleOnClick={denyChallenge(
-                      item.challenge.id,
-                      item.user.id
-                    )}
-                  />
-                  <Button
-                    type="btn primary-g flex-width-max"
-                    value="Validate"
-                    handleOnClick={validatedChallenge(
-                      item.challenge.id,
-                      item.user.id
-                    )}
-                  />
-                </Card>
-              ))
-            ) : (
-              <h2 className="challenges-subtilte">No Challenges to display</h2>
-            )}
-          </ChallengesSection>
-        </div>
+      <div className="challenges-container">
+        <ChallengesSection title="Challenges to be validated">
+          {challengesToBeValidated.length ? (
+            challengesToBeValidated.map(item => (
+              <Card
+                {...item.challenge}
+                {...item.user}
+                key={`${item.user.id}.${item.challenge.id}`}
+              >
+                <Button
+                  type="btn secondary-r "
+                  value="Deny"
+                  handleOnClick={denyChallenge(item.challenge.id, item.user.id)}
+                />
+                <Button
+                  type="btn primary-g flex-width-max"
+                  value="Validate"
+                  handleOnClick={validatedChallenge(
+                    item.challenge.id,
+                    item.user.id
+                  )}
+                />
+              </Card>
+            ))
+          ) : (
+            <h2 className="challenges-subtilte">No Challenges to display</h2>
+          )}
+        </ChallengesSection>
       </div>
     );
   }

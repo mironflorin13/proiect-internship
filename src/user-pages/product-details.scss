@@ -1,0 +1,105 @@
+@import "../index.scss";
+
+.product-details-page {
+  display: flex;
+  height: 100vh;
+  .images-slider {
+    display: flex;
+    position: relative;
+    width: 50%;
+    .slide {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+    }
+    .image-active {
+      opacity: 1;
+      margin: auto;
+    }
+    .image {
+      margin: auto;
+      width: 100%;
+      height: auto;
+    }
+  }
+  .right-side {
+    display: flex;
+    background: white;
+    width: 50%;
+    height: 100%;
+    overflow: auto;
+
+    .product-details {
+      padding: 40px;
+      margin: auto 0px auto 0px;
+
+      .product-details-title {
+        font-family: $font-family;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 48px;
+        line-height: 56px;
+        margin-bottom: 30px;
+      }
+      .product-details-description {
+        font-family: $font-family;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 24px;
+        margin-bottom: 40px;
+      }
+    }
+  }
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  font-size: 30px;
+  cursor: pointer;
+  color: $grey-color;
+}
+
+.a-left {
+  left: 20px;
+}
+
+.a-right {
+  right: 20px;
+}
+
+.hide {
+  visibility: hidden;
+}
+
+.cercles {
+  position: absolute;
+  bottom: 50px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  width: 100%;
+}
+
+.cercle {
+  background: $white-color;
+  width: 10px;
+  height: 10px;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.darker {
+  background: $grey-color;
+}
+
+.x-close {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  font-size: 30px;
+  cursor: pointer;
+}
