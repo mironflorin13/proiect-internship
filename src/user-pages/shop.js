@@ -44,24 +44,22 @@ const Shop = ({ userId }) => {
     return <div>{error}</div>;
   } else {
     return (
-      <div className="cards-overview-container">
-        <div className="challenges-container">
-          <ChallengesSection title="Shop">
-            {availableProducts.length ? (
-              availableProducts.map(product => (
-                <ShopCard {...product} key={product.id}>
-                  <Button
-                    type="btn primary flex-width-max"
-                    value={`Buy - ${product.credit} Credits`}
-                    handleOnClick={buyProduct(product.id, product.credit)}
-                  />
-                </ShopCard>
-              ))
-            ) : (
-              <h2 className="challenges-subtilte">No Products to display</h2>
-            )}
-          </ChallengesSection>
-        </div>
+      <div className="challenges-container">
+        <ChallengesSection title="Shop">
+          {availableProducts.length ? (
+            availableProducts.map(product => (
+              <ShopCard {...product} key={product.id}>
+                <Button
+                  type="btn primary flex-width-max"
+                  value={`Buy - ${product.credit} Credits`}
+                  handleOnClick={buyProduct(product.id, product.credit)}
+                />
+              </ShopCard>
+            ))
+          ) : (
+            <h2 className="challenges-subtilte">No Products to display</h2>
+          )}
+        </ChallengesSection>
       </div>
     );
   }
