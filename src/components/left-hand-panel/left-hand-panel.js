@@ -11,6 +11,7 @@ import "./left-hand-panel.scss";
 import Menu from "./menu/menu";
 import ExperienceBar from "./experience-bar/experience-bar";
 import Credits from "./credits/credits";
+import UsersDropdown from "./users-dropdown/users-dropdown";
 
 function LeftHandPanel() {
   const { userData, roleType, hasMultipleRoles } = useContext(Context);
@@ -19,6 +20,8 @@ function LeftHandPanel() {
   return (
     <div className="left-hand-panel">
       <UserCard name={name} jobTitle={jobTitle} image={image} />
+
+      <UsersDropdown />
 
       {roleType === ROLES_STATUSES.USER && (
         <>
