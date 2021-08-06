@@ -1,10 +1,5 @@
-import users from "../data/users";
-// import getUsers from "./getUsers";
+import { getUser } from "../data/users";
 
-const getUserInfo = id => {
-  const userToShow = users.find(userChosen => userChosen.id === id);
-
-  return Promise.resolve(userToShow);
-};
+const getUserInfo = id => Promise.resolve(getUser(id));
 
 export default getUserInfo;

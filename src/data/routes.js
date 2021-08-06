@@ -8,59 +8,61 @@ import Validation from "../admin-pages/validation";
 import AdminChallenges from "../admin-pages/admin-challenges";
 import AdminShop from "../admin-pages/admin-shop";
 
+import { ROLES_STATUSES } from "./constants";
+
 const list = [
   {
-    role: ["User"],
+    role: [ROLES_STATUSES.USER],
     path: "/",
     exact: true,
     component: Overview,
   },
   {
-    role: ["User"],
+    role: [ROLES_STATUSES.USER],
     path: "/challenges",
     exact: true,
     component: Challenges,
   },
 
   {
-    role: ["User"],
+    role: [ROLES_STATUSES.USER],
     path: "/shop",
     exact: true,
     component: Shop,
   },
   {
-    role: ["User"],
+    role: [ROLES_STATUSES.USER],
     path: "/demo",
     exact: true,
     component: Demo,
   },
   {
-    role: ["Admin"],
+    role: [ROLES_STATUSES.ADMIN],
     path: "/admin/challenges",
     exact: true,
     component: AdminChallenges,
   },
   {
-    role: ["Admin"],
+    role: [ROLES_STATUSES.ADMIN],
     path: "/admin/validation",
     exact: true,
     component: Validation,
   },
   {
-    role: ["Admin"],
+    role: [ROLES_STATUSES.ADMIN],
     path: "/admin/shop",
     exact: true,
     component: AdminShop,
   },
 
   {
-    role: ["User", "Admin"],
+    role: [ROLES_STATUSES.USER, ROLES_STATUSES.ADMIN],
     path: "/product/details/:id",
     exact: true,
     component: ProductDetails,
   },
   {
-    role: ["User", "Admin"],
+    role: [ROLES_STATUSES.USER, ROLES_STATUSES.ADMIN],
     path: "*",
     exact: false,
     component: NotFound,

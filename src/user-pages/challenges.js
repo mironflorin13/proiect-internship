@@ -1,15 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 import ChallengesSection from "../components/challenges-section/challenges-section";
 import Button from "../components/button/button";
 import Card from "../components/card/card";
 import getAvailableChallenges from "../mock-functions/get-available-challenges";
 import addChallengeToAUser from "../mock-functions/add-challenge-to-a-user";
+import { Context } from "../context/context-provider";
+import { ROLES_STATUSES } from "../data/constants";
 
 const AvailableChallenges = ({ userId }) => {
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState();
   const [availableChallenges, setAvailableChallenges] = useState([]);
+  const { setRoleType } = useContext(Context);
 
   const challengesRequest = getChallenges => {
     getChallenges()
@@ -29,7 +32,8 @@ const AvailableChallenges = ({ userId }) => {
 
   useEffect(() => {
     challengesRequest(() => getAvailableChallenges(userId));
-  }, [userId]);
+    setRoleType(ROLES_STATUSES.USER);
+  }, [userId, setRoleType]);
 
   if (isPending) {
     return <div>Loading...</div>;

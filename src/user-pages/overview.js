@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 import ChallengesSection from "../components/challenges-section/challenges-section";
 import Button from "../components/button/button";
@@ -7,8 +7,9 @@ import ShopCard from "../components/shop-card/shop-card";
 import editUserChallengesStatus from "../mock-functions/edit-user-challenges-status";
 import getUserChallenges from "../mock-functions/get-user-challenges";
 import getBoughtProducts from "../mock-functions/get-bought-products";
-import { CHALLENGE_STATUSES } from "../data/constants";
+import { CHALLENGE_STATUSES, ROLES_STATUSES } from "../data/constants";
 import deleteChallengeFromAUser from "../mock-functions/delete-challange-from-a-user";
+import { Context } from "../context/context-provider";
 
 const InProgressCompleteChallenge = ({ userId }) => {
   const [isPending, setIsPending] = useState(true);
@@ -17,7 +18,7 @@ const InProgressCompleteChallenge = ({ userId }) => {
   const [dataInProgress, setDataInProgress] = useState([]);
   const [dataCompleted, setDataCompleted] = useState([]);
   const [products, setProducts] = useState([]);
-
+  const { setRoleType } = useContext(Context);
   const challengesRequest = getChallenges => {
     getChallenges()
       .then(challenges => {
@@ -48,7 +49,7 @@ const InProgressCompleteChallenge = ({ userId }) => {
 
   const quitChallenge = itemId => () => {
     challengesRequest(() =>
-      deleteChallengeFromAUser(userId, itemId, 0, [
+      deleteChallengeFromAUser(userId, itemId, [
         CHALLENGE_STATUSES.IN_PROGRESS,
         CHALLENGE_STATUSES.DENIED,
         CHALLENGE_STATUSES.VALIDATED,
@@ -61,7 +62,7 @@ const InProgressCompleteChallenge = ({ userId }) => {
       editUserChallengesStatus(
         userId,
         itemId,
-        0,
+
         CHALLENGE_STATUSES.TO_BE_VALIDATED,
         [
           CHALLENGE_STATUSES.IN_PROGRESS,
@@ -73,6 +74,7 @@ const InProgressCompleteChallenge = ({ userId }) => {
   };
 
   useEffect(() => {
+    setRoleType(ROLES_STATUSES.USER);
     challengesRequest(() =>
       getUserChallenges(userId, [
         CHALLENGE_STATUSES.IN_PROGRESS,
@@ -81,7 +83,7 @@ const InProgressCompleteChallenge = ({ userId }) => {
       ])
     );
     productsRequest(userId);
-  }, [userId]);
+  }, [userId, setRoleType]);
 
   if (isPending) {
     return <div>Loading...</div>;

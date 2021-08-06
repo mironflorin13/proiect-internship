@@ -1,9 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 
-import { getUsers } from "../../data/users";
-import { getChallenges } from "../../data/challenges";
-import { CHALLENGE_STATUSES } from "../../data/constants";
+import { ROLES_STATUSES } from "../../data/constants";
 import { Context } from "../../context/context-provider";
 import userPages from "../../data/user-pages";
 import adminPages from "../../data/admin-pages";
@@ -14,67 +12,36 @@ import Menu from "./menu/menu";
 import ExperienceBar from "./experience-bar/experience-bar";
 import Credits from "./credits/credits";
 
-function getInitialCurrentXP(userId) {
-  let sum = 0;
-  const users = getUsers();
-  const challenges = getChallenges();
-  const validatedChallenges = users
-    .find(user => user.id === userId)
-    .challenges.filter(
-      challenge => challenge.status === CHALLENGE_STATUSES.VALIDATED
-    );
-
-  validatedChallenges.forEach(challenge => {
-    sum += challenges.find(ch => ch.id === challenge.id).xp;
-  });
-  return sum;
-}
-
-function LeftHandPanel({
-  hasMultipleRoles,
-  name,
-  jobTitle,
-  image,
-  roleType,
-  switchRole,
-  userId,
-}) {
-  function switchUserAdminHandler() {
-    switchRole();
-  }
+function LeftHandPanel() {
+  const { userData, roleType, hasMultipleRoles } = useContext(Context);
+  const { name, jobTitle, image, credits, xp } = userData;
 
   return (
-    <Context.Consumer>
-      {context => {
-        const { userCredit } = context;
+    <div className="left-hand-panel">
+      <UserCard name={name} jobTitle={jobTitle} image={image} />
 
-        return (
-          <div className="left-hand-panel">
-            <UserCard name={name} jobTitle={jobTitle} image={image} />
+      {roleType === ROLES_STATUSES.USER && (
+        <>
+          <Credits credits={credits} />
+          <ExperienceBar currentXP={xp} />
+        </>
+      )}
 
-            {roleType !== "Admin" && (
-              <>
-                <Credits credits={userCredit} />
-                <ExperienceBar currentXP={getInitialCurrentXP(userId)} />
-              </>
-            )}
+      {roleType === ROLES_STATUSES.USER && <Menu pagesToShow={userPages} />}
+      {roleType === ROLES_STATUSES.ADMIN && <Menu pagesToShow={adminPages} />}
 
-            {roleType === "User" && <Menu pagesToShow={userPages} />}
-            {roleType === "Admin" && <Menu pagesToShow={adminPages} />}
-
-            {hasMultipleRoles && (
-              <Link
-                to={roleType === "User" ? "/admin/challenges" : "/"}
-                className="left-hand-panel-admin"
-                onClick={switchUserAdminHandler}
-              >
-                Switch to {roleType === "Admin" ? "User" : "Admin"}
-              </Link>
-            )}
-          </div>
-        );
-      }}
-    </Context.Consumer>
+      {hasMultipleRoles && (
+        <Link
+          to={roleType === ROLES_STATUSES.USER ? "/admin/challenges" : "/"}
+          className="left-hand-panel-admin"
+        >
+          Switch to{" "}
+          {roleType === ROLES_STATUSES.USER
+            ? ROLES_STATUSES.ADMIN
+            : ROLES_STATUSES.USER}
+        </Link>
+      )}
+    </div>
   );
 }
 

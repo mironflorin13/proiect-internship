@@ -8,3 +8,8 @@ export const CHALLENGE_STATUSES = {
 export const PRODUCT_STATUSES = {
   BOUGHT: "BOUGHT",
 };
+
+export const ROLES_STATUSES = {
+  USER: "USER",
+  ADMIN: "ADMIN",
+};

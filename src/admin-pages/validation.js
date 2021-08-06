@@ -7,13 +7,14 @@ import ChallengesSection from "../components/challenges-section/challenges-secti
 import Button from "../components/button/button";
 import Card from "../components/card/card";
 import editUserChallengesStatus from "../mock-functions/edit-user-challenges-status";
-import { CHALLENGE_STATUSES } from "../data/constants";
+import { CHALLENGE_STATUSES, ROLES_STATUSES } from "../data/constants";
 
 function AdminChallengesToBeValidated() {
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState();
   const [challengesToBeValidated, setChallengesToBeValidated] = useState([]);
-  const { userCredit, setCredit } = useContext(Context);
+
+  const { updateUserData, setRoleType } = useContext(Context);
 
   const challengesRequest = getChallenges => {
     getChallenges()
@@ -27,28 +28,27 @@ function AdminChallengesToBeValidated() {
       });
   };
 
+  useEffect(() => {
+    setRoleType(ROLES_STATUSES.ADMIN);
+    challengesRequest(() => getChallengesToBeValidated());
+  }, [setRoleType]);
+
   const denyChallenge = (userId, itemId) => () => {
     challengesRequest(() =>
-      editUserChallengesStatus(itemId, userId, 0, CHALLENGE_STATUSES.DENIED, [
+      editUserChallengesStatus(itemId, userId, CHALLENGE_STATUSES.DENIED, [
         CHALLENGE_STATUSES.TO_BE_VALIDATED,
       ])
     );
   };
 
-  const validatedChallenge = (userId, itemId, challengeCredits) => () => {
+  const validatedChallenge = (userId, itemId) => () => {
     challengesRequest(() =>
-      editUserChallengesStatus(
-        itemId,
-        userId,
-        challengeCredits,
-        CHALLENGE_STATUSES.VALIDATED,
-        [CHALLENGE_STATUSES.TO_BE_VALIDATED]
-      )
+      editUserChallengesStatus(itemId, userId, CHALLENGE_STATUSES.VALIDATED, [
+        CHALLENGE_STATUSES.TO_BE_VALIDATED,
+      ])
     );
-    setCredit(userCredit + challengeCredits);
+    updateUserData();
   };
-
-  useEffect(() => challengesRequest(() => getChallengesToBeValidated()), []);
 
   if (isPending) {
     return <div>Loading...</div>;

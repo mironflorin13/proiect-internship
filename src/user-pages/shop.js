@@ -6,15 +6,16 @@ import ChallengesSection from "../components/challenges-section/challenges-secti
 import Button from "../components/button/button";
 import ShopCard from "../components/shop-card/shop-card";
 import addProductToAUser from "../mock-functions/add-product-to-a-user";
+import { ROLES_STATUSES } from "../data/constants";
 
 const Shop = ({ userId }) => {
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState();
   const [availableProducts, setAvailableProducts] = useState([]);
-  const { userCredit, setCredit } = useContext(Context);
+  const { userData, updateUserData, setRoleType } = useContext(Context);
 
-  const productsRequest = getProducts => {
-    getProducts()
+  const productsRequest = async getProducts => {
+    await getProducts()
       .then(products => {
         setAvailableProducts(products);
         setIsPending(false);
@@ -26,17 +27,18 @@ const Shop = ({ userId }) => {
   };
 
   const buyProduct = (productId, credit) => () => {
-    if (userCredit >= credit) {
-      productsRequest(() => addProductToAUser(userId, productId, credit));
-      setCredit(userCredit - credit);
+    if (userData.credits >= credit) {
+      productsRequest(() => addProductToAUser(userId, productId, false));
+      updateUserData();
     } else {
       alert("you do not have enough credit to buy this product");
     }
   };
 
   useEffect(() => {
+    setRoleType(ROLES_STATUSES.USER);
     productsRequest(() => getAvailableProducts(userId));
-  }, [userId]);
+  }, [userId, setRoleType]);
 
   if (isPending) {
     return <div>Loading...</div>;
