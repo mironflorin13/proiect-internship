@@ -25,8 +25,8 @@ const ProductDetails = () => {
   const [bought, setBought] = useState(false);
   const { userData, updateUserData, roleType } = useContext(Context);
 
-  const productsRequest = async getProduct => {
-    await getProduct()
+  const productsRequest = getProduct => {
+    getProduct()
       .then(product => {
         setProduct(product);
         setLength(product.imageURL.length);
