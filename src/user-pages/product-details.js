@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import {
   faChevronLeft,
@@ -10,29 +10,36 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import getSingleProduct from "../mock-functions/get-single-product";
 import Button from "../components/button/button";
 import "./product-details.scss";
+import { Context } from "../context/context-provider";
+import addProductToAUser from "../mock-functions/add-product-to-a-user";
 
 const ProductDetails = () => {
   const id = Number.parseInt(useParams().id);
 
   const [isPending, setIsPending] = useState(true);
-  const [error, setError] = useState();
   const [product, setProduct] = useState({});
 
   const [current, setCurrent] = useState(0);
   const [length, setLength] = useState(0);
+  const [bought, setBought] = useState(false);
+  const { userData, updateUserData, roleType } = useContext(Context);
 
-  useEffect(() => {
-    getSingleProduct(id)
+  const productsRequest = getProduct => {
+    getProduct()
       .then(product => {
         setProduct(product);
         setLength(product.imageURL.length);
+        setBought(product.bought);
         setIsPending(false);
       })
       .catch(error => {
-        setError(error.message);
+        alert(error);
         setIsPending(false);
       });
-  }, [id]);
+  };
+  useEffect(() => {
+    productsRequest(() => getSingleProduct(id, userData.id, roleType));
+  }, [id, roleType, userData.id]);
 
   const nextSlide = () => {
     setCurrent(prevCurrent => prevCurrent + 1);
@@ -46,10 +53,15 @@ const ProductDetails = () => {
     setCurrent(id);
   };
 
+  const buyProduct = (productId, credit) => async () => {
+    await productsRequest(() =>
+      addProductToAUser(userData.id, productId, true)
+    );
+    updateUserData();
+  };
+
   if (isPending) {
     return <div>Loading...</div>;
-  } else if (error) {
-    return <div>{error}</div>;
   } else {
     return (
       <div className="product-details-page">
@@ -105,10 +117,13 @@ const ProductDetails = () => {
             <div className="product-details-description">
               {product.description}
             </div>
-            <Button
-              type="btn primary"
-              value={`Buy - ${product.credit} Credits `}
-            />
+            {bought && (
+              <Button
+                type="btn primary"
+                value={`Buy - ${product.credit} Credits `}
+                handleOnClick={buyProduct(product.id, product.credit)}
+              />
+            )}
           </div>
         </div>
       </div>

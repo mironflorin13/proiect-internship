@@ -1,3 +1,4 @@
+import { getChallenge } from "../data/challenges";
 import { CHALLENGE_STATUSES } from "../data/constants";
 import { setUsers, getUsers } from "../data/users";
 
@@ -11,6 +12,14 @@ const editUserChallengesStatus = (
   returnStatuses
 ) => {
   const users = getUsers();
+  const challengeCredits =
+    newStatus === CHALLENGE_STATUSES.VALIDATED
+      ? getChallenge(challengeId).credits
+      : 0;
+  const challengeXp =
+    newStatus === CHALLENGE_STATUSES.VALIDATED
+      ? getChallenge(challengeId).xp
+      : 0;
 
   const usersCopy = users.map(user => {
     if (user.id === userId) {
@@ -20,7 +29,13 @@ const editUserChallengesStatus = (
         }
         return challenge;
       });
-      return { ...user, challenges: challengesCopy };
+
+      return {
+        ...user,
+        challenges: challengesCopy,
+        credits: user.credits + challengeCredits,
+        xp: user.xp + challengeXp,
+      };
     }
     return user;
   });

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import getAllProducts from "../mock-functions/get-all-products";
 import addProduct from "../mock-functions/add-product";
@@ -9,6 +9,8 @@ import Button from "../components/button/button";
 import ShopCard from "../components/shop-card/shop-card";
 import ProductsForm from "../components/modal/products-form";
 import Modal from "../components/modal/modal";
+import { Context } from "../context/context-provider";
+import { ROLES_STATUSES } from "../data/constants";
 
 const AdminShop = () => {
   const [isPending, setIsPending] = useState(true);
@@ -16,6 +18,8 @@ const AdminShop = () => {
   const [allProducts, setAllProducts] = useState([]);
   const [isVisible, setIsVisible] = useState(false);
   const [product, setProduct] = useState();
+
+  const { setRoleType } = useContext(Context);
 
   const productsRequest = getProducts => {
     getProducts()
@@ -30,8 +34,9 @@ const AdminShop = () => {
   };
 
   useEffect(() => {
+    setRoleType(ROLES_STATUSES.ADMIN);
     productsRequest(getAllProducts);
-  }, []);
+  }, [setRoleType]);
 
   function addNewProduct(title, imageURL, credit, description) {
     productsRequest(() => addProduct(title, imageURL, credit, description));

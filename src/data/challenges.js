@@ -77,3 +77,5 @@ export const setChallenges = c => {
 };
 
 export const getChallenges = () => challenges;
+export const getChallenge = challengeId =>
+  challenges.find(challenge => challenge.id === challengeId);

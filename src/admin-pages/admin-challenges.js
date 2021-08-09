@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 import getAllChallenges from "../mock-functions/get-all-challenges";
 import addChallenge from "../mock-functions/add-challenge";
@@ -10,6 +10,8 @@ import Button from "../components/button/button";
 import Card from "../components/card/card";
 import ChallengesForm from "../components/modal/challenges-form";
 import Modal from "../components/modal/modal";
+import { Context } from "../context/context-provider";
+import { ROLES_STATUSES } from "../data/constants";
 
 const AdminChallenges = () => {
   const [isPending, setIsPending] = useState(true);
@@ -17,6 +19,8 @@ const AdminChallenges = () => {
   const [allChallenges, setAllChallenges] = useState([]);
   const [isVisible, setIsVisible] = useState(false);
   const [item, setItem] = useState();
+
+  const { setRoleType } = useContext(Context);
 
   const challengesRequest = getChallenges => {
     getChallenges()
@@ -30,7 +34,10 @@ const AdminChallenges = () => {
       });
   };
 
-  useEffect(() => challengesRequest(() => getAllChallenges()), []);
+  useEffect(() => {
+    setRoleType(ROLES_STATUSES.ADMIN);
+    challengesRequest(() => getAllChallenges());
+  }, [setRoleType]);
 
   function addNewChallenge(title, xp, credits, description) {
     challengesRequest(() => addChallenge(title, xp, credits, description));

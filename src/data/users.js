@@ -3,6 +3,8 @@ let users = [
     id: 0,
     name: "Daniel Toma",
     jobTitle: "Software Developer",
+    credits: 521,
+    xp: 10,
     image:
       "https://www.pngfind.com/pngs/m/488-4887957_facebook-teerasej-profile-ball-circle-circular-profile-picture.png",
     challenges: [
@@ -19,26 +21,28 @@ let users = [
       { id: 2, status: "BOUGHT" },
       { id: 3, status: "BOUGHT" },
     ],
-    roles: ["User", "Admin"],
+    roles: ["USER", "ADMIN"],
   },
 
   {
     id: 1,
     name: "Andrei Otea",
     jobTitle: "Software Developer",
+    credits: 0,
+    xp: 0,
     image:
       "https://i.pinimg.com/564x/65/25/a0/6525a08f1df98a2e3a545fe2ace4be47.jpg",
-    challenges: [
-      { id: 5, status: "TO_BE_VALIDATED" },
-      { id: 9, status: "TO_BE_VALIDATED" },
-    ],
+    challenges: [],
     products: [],
-    roles: ["Admin"],
+    roles: ["ADMIN"],
   },
+
   {
     id: 2,
     name: "User 3",
     jobTitle: "Software Developer",
+    credits: 521,
+    xp: 10,
     image:
       "https://i.pinimg.com/564x/65/25/a0/6525a08f1df98a2e3a545fe2ace4be47.jpg",
     challenges: [
@@ -46,7 +50,7 @@ let users = [
       { id: 9, status: "IN_PROGRESS" },
     ],
     products: [],
-    roles: ["User"],
+    roles: ["USER"],
   },
 ];
 export const setUsers = u => {

@@ -1,14 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
+import { Context } from "../context/context-provider";
 import getAvailableProducts from "../mock-functions/get-available-products";
 import ChallengesSection from "../components/challenges-section/challenges-section";
 import Button from "../components/button/button";
 import ShopCard from "../components/shop-card/shop-card";
+import addProductToAUser from "../mock-functions/add-product-to-a-user";
+import { ROLES_STATUSES } from "../data/constants";
 
 const Shop = ({ userId }) => {
   const [isPending, setIsPending] = useState(true);
-  const [error, setError] = useState();
+
   const [availableProducts, setAvailableProducts] = useState([]);
+  const { updateUserData, setRoleType } = useContext(Context);
 
   const productsRequest = getProducts => {
     getProducts()
@@ -17,19 +21,23 @@ const Shop = ({ userId }) => {
         setIsPending(false);
       })
       .catch(error => {
-        setError(error.message);
+        alert(error);
         setIsPending(false);
       });
   };
 
+  const buyProduct = (productId, credit) => async () => {
+    await productsRequest(() => addProductToAUser(userId, productId, false));
+    updateUserData();
+  };
+
   useEffect(() => {
+    setRoleType(ROLES_STATUSES.USER);
     productsRequest(() => getAvailableProducts(userId));
-  }, [userId]);
+  }, [userId, setRoleType]);
 
   if (isPending) {
     return <div>Loading...</div>;
-  } else if (error) {
-    return <div>{error}</div>;
   } else {
     return (
       <div className="challenges-container">
@@ -40,6 +48,7 @@ const Shop = ({ userId }) => {
                 <Button
                   type="btn primary flex-width-max"
                   value={`Buy - ${product.credit} Credits`}
+                  handleOnClick={buyProduct(product.id, product.credit)}
                 />
               </ShopCard>
             ))
