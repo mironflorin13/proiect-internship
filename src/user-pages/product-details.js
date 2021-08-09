@@ -17,7 +17,6 @@ const ProductDetails = () => {
   const id = Number.parseInt(useParams().id);
 
   const [isPending, setIsPending] = useState(true);
-  const [error, setError] = useState();
   const [product, setProduct] = useState({});
 
   const [current, setCurrent] = useState(0);
@@ -34,7 +33,7 @@ const ProductDetails = () => {
         setIsPending(false);
       })
       .catch(error => {
-        setError(error.message);
+        alert(error);
         setIsPending(false);
       });
   };
@@ -54,19 +53,15 @@ const ProductDetails = () => {
     setCurrent(id);
   };
 
-  const buyProduct = (productId, credit) => () => {
-    if (userData.credits >= credit) {
-      productsRequest(() => addProductToAUser(userData.id, productId, true));
-      updateUserData();
-    } else {
-      alert("you do not have enough credit to buy this product");
-    }
+  const buyProduct = (productId, credit) => async () => {
+    await productsRequest(() =>
+      addProductToAUser(userData.id, productId, true)
+    );
+    updateUserData();
   };
 
   if (isPending) {
     return <div>Loading...</div>;
-  } else if (error) {
-    return <div>{error}</div>;
   } else {
     return (
       <div className="product-details-page">
