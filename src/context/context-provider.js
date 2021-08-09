@@ -6,25 +6,25 @@ const ContextProvider = ({ children }) => {
   const [userId, setUserId] = useState(0);
   const [userData, setUserData] = useState({});
   const [roleType, setRoleType] = useState();
-  const [update, setUpdate] = useState(0);
   const [hasMultipleRoles, setHasMultipleRoles] = useState();
 
-  useEffect(() => {
+  const getUserData = userId => {
     getUserInfo(userId)
       .then(data => {
         setUserData(data);
         setHasMultipleRoles(data.roles.length > 1);
-        setRoleType(
-          prevRole => (data.roles.length === 1 || !prevRole) && data.roles[0]
-        );
+        setRoleType(data.roles[0]);
       })
       .catch(error => {
         console.log(error);
       });
-  }, [update, userId]);
+  };
+  useEffect(() => {
+    getUserData(userId);
+  }, [userId]);
 
   const updateUserData = () => {
-    setUpdate(prevUpdate => prevUpdate + 1);
+    getUserData(userId);
   };
 
   return (

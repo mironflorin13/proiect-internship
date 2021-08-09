@@ -8,9 +8,10 @@ import getSingleProduct from "./get-single-product";
 const addProductToAUser = (userId, productId, singleProduct) => {
   const users = getUsers();
   const cost = getProduct(productId).credit;
-
+  let canBuyProduct = true;
   const usersCopy = users.map(user => {
     if (user.id === userId) {
+      canBuyProduct = user.credits >= cost;
       return {
         ...user,
         products: [
@@ -22,7 +23,9 @@ const addProductToAUser = (userId, productId, singleProduct) => {
     }
     return user;
   });
-
+  if (!canBuyProduct) {
+    return Promise.reject("You do not have enough credit to buy this product");
+  }
   setUsers(usersCopy);
   if (singleProduct) {
     return getSingleProduct(productId, userId);

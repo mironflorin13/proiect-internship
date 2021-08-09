@@ -10,29 +10,25 @@ import { ROLES_STATUSES } from "../data/constants";
 
 const Shop = ({ userId }) => {
   const [isPending, setIsPending] = useState(true);
-  const [error, setError] = useState();
-  const [availableProducts, setAvailableProducts] = useState([]);
-  const { userData, updateUserData, setRoleType } = useContext(Context);
 
-  const productsRequest = async getProducts => {
-    await getProducts()
+  const [availableProducts, setAvailableProducts] = useState([]);
+  const { updateUserData, setRoleType } = useContext(Context);
+
+  const productsRequest = getProducts => {
+    getProducts()
       .then(products => {
         setAvailableProducts(products);
         setIsPending(false);
       })
       .catch(error => {
-        setError(error.message);
+        alert(error);
         setIsPending(false);
       });
   };
 
-  const buyProduct = (productId, credit) => () => {
-    if (userData.credits >= credit) {
-      productsRequest(() => addProductToAUser(userId, productId, false));
-      updateUserData();
-    } else {
-      alert("you do not have enough credit to buy this product");
-    }
+  const buyProduct = (productId, credit) => async () => {
+    await productsRequest(() => addProductToAUser(userId, productId, false));
+    updateUserData();
   };
 
   useEffect(() => {
@@ -42,8 +38,6 @@ const Shop = ({ userId }) => {
 
   if (isPending) {
     return <div>Loading...</div>;
-  } else if (error) {
-    return <div>{error}</div>;
   } else {
     return (
       <div className="challenges-container">

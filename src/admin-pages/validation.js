@@ -41,8 +41,8 @@ function AdminChallengesToBeValidated() {
     );
   };
 
-  const validatedChallenge = (userId, itemId) => () => {
-    challengesRequest(() =>
+  const validatedChallenge = (userId, itemId) => async () => {
+    await challengesRequest(() =>
       editUserChallengesStatus(itemId, userId, CHALLENGE_STATUSES.VALIDATED, [
         CHALLENGE_STATUSES.TO_BE_VALIDATED,
       ])
