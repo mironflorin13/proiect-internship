@@ -75,7 +75,7 @@ const AdminShop = () => {
       <div className="challenges-container">
         <ChallengesSection title="Shop">
           <>
-            <Modal isVisible={isVisible} onClose={() => setIsVisible(false)}>
+            <Modal isVisible={isVisible} onClose={closeModalHandler}>
               <ProductsForm
                 isEditMode={Boolean(product)}
                 {...product}
