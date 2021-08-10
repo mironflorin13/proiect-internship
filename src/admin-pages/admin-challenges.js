@@ -74,7 +74,7 @@ const AdminChallenges = () => {
       <div className="challenges-container">
         <ChallengesSection title="Challenges">
           <>
-            <Modal isVisible={isVisible}>
+            <Modal isVisible={isVisible} onClose={closeModalHandler}>
               <ChallengesForm
                 isEditMode={Boolean(item)}
                 {...item}

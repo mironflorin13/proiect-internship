@@ -26,7 +26,7 @@ const Shop = ({ userId }) => {
       });
   };
 
-  const buyProduct = (productId, credit) => async () => {
+  const buyProduct = productId => async () => {
     await productsRequest(() => addProductToAUser(userId, productId, false));
     updateUserData();
   };
@@ -48,7 +48,7 @@ const Shop = ({ userId }) => {
                 <Button
                   type="btn primary flex-width-max"
                   value={`Buy - ${product.credit} Credits`}
-                  handleOnClick={buyProduct(product.id, product.credit)}
+                  handleOnClick={buyProduct(product.id)}
                 />
               </ShopCard>
             ))

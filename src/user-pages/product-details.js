@@ -53,7 +53,7 @@ const ProductDetails = () => {
     setCurrent(id);
   };
 
-  const buyProduct = (productId, credit) => async () => {
+  const buyProduct = productId => async () => {
     await productsRequest(() =>
       addProductToAUser(userData.id, productId, true)
     );
@@ -121,7 +121,7 @@ const ProductDetails = () => {
               <Button
                 type="btn primary"
                 value={`Buy - ${product.credit} Credits `}
-                handleOnClick={buyProduct(product.id, product.credit)}
+                handleOnClick={buyProduct(product.id)}
               />
             )}
           </div>
